@@ -10,79 +10,68 @@ import Navbar from './Navbar';
 import collegeLogo from '../assets/logo/college.png';
 import ieeeLogo from '../assets/logo/ieee_cs.png';
 
-// Fallback images if events are missing
-const eventImages = {
-    event1: 'https://via.placeholder.com/800x500?text=DVP+TALK',
-    promptIq: 'https://via.placeholder.com/800x500?text=Prompt+IQ',
-    replica: 'https://via.placeholder.com/800x500?text=Replica',
-    alumniLecture: 'https://via.placeholder.com/800x500?text=Alumni+Lecture'
-};
+// Event Assets
+import event1 from '../assets/events/event1.JPG';
+import promptIq from '../assets/events/prompt-iq.JPG';
+import replica from '../assets/events/replica.JPG';
+import alumnilecture from '../assets/events/alumnilecture.JPG';
+import iccds from '../assets/events/ICCDS.JPG';
+import recruitment from '../assets/events/rectrutment.jpg';
+import streamlit from '../assets/events/streamlit.jpg';
+import techATwist from '../assets/events/tech-a-twist.JPG';
+import techtopia from '../assets/events/techtopia.png';
+import xyntra from '../assets/events/xyntra.JPG';
 
 const Home = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
     const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
 
-    const missionSlides = [
+    const identityCards = [
         {
-            id: 'slide1',
+            id: 'mission',
             title: 'Our Mission',
             icon: 'fas fa-bullseye',
             content: 'Empowering students to lead in computing innovations through hands-on projects and professional development.',
-            list: [
-                'Foster technical excellence through workshops and hackathons',
-                'Encourage collaboration across disciplines',
-                'Promote impactful projects that solve real-world problems',
-                'Connect students with industry leaders and opportunities'
+            details: [
+                'Foster technical excellence',
+                'Encourage collaboration',
+                'Real-world problem solving'
             ]
         },
         {
-            id: 'slide2',
+            id: 'vision',
             title: 'Our Vision',
             icon: 'fas fa-eye',
             content: 'To establish ourselves as the premier hub of creativity and technical leadership in our institution and beyond.',
-            list: [
-                'Inspire innovation through cutting-edge technologies',
-                'Build future leaders in computer science and engineering',
-                'Connect with global IEEE communities and resources',
-                'Create a culture of continuous learning and growth'
+            details: [
+                'Inspire technical innovation',
+                'Build future leaders',
+                'Global IEEE connection'
             ]
         },
         {
-            id: 'slide3',
+            id: 'what-we-do',
             title: 'What We Do',
             icon: 'fas fa-users',
             content: 'We organize a variety of activities to help students grow technically and professionally.',
-            list: [
-                'Technical workshops and coding competitions',
-                'Guest lectures from industry experts',
-                'Research paper presentations and publications',
-                'Community outreach and social initiatives',
-                'Networking events with alumni and professionals'
+            details: [
+                'Workshops & Hackathons',
+                'Industry Guest Lectures',
+                'Technical Research'
             ]
         }
     ];
 
     const gallerySlides = [
-        {
-            title: 'DVP TALK',
-            date: 'January 2024',
-            image: eventImages.event1
-        },
-        {
-            title: 'Prompt IQ',
-            date: 'February 2024',
-            image: eventImages.promptIq
-        },
-        {
-            title: 'Replica',
-            date: 'March 2024',
-            image: eventImages.replica
-        },
-        {
-            title: 'Alumni Lecture',
-            date: 'April 2024',
-            image: eventImages.alumniLecture
-        }
+        { title: 'XYNTRA 2.0', date: 'January 2024', image: xyntra },
+        { title: 'Prompt IQ', date: 'February 2024', image: promptIq },
+        { title: 'Replica', date: 'March 2024', image: replica },
+        { title: 'ICCDS Conference', date: 'April 2024', image: iccds },
+        { title: 'DVP Talk', date: 'May 2024', image: event1 },
+        { title: 'Alumni Lecture', date: 'June 2024', image: alumnilecture },
+        { title: 'Streamlit Workshop', date: 'July 2024', image: streamlit },
+        { title: 'Tech-A-Twist', date: 'August 2024', image: techATwist },
+        { title: 'Techtopia', date: 'September 2024', image: techtopia },
+        { title: 'Recruitment Drive', date: 'October 2024', image: recruitment }
     ];
 
     useEffect(() => {
@@ -95,19 +84,14 @@ const Home = () => {
             disable: window.innerWidth < 768
         });
 
-        const missionInterval = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % missionSlides.length);
-        }, 5000);
-
         const galleryInterval = setInterval(() => {
             setCurrentGalleryIndex((prev) => (prev + 1) % gallerySlides.length);
         }, 5000);
 
         return () => {
-            clearInterval(missionInterval);
             clearInterval(galleryInterval);
         };
-    }, []);
+    }, [gallerySlides.length]);
 
     const particlesInit = useCallback(async (engine) => {
         await loadSlim(engine);
@@ -130,9 +114,6 @@ const Home = () => {
         retina_detect: true
     };
 
-    const nextMissionSlide = () => setCurrentSlide((prev) => (prev + 1) % missionSlides.length);
-    const prevMissionSlide = () => setCurrentSlide((prev) => (prev - 1 + missionSlides.length) % missionSlides.length);
-
     const nextGallerySlide = () => setCurrentGalleryIndex((prev) => (prev + 1) % gallerySlides.length);
     const prevGallerySlide = () => setCurrentGalleryIndex((prev) => (prev - 1 + gallerySlides.length) % gallerySlides.length);
 
@@ -153,78 +134,116 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Mission & Vision Slider */}
-            <section className="mission-slider">
-                <div className="slider-container">
-                    {missionSlides.map((slide, index) => (
-                        <div key={slide.id} className={`slide ${currentSlide === index ? 'active' : ''}`}>
-                            <h2><i className={slide.icon}></i> {slide.title}</h2>
-                            <p>{slide.content}</p>
-                            <ul>
-                                {slide.list.map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="slider-controls">
-                    <button className="slider-btn prev" onClick={prevMissionSlide}><i className="fas fa-chevron-left"></i> Prev</button>
-                    <button className="slider-btn next" onClick={nextMissionSlide}>Next <i className="fas fa-chevron-right"></i></button>
-                </div>
-
-                <div className="slider-dots">
-                    {missionSlides.map((_, index) => (
-                        <span
-                            key={index}
-                            className={`dot ${currentSlide === index ? 'active' : ''}`}
-                            onClick={() => setCurrentSlide(index)}
-                        ></span>
-                    ))}
-                </div>
-            </section>
-
-            {/* Events Gallery Section */}
-            <section className="events-gallery" id="events">
-                <div className="section-header" data-aos="fade-up">
-                    <h2><i className="fas fa-images"></i> Past Events Gallery</h2>
-                    <p>Relive the memorable moments from our previous events and activities</p>
-                </div>
-
-                <div className="gallery-slider" data-aos="fade-up" data-aos-delay="200">
-                    <div
-                        className="gallery-track"
-                        style={{ transform: `translateX(-${currentGalleryIndex * 100}%)` }}
-                    >
-                        {gallerySlides.map((slide, index) => (
-                            <div key={index} className="gallery-slide">
-                                <img src={slide.image} alt={slide.title} />
-                                <div className="slide-caption">
-                                    <h3>{slide.title}</h3>
-                                    <p>{slide.date}</p>
+            {/* Identity Grid (Mission, Vision, What We Do) */}
+            <section className="identity-section">
+                <div className="container">
+                    <div className="identity-grid">
+                        {identityCards.map((card, index) => (
+                            <div
+                                key={card.id}
+                                className={`identity-card ${card.id}`}
+                                data-aos="fade-up"
+                                data-aos-delay={index * 200}
+                            >
+                                <div className="card-inner">
+                                    <div className="card-glow"></div>
+                                    <div className="icon-box">
+                                        <i className={card.icon}></i>
+                                    </div>
+                                    <h2>{card.title}</h2>
+                                    <p>{card.content}</p>
+                                    <div className="details-tags">
+                                        {card.details.map((detail, i) => (
+                                            <span key={i}>{detail}</span>
+                                        ))}
+                                    </div>
+                                    {card.id === 'vision' && <div className="vision-scanline"></div>}
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
+            </section>
 
-                <div className="gallery-controls" data-aos="fade-up" data-aos-delay="300">
-                    <button className="gallery-prev" onClick={prevGallerySlide}><i className="fas fa-chevron-left"></i></button>
-                    <div className="gallery-dots">
-                        {gallerySlides.map((_, index) => (
-                            <div
-                                key={index}
-                                className={`gallery-dot ${currentGalleryIndex === index ? 'active' : ''}`}
-                                onClick={() => setCurrentGalleryIndex(index)}
-                            ></div>
-                        ))}
+            {/* Holographic Past Events Hub */}
+            <section className="past-events-hub" id="events">
+                <div className="hub-background-glow"></div>
+                <div className="section-header" data-aos="fade-up">
+                    <div className="header-hud-line"></div>
+                    <h2><i className="fas fa-microchip"></i> Archive: Past Events</h2>
+                    <p className="hud-status">SYSTEM STATUS: IMAGES LOADED // DB_VERSION: 2.0.25</p>
+                </div>
+
+                <div className="hub-container" data-aos="zoom-in" data-aos-delay="200">
+                    <div className="event-deck">
+                        {gallerySlides.map((slide, index) => {
+                            const offset = index - currentGalleryIndex;
+                            const isActive = index === currentGalleryIndex;
+                            const isPrev = index === (currentGalleryIndex - 1 + gallerySlides.length) % gallerySlides.length;
+                            const isNext = index === (currentGalleryIndex + 1) % gallerySlides.length;
+
+                            let className = "event-card";
+                            if (isActive) className += " active";
+                            else if (isPrev) className += " prev";
+                            else if (isNext) className += " next";
+                            else if (Math.abs(offset) > 1) className += " hidden";
+
+                            return (
+                                <div
+                                    key={index}
+                                    className={className}
+                                    onClick={() => setCurrentGalleryIndex(index)}
+                                >
+                                    <div className="card-hud-frame">
+                                        <div className="bracket tl"></div>
+                                        <div className="bracket tr"></div>
+                                        <div className="bracket bl"></div>
+                                        <div className="bracket br"></div>
+
+                                        <div className="card-image-wrapper">
+                                            <img src={slide.image} alt={slide.title} />
+                                            <div className="image-scanline"></div>
+                                            <div className="hologram-flicker"></div>
+                                        </div>
+
+                                        <div className="card-info-hud">
+                                            <div className="hud-data-top">
+                                                <span className="event-date">DAT_LOG: {slide.date}</span>
+                                                <span className="event-id">UID_{index.toString().padStart(3, '0')}</span>
+                                            </div>
+                                            <h3>{slide.title}</h3>
+                                            <div className="hud-data-btm">
+                                                <div className="data-bar"><div className="fill"></div></div>
+                                                <span className="status-label">QUAL_VERIFIED</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
-                    <button className="gallery-next" onClick={nextGallerySlide}><i className="fas fa-chevron-right"></i></button>
+
+                    <div className="hub-controls">
+                        <button className="hub-nav-btn prev" onClick={prevGallerySlide}>
+                            <i className="fas fa-chevron-left"></i>
+                        </button>
+                        <div className="hub-indicators">
+                            {gallerySlides.map((_, index) => (
+                                <div
+                                    key={index}
+                                    className={`hub-dot ${currentGalleryIndex === index ? 'active' : ''}`}
+                                    onClick={() => setCurrentGalleryIndex(index)}
+                                ></div>
+                            ))}
+                        </div>
+                        <button className="hub-nav-btn next" onClick={nextGallerySlide}>
+                            <i className="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div className="view-more-container" data-aos="fade-up" data-aos-delay="400">
-                    <a href="#events" className="btn-view-more">View Full Gallery</a>
+                    <a href="#events" className="btn-archive-access">Access Full Archive</a>
                 </div>
             </section>
 
