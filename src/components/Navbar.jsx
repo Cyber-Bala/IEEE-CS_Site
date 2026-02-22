@@ -1,34 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import collegeLogo from '../assets/logo/college.png';
 import ieeeLogo from '../assets/logo/ieee_cs.png';
 
 const Navbar = () => {
     const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
+
+    const getPath = (hash) => {
+        return isHomePage ? hash : `/${hash}`;
+    };
+
+    // Toggle body class to blur the page content when menu is open
+    useEffect(() => {
+        if (isMobileMenuActive) {
+            document.body.classList.add('menu-open');
+        } else {
+            document.body.classList.remove('menu-open');
+        }
+        return () => document.body.classList.remove('menu-open');
+    }, [isMobileMenuActive]);
 
     return (
-        <header className="header">
-            <div className="logo-container">
-                <img src={collegeLogo} className="logo-left" alt="College Logo" />
-                <img src={ieeeLogo} className="logo-right" alt="IEEE CS Logo" />
-            </div>
+        <>
+            {/* Full-screen blur overlay — sits above page content, below the header+menu */}
+            <div
+                className={`menu-blur-overlay ${isMobileMenuActive ? 'active' : ''}`}
+                onClick={() => setIsMobileMenuActive(false)}
+            />
 
-            <nav className={`navbar ${isMobileMenuActive ? 'active' : ''}`} aria-label="Main Navigation">
-                <a href="#home" onClick={() => setIsMobileMenuActive(false)}>Home</a>
-                <a href="#about" onClick={() => setIsMobileMenuActive(false)}>About Us</a>
-                <a href="#team" onClick={() => setIsMobileMenuActive(false)}>Our Team</a>
-                <a href="#events" onClick={() => setIsMobileMenuActive(false)}>Events & Gallery</a>
-                <a href="#contact" onClick={() => setIsMobileMenuActive(false)}>Contact Us</a>
-            </nav>
+            <header className="header">
+                <div className="logo-container">
+                    <Link to="/" onClick={() => setIsMobileMenuActive(false)}>
+                        <img src={collegeLogo} className="logo-left" alt="College Logo" />
+                    </Link>
+                    <img src={ieeeLogo} className="logo-right" alt="IEEE CS Logo" />
+                </div>
 
-            <button
-                className="mobile-menu-btn"
-                aria-label="Open menu"
-                onClick={() => setIsMobileMenuActive(!isMobileMenuActive)}
-            >
-                <i className={`fas ${isMobileMenuActive ? 'fa-times' : 'fa-bars'}`}></i>
-            </button>
-        </header>
+                <nav className={`navbar ${isMobileMenuActive ? 'active' : ''}`} aria-label="Main Navigation">
+                    <Link to="/" onClick={() => setIsMobileMenuActive(false)}>Home</Link>
+                    <a href={getPath('#about')} onClick={() => setIsMobileMenuActive(false)}>About Us</a>
+                    <Link to="/team" className={location.pathname === '/team' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Our Team</Link>
+                    <a href={getPath('#events')} onClick={() => setIsMobileMenuActive(false)}>Events & Gallery</a>
+                    <a href={getPath('#contact')} onClick={() => setIsMobileMenuActive(false)}>Contact Us</a>
+                </nav>
+
+                <button
+                    className="mobile-menu-btn"
+                    aria-label="Open menu"
+                    onClick={() => setIsMobileMenuActive(!isMobileMenuActive)}
+                >
+                    <i className={`fas ${isMobileMenuActive ? 'fa-times' : 'fa-bars'}`}></i>
+                </button>
+            </header>
+        </>
     );
 };
 

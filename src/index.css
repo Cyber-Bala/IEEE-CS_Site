@@ -10,7 +10,7 @@ html {
   width: 100%;
   overflow-y: scroll;
   /* Forces single scrollbar at window edge */
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   scroll-behavior: smooth;
 }
 
@@ -19,7 +19,8 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  overflow: visible;
+  overflow-x: hidden !important;
+  overflow-y: visible;
   /* Prevent body from creating its own scroll context */
   background-color: #111;
 }

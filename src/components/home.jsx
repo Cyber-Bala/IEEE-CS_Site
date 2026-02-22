@@ -117,6 +117,21 @@ const Home = () => {
     const nextGallerySlide = () => setCurrentGalleryIndex((prev) => (prev + 1) % gallerySlides.length);
     const prevGallerySlide = () => setCurrentGalleryIndex((prev) => (prev - 1 + gallerySlides.length) % gallerySlides.length);
 
+    // Touch swipe support for the events section
+    const touchStartX = React.useRef(null);
+    const handleTouchStart = (e) => {
+        touchStartX.current = e.touches[0].clientX;
+    };
+    const handleTouchEnd = (e) => {
+        if (touchStartX.current === null) return;
+        const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+        if (Math.abs(deltaX) > 50) { // 50px threshold
+            if (deltaX < 0) nextGallerySlide(); // swipe left = next
+            else prevGallerySlide();             // swipe right = prev
+        }
+        touchStartX.current = null;
+    };
+
     return (
         <div className="home-container">
             <Navbar />
@@ -127,15 +142,40 @@ const Home = () => {
 
             {/* Hero Section */}
             <section className="hero" id="home">
-                <div className="hero-content" data-aos="fade-in">
-                    <h1><span>IEEE COMPUTER</span><span>SOCIETY</span></h1>
-                    <p>Empowering the next generation of computing professionals through innovation, collaboration, and technical excellence.</p>
-                    <a href="https://www.ieee.org/" className="btn-join" target="_blank" rel="noopener noreferrer">Join Us Today</a>
+                <div className="cyber-grid"></div>
+                <div className="hero-noise"></div>
+
+                <div className="hero-hud-decor">
+                    <div className="hud-line top"></div>
+                    <div className="hud-line bottom"></div>
+                    <div className="hud-corner tl"></div>
+                    <div className="hud-corner tr"></div>
+                    <div className="hud-corner bl"></div>
+                    <div className="hud-corner br"></div>
+                </div>
+
+                <div className="hero-content" data-aos="zoom-out" data-aos-duration="1500">
+                    <div className="hero-glitch-wrapper">
+                        <h1 className="glitch-text" data-text="IEEE COMPUTER SOCIETY">
+                            <span>IEEE COMPUTER</span><span>SOCIETY</span>
+                        </h1>
+                    </div>
+                    <div className="hero-subtitle-container">
+                        <div className="subtitle-line"></div>
+                        <p>Empowering the next generation of computing professionals through innovation, collaboration, and technical excellence.</p>
+                        <div className="subtitle-line"></div>
+                    </div>
+                    <div className="hero-actions">
+                        <a href="https://www.ieee.org/" className="btn-join-cyber" target="_blank" rel="noopener noreferrer">
+                            <span className="btn-text">JOIN US TODAY</span>
+                            <span className="btn-glitch"></span>
+                        </a>
+                    </div>
                 </div>
             </section>
 
             {/* Identity Grid (Mission, Vision, What We Do) */}
-            <section className="identity-section">
+            <section className="identity-section" id="about">
                 <div className="container">
                     <div className="identity-grid">
                         {identityCards.map((card, index) => (
@@ -170,11 +210,17 @@ const Home = () => {
                 <div className="hub-background-glow"></div>
                 <div className="section-header" data-aos="fade-up">
                     <div className="header-hud-line"></div>
-                    <h2><i className="fas fa-microchip"></i> Archive: Past Events</h2>
-                    <p className="hud-status">SYSTEM STATUS: IMAGES LOADED // DB_VERSION: 2.0.25</p>
+                    <h2>Past Events</h2>
                 </div>
 
-                <div className="hub-container" data-aos="zoom-in" data-aos-delay="200">
+                <div
+                    className="hub-container"
+                    data-aos="zoom-in"
+                    data-aos-delay="200"
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
+                    style={{ touchAction: 'pan-y' }}
+                >
                     <div className="event-deck">
                         {gallerySlides.map((slide, index) => {
                             const offset = index - currentGalleryIndex;
@@ -214,7 +260,6 @@ const Home = () => {
                                             <h3>{slide.title}</h3>
                                             <div className="hud-data-btm">
                                                 <div className="data-bar"><div className="fill"></div></div>
-                                                <span className="status-label">QUAL_VERIFIED</span>
                                             </div>
                                         </div>
                                     </div>
@@ -242,14 +287,14 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="view-more-container" data-aos="fade-up" data-aos-delay="400">
+                <div className="view-more-container" data-aos="fade-up" data-aos-delay="100">
                     <a href="#events" className="btn-archive-access">Access Full Archive</a>
                 </div>
             </section>
 
             {/* Footer */}
             <footer className="footer" id="contact">
-                <h3 data-aos="fade-up">Reach Us</h3>
+                <h3 data-aos="fade-up">Reach Out</h3>
                 <p data-aos="fade-up" data-aos-delay="100">Rajalakshmi Engineering College</p>
                 <p data-aos="fade-up" data-aos-delay="150">An Autonomous Institution Affiliated to Anna University, Chennai</p>
                 <p data-aos="fade-up" data-aos-delay="200">Rajalakshmi Nagar, Thandalam, Chennai - 602105</p>
