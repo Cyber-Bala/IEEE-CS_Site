@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap');
 :root {
   --accent: #FFA300;
   --dark: #000;
@@ -176,23 +177,26 @@
 }
 
 .contact-container {
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
-  background: rgba(255,255,255,0.03);
+  background: #222;
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255,163,0,0.2);
   border-radius: 24px;
-  padding: 50px 30px;
+  padding: 50px 70px;
   text-align: center;
 }
 
 .contact-container h2 {
-  color: var(--accent);
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 2rem;
-  margin-bottom: 30px;
-  text-transform: uppercase;
-}
+      margin-bottom: 25px;
+      color: var(--accent);
+      font-size: 2.2rem;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 10px rgba(255, 162, 0, 0.664);
+      position: relative;
+      display: inline-block;
+    }
 
 .form-group {
   margin-bottom: 20px;

@@ -86,26 +86,52 @@ const Contact = () => {
 
       <section className="contact-section" id="contact-main">
         <div className="contact-container" data-aos="fade-up">
-          <h2>Send Us a Message</h2>
+          <h2>
+            <i className="fas fa-envelope"></i> Contact Us
+          </h2>
+
+          <p>
+            We'd love to hear from you. <br />
+            Fill out the form below and we'll get back to you soon.
+          </p>
 
           <form
             ref={formRef}
             onSubmit={handleSubmit}
+            id="contactForm"
             className="contact-form"
           >
             <div className="form-group">
               <label>Full Name</label>
-              <input type="text" name="name" required />
+              <input
+  type="text"
+  name="name"
+  className="form-control"
+  placeholder="Your full name"
+  required
+/>
             </div>
 
             <div className="form-group">
               <label>Email Address</label>
-              <input type="email" name="email" required />
+              <input
+  type="email"
+  name="email"
+  className="form-control"
+  placeholder="Your email address"
+  required
+/>
             </div>
 
             <div className="form-group">
               <label>Your Message</label>
-              <textarea name="message" rows="6" required></textarea>
+              <textarea
+  name="message"
+  className="form-control"
+  rows="6"
+  placeholder="Your message"
+  required
+></textarea>
             </div>
 
             <button type="submit" className="btn-submit" id="submitButton">
