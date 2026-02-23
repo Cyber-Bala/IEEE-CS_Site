@@ -56,18 +56,20 @@ import mettu from '../assets/team/mettu.jpg';
 import balamurugan from '../assets/team/balamurugan.jpg';
 import venkat from '../assets/team/venkat.jpg';
 
-const TeamMember = ({ name, role, image, linkedin, instagram, delay }) => (
+const TeamMember = ({ name, role, image, linkedin, instagram, delay, imgPosition }) => (
     <div className="team-card" data-aos="fade-up" data-aos-delay={delay}>
         <div className="card-inner">
             <div className="member-image">
-                <img src={image} alt={name} />
+                <img src={image} alt={name} style={{ objectPosition: imgPosition || 'center center' }} />
                 <div className="image-glow"></div>
             </div>
-            <h3>{name}</h3>
-            <p>{role}</p>
-            <div className="team-social">
-                {linkedin && <a href={linkedin} target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>}
-                {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>}
+            <div className="card-info-overlay">
+                <h3>{name}</h3>
+                <p>{role}</p>
+                <div className="team-social">
+                    {linkedin && <a href={linkedin} target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>}
+                    {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>}
+                </div>
             </div>
         </div>
     </div>
@@ -192,7 +194,7 @@ const Team = () => {
                         <TeamMember name="Adhitya S" role="Web Team" image={aditya} linkedin="http://www.linkedin.com/in/adithyadevcoder" instagram="https://www.instagram.com/__adith_ya.__s/" delay="300" />
                         <TeamMember name="Kaviarasi M" role="Web Team" image={kaviarasi} linkedin="https://www.linkedin.com/in/kaviarasi-m-16170132b" instagram="https://www.instagram.com/kaviarasi018" delay="400" />
                         <TeamMember name="Mettu Mani Chandhan" role="Web Team" image={mettu} linkedin="https://www.linkedin.com/in/mettu-mani-chandhan-sai-993b5b32a/" instagram="https://www.instagram.com/mani_chandhan_sai/" delay="100" />
-                        <TeamMember name="S.Balumurugan" role="Web Team" image={balamurugan} linkedin="https://www.linkedin.com/in/balamurugan-s-18229732b" instagram="https://www.instagram.com/balamurugan_93931" delay="200" />
+                        <TeamMember name="S.Balumurugan" role="Web Team" image={balamurugan} linkedin="https://www.linkedin.com/in/balamurugan-s-18229732b" instagram="https://www.instagram.com/balamurugan_93931" delay="200" imgPosition="center 75%" />
                         <TeamMember name="VENKAT PRASHAD A" role="Web Team" image={venkat} linkedin="https://www.linkedin.com/in/v3nk47/" instagram="https://www.instagram.com/v3nk47/" delay="300" />
                     </div>
                 </div>
