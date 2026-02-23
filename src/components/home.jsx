@@ -347,6 +347,7 @@ const Home = () => {
                 </div>
 
                 <div className="creators">
+                    <h3 className="glitch-text" data-text="Website Creators">Website Creators</h3>
                     <div className="creator-grid">
                         <div className="creator-card" data-aos="fade-up" data-aos-delay="100">
                             <strong>Balamurugan S</strong>
