@@ -44,7 +44,7 @@ const Navbar = () => {
                     <a href={getPath('#about')} onClick={() => setIsMobileMenuActive(false)}>About Us</a>
                     <Link to="/team" className={location.pathname === '/team' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Our Team</Link>
                     <a href={getPath('#events')} onClick={() => setIsMobileMenuActive(false)}>Events & Gallery</a>
-                    <a href={getPath('#contact')} onClick={() => setIsMobileMenuActive(false)}>Contact Us</a>
+                    <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Contact Us</Link>
                 </nav>
 
                 <button

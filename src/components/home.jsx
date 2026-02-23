@@ -326,7 +326,7 @@ const Home = () => {
                     <a href="#" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
                     <a href="https://www.youtube.com/@IEEECSREC" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
                 </div>
-
+                
                 <div className="creators">
                     <h3 data-aos="fade-up">Website Creators</h3>
                     <div className="creator-grid">
