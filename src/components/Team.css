@@ -513,24 +513,82 @@
         padding: 40px 15px;
     }
 
-    .team-card .card-inner {
-        padding: 35px 15px 25px;
-        border-radius: 16px;
+    /* Target with higher specificity to overcome any collisions */
+    .team-page-container .team-grid .team-card .card-inner {
+        height: 400px !important;
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 20px;
+        position: relative !important;
+        overflow: hidden !important;
+        background: #000 !important;
     }
 
-    .member-image {
-        width: 130px;
-        height: 130px;
-        margin-bottom: 15px;
+    .team-page-container .team-card .member-image {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        z-index: 1 !important;
+    }
+
+    .team-page-container .team-card .member-image img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center 20% !important;
+        display: block !important;
+    }
+
+    .team-page-container .team-card .image-glow {
+        display: block !important;
+        position: absolute !important;
+        inset: 0 !important;
+        height: 100% !important;
+        background: linear-gradient(to top,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0.6) 40%,
+                transparent 80%) !important;
+        z-index: 2 !important;
+        pointer-events: none !important;
+    }
+
+    .team-page-container .team-card .card-info-overlay {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        padding: 25px 15px !important;
+        background: transparent !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        z-index: 3 !important;
+        width: 100% !important;
     }
 
     .team-card h3 {
-        font-size: 1.2rem;
+        font-size: 1.3rem !important;
+        margin-bottom: 5px !important;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
     }
 
     .team-card p {
-        font-size: 0.8rem;
-        margin-bottom: 20px;
+        font-size: 0.85rem !important;
+        margin-bottom: 15px !important;
+        color: var(--accent) !important;
+        letter-spacing: 1px !important;
+    }
+
+    .team-social {
+        margin-top: 5px !important;
+        gap: 12px !important;
     }
 
     .hero-scroll-indicator {
