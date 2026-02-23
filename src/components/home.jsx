@@ -292,33 +292,52 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Footer */}
+            {/* Footer / Reach Out Section */}
             <footer className="footer" id="contact">
-                <h3 data-aos="fade-up">Reach Out</h3>
-                <p data-aos="fade-up" data-aos-delay="100">Rajalakshmi Engineering College</p>
-                <p data-aos="fade-up" data-aos-delay="150">An Autonomous Institution Affiliated to Anna University, Chennai</p>
-                <p data-aos="fade-up" data-aos-delay="200">Rajalakshmi Nagar, Thandalam, Chennai - 602105</p>
+                <div className="footer-hud-grid"></div>
+                {/* <div className="footer-metadata">
+                    SYS_STATUS: ACTIVE<br />
+                    LOC_REF: REC_CHENNAI<br />
+                    SEC_AUTH: IEEE_CS_PROTOCOL
+                </div> */}
+
+                <div className="section-header" data-aos="fade-up">
+                    <div className="header-hud-line"></div>
+                    <h3 className="glitch-text" data-text="Reach Out">Reach Out</h3>
+                    <p className="footer-subtitle">COMMAND_CENTER: COORDINATE WITH FACULTY REPRESENTATIVES AND SYSTEM ARCHITECTS.</p>
+                </div>
 
                 <div className="contact-info">
                     <div className="contact-person" data-aos="fade-up" data-aos-delay="100">
+                        <div className="role-tag">FACULTY CO-ORDINATOR</div>
                         <strong>Dr. N. Duraimurugan</strong>
-                        <p>Faculty Co-ordinator</p>
-                        <p><i className="fas fa-envelope"></i> duraimurugan.n@rajalakshmi.edu.in</p>
+                        <p>Rajalakshmi Engineering College</p>
+                        <a href="mailto:duraimurugan.n@rajalakshmi.edu.in" className="email-link">
+                            <i className="fas fa-envelope"></i> duraimurugan.n@rajalakshmi.edu.in
+                        </a>
                     </div>
                     <div className="contact-person" data-aos="fade-up" data-aos-delay="200">
+                        <div className="role-tag">FACULTY CO-ORDINATOR</div>
                         <strong>Dr. K. Anandhajothi</strong>
-                        <p>Faculty Co-ordinator</p>
-                        <p><i className="fas fa-envelope"></i> ananthajothi.k@rajalakshmi.edu.in</p>
+                        <p>Rajalakshmi Engineering College</p>
+                        <a href="mailto:ananthajothi.k@rajalakshmi.edu.in" className="email-link">
+                            <i className="fas fa-envelope"></i> ananthajothi.k@rajalakshmi.edu.in
+                        </a>
                     </div>
                     <div className="contact-person" data-aos="fade-up" data-aos-delay="300">
+                        <div className="role-tag">FACULTY CO-ORDINATOR</div>
                         <strong>Dr. S. Vinod Kumar</strong>
-                        <p>Faculty Co-ordinator</p>
-                        <p><i className="fas fa-envelope"></i> vinodkumar.s@rajalakshmi.edu.in</p>
+                        <p>Rajalakshmi Engineering College</p>
+                        <a href="mailto:vinodkumar.s@rajalakshmi.edu.in" className="email-link">
+                            <i className="fas fa-envelope"></i> vinodkumar.s@rajalakshmi.edu.in
+                        </a>
                     </div>
                 </div>
 
                 <div className="join-us-container" data-aos="fade-up" data-aos-delay="400">
-                    <a href="https://www.ieee.org/" className="btn-join-ieee" target="_blank" rel="noopener noreferrer">Join IEEE</a>
+                    <a href="https://www.ieee.org/" className="btn-join-ieee" target="_blank" rel="noopener noreferrer">
+                        INITIALIZE_MEMBERSHIP
+                    </a>
                 </div>
 
                 <div className="social-links" data-aos="fade-up" data-aos-delay="500">
@@ -326,54 +345,48 @@ const Home = () => {
                     <a href="#" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
                     <a href="https://www.youtube.com/@IEEECSREC" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
                 </div>
-                
+
                 <div className="creators">
-                    <h3 data-aos="fade-up">Website Creators</h3>
                     <div className="creator-grid">
                         <div className="creator-card" data-aos="fade-up" data-aos-delay="100">
-                            <strong>GOKUL ANAND B</strong>
-                            <p>Follow me on</p>
+                            <strong>Balamurugan S</strong>
                             <div className="creator-social">
-                                <a href="#"><i className="fab fa-github"></i></a>
-                                <a href="#"><i className="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/Cyber-Bala" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/balamurugan-s-18229732b/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
                             </div>
                         </div>
 
                         <div className="creator-card" data-aos="fade-up" data-aos-delay="200">
-                            <strong>HIMESHWAR N</strong>
-                            <p>Follow me on</p>
+                            <strong>Mettu Mani Chandhan</strong>
                             <div className="creator-social">
-                                <a href="#"><i className="fab fa-github"></i></a>
-                                <a href="#"><i className="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/Batman7mani" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/mettu-mani-chandhan-sai-993b5b32a/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
                             </div>
                         </div>
 
                         <div className="creator-card" data-aos="fade-up" data-aos-delay="300">
-                            <strong>ISHWARI RAJMOHAN</strong>
-                            <p>Follow me on</p>
+                            <strong>Kaviarasi M</strong>
                             <div className="creator-social">
-                                <a href="#"><i className="fab fa-github"></i></a>
-                                <a href="#"><i className="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/Kaviarasi18" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/kaviarasi-m-16170132b" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
                             </div>
                         </div>
 
                         <div className="creator-card" data-aos="fade-up" data-aos-delay="400">
-                            <strong>RAMALINGAM S</strong>
-                            <p>Follow me on</p>
+                            <strong>Venkat Prashad A</strong>
                             <div className="creator-social">
-                                <a href="#"><i className="fab fa-github"></i></a>
-                                <a href="#"><i className="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/V3NK47XD" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/v3nk47/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
                             </div>
                         </div>
 
-                        <div className="creator-card" data-aos="fade-up" data-aos-delay="500">
+                        {/* <div className="creator-card" data-aos="fade-up" data-aos-delay="500">
                             <strong>JAYADHARSHINI M</strong>
-                            <p>Follow me on</p>
                             <div className="creator-social">
-                                <a href="#"><i className="fab fa-github"></i></a>
-                                <a href="#"><i className="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/Jayadharshini-M" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/jayadharshini-m-445a90256/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </footer>
