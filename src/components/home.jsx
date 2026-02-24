@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Particles from "@tsparticles/react";
@@ -347,48 +348,10 @@ const Home = () => {
                 </div>
 
                 <div className="creators">
-                    <h3 className="glitch-text" data-text="Website Creators">Website Creators</h3>
-                    <div className="creator-grid">
-                        <div className="creator-card" data-aos="fade-up" data-aos-delay="100">
-                            <strong>Balamurugan S</strong>
-                            <div className="creator-social">
-                                <a href="https://github.com/Cyber-Bala" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-                                <a href="https://www.linkedin.com/in/balamurugan-s-18229732b/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-
-                        <div className="creator-card" data-aos="fade-up" data-aos-delay="200">
-                            <strong>Mettu Mani Chandhan</strong>
-                            <div className="creator-social">
-                                <a href="https://github.com/Batman7mani" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-                                <a href="https://www.linkedin.com/in/mettu-mani-chandhan-sai-993b5b32a/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-
-                        <div className="creator-card" data-aos="fade-up" data-aos-delay="300">
-                            <strong>Kaviarasi M</strong>
-                            <div className="creator-social">
-                                <a href="https://github.com/Kaviarasi18" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-                                <a href="https://www.linkedin.com/in/kaviarasi-m-16170132b" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-
-                        <div className="creator-card" data-aos="fade-up" data-aos-delay="400">
-                            <strong>Venkat Prashad A</strong>
-                            <div className="creator-social">
-                                <a href="https://github.com/V3NK47XD" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-                                <a href="https://www.linkedin.com/in/v3nk47/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-
-                        {/* <div className="creator-card" data-aos="fade-up" data-aos-delay="500">
-                            <strong>JAYADHARSHINI M</strong>
-                            <div className="creator-social">
-                                <a href="https://github.com/Jayadharshini-M" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-                                <a href="https://www.linkedin.com/in/jayadharshini-m-445a90256/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-                            </div>
-                        </div> */}
-                    </div>
+                    <Link to="/creators" className="creator-link-main" data-aos="fade-up">
+                        <h3 className="glitch-text" data-text="Website Creators">Website Creators</h3>
+                        <span className="view-team-tag">VIEW_SYSTEM_ARCHITECTS <i className="fas fa-arrow-right"></i></span>
+                    </Link>
                 </div>
             </footer>
 

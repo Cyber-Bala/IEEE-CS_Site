@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --primary: #00629B;
   --accent: #FFA300;
   /* IEEE Gold */
@@ -1143,76 +1143,40 @@
   font-family: 'Rajdhani', sans-serif;
   font-size: clamp(2rem, 5vw, 2.8rem);
   color: var(--accent);
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   letter-spacing: 8px;
   text-transform: uppercase;
   font-weight: 700;
   text-align: center;
 }
 
-.creator-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 1400px;
-  margin: 40px auto;
-}
-
-.creator-card {
-  padding: 30px 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.4s ease;
-  text-align: center;
-  position: relative;
-}
-
-.creator-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0%;
-  height: 2px;
-  background: var(--accent);
-  transition: width 0.4s ease;
-}
-
-.creator-card:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 163, 0, 0.2);
-}
-
-.creator-card:hover::after {
-  width: 100%;
-}
-
-.creator-card strong {
+.creator-link-main {
+  text-decoration: none;
   display: block;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 1rem;
-  color: #fff;
-  letter-spacing: 2px;
-  margin-bottom: 15px;
+  padding: 40px 20px;
+  transition: all 0.4s ease;
+  border-radius: 12px;
+}
+
+.creator-link-main:hover {
+  background: rgba(255, 163, 0, 0.05);
+  transform: scale(1.02);
+}
+
+.view-team-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 4px;
   text-transform: uppercase;
+  font-weight: 600;
+  display: block;
+  margin-top: 10px;
+  text-align: center;
 }
 
-.creator-social {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.creator-social a {
-  color: rgba(255, 255, 255, 0.3);
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-}
-
-.creator-social a:hover {
+.creator-link-main:hover .view-team-tag {
   color: var(--accent);
-  transform: scale(1.2);
 }
 
 .copyright-footer {
