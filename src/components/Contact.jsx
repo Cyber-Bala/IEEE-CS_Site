@@ -6,6 +6,47 @@ import "aos/dist/aos.css";
 import "./Contact.css";
 import Navbar from "./Navbar";
 
+const CyberInput = ({ label, name, type = "text", placeholder, required, isTextarea, rows }) => {
+  return (
+    <div className="form-group">
+      <div className="input-container">
+        {isTextarea ? (
+          <textarea
+            name={name}
+            className="holo-input holo-textarea"
+            placeholder=" "
+            rows={rows || 6}
+            required={required}
+          />
+        ) : (
+          <input
+            type={type}
+            name={name}
+            className="holo-input"
+            placeholder=" "
+            required={required}
+          />
+        )}
+        <label className="input-label" data-text={label}>{label}</label>
+        <div className="input-border" />
+        <div className="input-glow" />
+        <div className="input-scanline" />
+        <div className="input-corners">
+          <span className="corner corner-tl" />
+          <span className="corner corner-tr" />
+          <span className="corner corner-bl" />
+          <span className="corner corner-br" />
+        </div>
+        <div className="input-data-stream">
+          {[...Array(20)].map((_, i) => (
+            <div key={i} className="stream-bar" style={{ "--i": i }} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Contact = () => {
   const formRef = useRef();
 
@@ -71,26 +112,57 @@ const Contact = () => {
           </h1>
 
           <p className="hero-subtitle">
-            Have questions or want to collaborate?<br/> Drop us a message.
+            Have questions or want to collaborate?<br /> Drop us a message.
           </p>
 
           
+           <a href="#contact-main" className="btn-join-cyber" style={{ margin: "50px" }}>
+  <span className="btn-text">SEND MESSAGE</span>
+</a>
+
+          <div className="social-links" data-aos="fade-up" data-aos-delay="500">
+            <span className="social-label">// REACH US ON</span>
+            <div className="social-icons">
+              <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Instagram">
+                <span className="social-icon-inner">
+                  <i className="fab fa-instagram"></i>
+                </span>
+                <span className="social-icon-glow"></span>
+              </a>
+              <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="WhatsApp">
+                <span className="social-icon-inner">
+                  <i className="fab fa-whatsapp"></i>
+                </span>
+                <span className="social-icon-glow"></span>
+              </a>
+              <a href="mailto:ieeecs@example.com" className="social-icon-btn" aria-label="Email">
+                <span className="social-icon-inner">
+                  <i className="fas fa-envelope"></i>
+                </span>
+                <span className="social-icon-glow"></span>
+              </a>
+            </div>
+          </div>
         </div>
         <a href="#contact-main" className="hero-scroll-indicator">
-            <div className="mouse-icon">
-              <div className="wheel"></div>
-              <div class="arrow-pulse"><i class="fas fa-chevron-down"></i></div>
-            </div>
-          </a>
+          <div className="mouse-icon">
+            <div className="wheel"></div>
+            <div className="arrow-pulse"><i className="fas fa-chevron-down"></i></div>
+          </div>
+        </a>
       </section>
 
       <section className="contact-section" id="contact-main">
         <div className="contact-container" data-aos="fade-up">
-          <h2>
-            <i className="fas fa-envelope"></i> Contact Us
+          <h2 className="contact-heading">
+            <i className="fas fa-envelope"></i>
+            <span className="heading-text-wrap">
+              <span className="heading-base">&nbsp;Contact Us&nbsp;</span>
+              <span aria-hidden="true" className="heading-fill">&nbsp;Contact Us&nbsp;</span>
+            </span>
           </h2>
 
-          <p>
+          <p style={{paddingBottom:"50px"}}>
             We'd love to hear from you. <br />
             Fill out the form below and we'll get back to you soon.
           </p>
@@ -101,45 +173,19 @@ const Contact = () => {
             id="contactForm"
             className="contact-form"
           >
-            <div className="form-group">
-              <label>Full Name</label>
-              <input
-  type="text"
-  name="name"
-  className="form-control"
-  placeholder="Your full name"
-  required
-/>
-            </div>
+            <CyberInput label="Full Name" name="name" type="text" required />
+            <CyberInput label="Email Address" name="email" type="email" required />
+            <CyberInput label="Your Message" name="message" isTextarea rows={6} required />
 
-            <div className="form-group">
-              <label>Email Address</label>
-              <input
-  type="email"
-  name="email"
-  className="form-control"
-  placeholder="Your email address"
-  required
-/>
+            <div className="hero-actions">
+              <button type="submit" className="btn-join-cyber" id="submitButton">
+                <span className="btn-text" id="buttonText">SEND MESSAGE</span>
+                <span id="buttonLoading" style={{ display: "none" }}>
+                  <i className="fas fa-spinner fa-spin"></i> SENDING...
+                </span>
+                <span className="btn-glitch"></span>
+              </button>
             </div>
-
-            <div className="form-group">
-              <label>Your Message</label>
-              <textarea
-  name="message"
-  className="form-control"
-  rows="6"
-  placeholder="Your message"
-  required
-></textarea>
-            </div>
-
-            <button type="submit" className="btn-submit" id="submitButton">
-              <span id="buttonText">Send Message</span>
-              <div id="buttonLoading" style={{ display: "none" }}>
-                <i className="fas fa-spinner fa-spin"></i> Sending...
-              </div>
-            </button>
 
             <div
               id="statusMessage"
