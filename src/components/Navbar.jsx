@@ -41,7 +41,7 @@ const Navbar = () => {
 
                 <nav className={`navbar ${isMobileMenuActive ? 'active' : ''}`} aria-label="Main Navigation">
                     <Link to="/" onClick={() => setIsMobileMenuActive(false)}>Home</Link>
-                    <a href={getPath('#about')} onClick={() => setIsMobileMenuActive(false)}>About Us</a>
+                    <Link to="/about" className={location.pathname === '/about' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>About Us</Link>
                     <Link to="/team" className={location.pathname === '/team' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Our Team</Link>
                     <a href={getPath('#events')} onClick={() => setIsMobileMenuActive(false)}>Events & Gallery</a>
                     <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Contact Us</Link>

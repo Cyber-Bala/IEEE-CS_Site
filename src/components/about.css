@@ -1,0 +1,355 @@
+/* about.css */
+
+.aboutPage {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- HEADER --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 163, 0, 0.1);
+}
+
+.logoContainer {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.logoLeft,
+.logoRight {
+    height: 45px;
+    transition: transform 0.3s ease;
+}
+
+.logoLeft:hover,
+.logoRight:hover {
+    transform: scale(1.1);
+}
+
+.navbar {
+    display: flex;
+    gap: 30px;
+}
+
+.navbar a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.navbar a:hover,
+.navActive {
+    color: #FFA300 !important;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #FFA300;
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::after,
+.navActive::after {
+    width: 100%;
+}
+
+.mobileMenuBtn {
+    display: none;
+    color: #fff;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- HERO --- */
+.pageHero {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+    background: radial-gradient(circle at center, #140d07 0%, #000 70%);
+    position: relative;
+}
+
+.heroTitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(3rem, 12vw, 8rem);
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    margin-bottom: 20px;
+    position: relative;
+    background: linear-gradient(90deg, #fff, #FFA300, #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.heroSubtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 800px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.divider {
+    width: 100px;
+    height: 4px;
+    background: #FFA300;
+    box-shadow: 0 0 20px rgba(255, 163, 0, 0.5);
+}
+
+/* --- SECTIONS --- */
+.contentSection {
+    padding: 100px 0;
+}
+
+.sectionContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    padding: 0 40px;
+}
+
+.sectionText {
+    flex: 1;
+}
+
+.sectionText h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 25px;
+    color: #FFA300;
+}
+
+.sectionText p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+}
+
+.sectionImage {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.sectionImage img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.sectionImage:hover img {
+    transform: scale(1.05);
+}
+
+/* --- TEAM SECTION --- */
+.teamSection {
+    padding: 120px 40px;
+    background: #080808;
+}
+
+.sectionTitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 60px;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.teamGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.teamMember {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 163, 0, 0.1);
+    border-radius: 20px;
+    padding: 50px 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    perspective: 1000px;
+}
+
+.teamMember h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.teamMember p {
+    color: #FFA300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+.contactNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+}
+
+.contactNumber a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* --- JOIN SECTION --- */
+.joinSection {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1517245385167-63770939ca5e?auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 150px 20px;
+}
+
+.joinContent h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.joinContent p {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto 50px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.btnJoin {
+    display: inline-block;
+    padding: 20px 50px;
+    background: #FFA300;
+    color: #000;
+    text-decoration: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 10px 30px rgba(255, 163, 0, 0.3);
+}
+
+/* --- FOOTER --- */
+.footer {
+    padding: 60px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* --- UTILS --- */
+.scrollTop {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    background: #FFA300;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    z-index: 1000;
+}
+
+.scrollTopVisible {
+    opacity: 1;
+    visibility: visible;
+    bottom: 50px;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .sectionContainer {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 30px;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .mobileMenuBtn {
+        display: block;
+    }
+
+    .sectionText h2 {
+        font-size: 2.5rem;
+    }
+}
