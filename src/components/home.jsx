@@ -356,7 +356,7 @@ const Home = () => {
             </footer>
 
             <div className="copyright-footer">
-                &copy; 2025 IEEE Computer Society — Rajalakshmi Engineering College
+                &copy; 2026 IEEE Computer Society — Rajalakshmi Engineering College
             </div>
         </div>
     );
