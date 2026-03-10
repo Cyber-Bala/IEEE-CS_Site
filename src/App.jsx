@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/home';
 import About from './components/About';
+import EventGallery from './components/EventGallery';
 import Team from './components/Team';
 import Contact from './components/Contact';
 import Creators from './components/Creators';
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/events" element={<EventGallery />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/creators" element={<Creators />} />

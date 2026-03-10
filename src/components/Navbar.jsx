@@ -9,9 +9,6 @@ const Navbar = () => {
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
-    const getPath = (hash) => {
-        return isHomePage ? hash : `/${hash}`;
-    };
 
     // Toggle body class to blur the page content when menu is open
     useEffect(() => {
@@ -43,7 +40,7 @@ const Navbar = () => {
                     <Link to="/" onClick={() => setIsMobileMenuActive(false)}>Home</Link>
                     <Link to="/about" className={location.pathname === '/about' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>About Us</Link>
                     <Link to="/team" className={location.pathname === '/team' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Our Team</Link>
-                    <a href={getPath('#events')} onClick={() => setIsMobileMenuActive(false)}>Events & Gallery</a>
+                    <Link to="/events" className={location.pathname === '/events' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Events & Gallery</Link>
                     <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Contact Us</Link>
                 </nav>
 
