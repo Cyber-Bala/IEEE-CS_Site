@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
+import Navbar from './Navbar';
 import './about.css';
 
 // ✅ IMPORT IMAGES FROM SRC
@@ -14,7 +15,6 @@ import iccdsImg from '../assets/events/ICCDS.JPG';
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 const About = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
 
     const mainRef = useRef(null);
@@ -25,7 +25,6 @@ const About = () => {
     const cultureRef = useRef(null);
     const teamRef = useRef(null);
     const joinRef = useRef(null);
-    const navbarRef = useRef(null);
     const scrollTopRef = useRef(null);
 
     useEffect(() => {
@@ -337,31 +336,6 @@ const About = () => {
                 }
             }
 
-            // ===== NAVBAR hover =====
-            if (navbarRef.current) {
-                const links = navbarRef.current.querySelectorAll('a');
-                links.forEach((link) => {
-                    const onEnter = () => {
-                        gsap.to(link, {
-                            scale: 1.05,
-                            y: -4,
-                            duration: 0.25,
-                            ease: 'power3.out',
-                        });
-                    };
-                    const onLeave = () => {
-                        gsap.to(link, {
-                            scale: 1,
-                            y: 0,
-                            duration: 0.25,
-                            ease: 'power2.out',
-                        });
-                    };
-                    link.addEventListener('mouseenter', onEnter);
-                    link.addEventListener('mouseleave', onLeave);
-                });
-            }
-
             // ===== SCROLL TOP visibility =====
             const handleScroll = () => {
                 if (window.scrollY > 500) {
@@ -384,49 +358,13 @@ const About = () => {
         };
     }, []);
 
-    const toggleMobileMenu = () => {
-        setMobileMenuOpen((prev) => !prev);
-    };
-
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
         <div className="aboutPage" ref={mainRef}>
-            {/* Header */}
-            <header className="header">
-                <div className="logoContainer">
-                    <Link to="/">
-                        <img src={collegeLogo} className="logoLeft" alt="College Logo" />
-                    </Link>
-                    <img src={ieeeLogo} className="logoRight" alt="IEEE CS Logo" />
-                </div>
-
-                <nav
-                    ref={navbarRef}
-                    className={`navbar ${mobileMenuOpen ? 'navbarActive' : ''
-                        }`}
-                    aria-label="Main Navigation"
-                >
-                    <Link to="/">Home</Link>
-                    <Link to="/about" className="navActive">
-                        About Us
-                    </Link>
-                    <Link to="/team">Our Team</Link>
-                    <Link to="/#events">Event Gallery</Link>
-                    <Link to="/contact">Contact us</Link>
-                </nav>
-
-                <button
-                    className="mobileMenuBtn"
-                    onClick={toggleMobileMenu}
-                    aria-label="Open menu"
-                >
-                    <i className="fas fa-bars" />
-                </button>
-            </header>
-
+            <Navbar />
             {/* Hero Section */}
             <section className="pageHero" ref={heroRef}>
                 <h1
