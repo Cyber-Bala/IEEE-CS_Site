@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Navbar from "./Navbar";
 import "./event.css";
 
@@ -140,10 +141,22 @@ export default function EventGallery() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [lightboxEvent, setLightboxEvent] = useState(null);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        AOS.init({
+            duration: 1000,
+            easing: "ease-out-back",
+            once: true
+        });
+    }, []);
+
     const filteredEvents = useMemo(() => {
-        setActiveIndex(0);
         if (activeFilter === "all") return EVENTS;
         return EVENTS.filter((e) => e.category === activeFilter);
+    }, [activeFilter]);
+
+    useEffect(() => {
+        setActiveIndex(0);
     }, [activeFilter]);
 
     useEffect(() => {
@@ -180,15 +193,26 @@ export default function EventGallery() {
             <Navbar />
 
             <section className="eg-hero">
-                <h1>EVENT GALLERY</h1>
-                <p>
-                    Explore our curated collection of workshops, hackathons, and expert
-                    talks hosted by the IEEE Computer Society.
-                </p>
-                <div className="eg-divider" />
+                <div className="cyber-grid"></div>
+                <div className="hero-noise"></div>
+
+                <div className="hero-content">
+                    <h1 className="glitch-text">
+                        <span>EVENT</span>
+                        <span> GALLERY</span>
+                    </h1>
+                    <p className="hero-subtitle">
+                        Explore our curated collection of workshops, hackathons, and expert
+                        talks hosted by the IEEE Computer Society.
+                    </p>
+
+                    <a href="#events-main" className="btn-join-cyber" style={{ marginTop: "40px" }}>
+                        <span className="btn-text">BROWSE EVENTS</span>
+                    </a>
+                </div>
             </section>
 
-            <div className="eg-filters">
+            <div id="events-main" className="eg-filters">
                 {FILTERS.map((f) => (
                     <button
                         key={f.key}
@@ -204,7 +228,7 @@ export default function EventGallery() {
 
             <main className="eg-main">
                 <section className="eg-slideshow">
-                    {currentEvent && (
+                    {currentEvent ? (
                         <>
                             <div
                                 className="eg-slide-bg"
@@ -265,6 +289,10 @@ export default function EventGallery() {
                                 ))}
                             </div>
                         </>
+                    ) : (
+                        <div className="eg-empty-state">
+                            <p>No events found for this category at the moment. Please check back later!</p>
+                        </div>
                     )}
                 </section>
 

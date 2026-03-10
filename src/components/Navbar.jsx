@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import collegeLogo from '../assets/logo/college.png';
@@ -7,51 +8,73 @@ import ieeeLogo from '../assets/logo/ieee_cs.png';
 const Navbar = () => {
     const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
     const location = useLocation();
-    const isHomePage = location.pathname === '/';
 
+    const close = () => setIsMobileMenuActive(false);
 
-    // Toggle body class to blur the page content when menu is open
+    // Lock body scroll when menu is open
     useEffect(() => {
-        if (isMobileMenuActive) {
-            document.body.classList.add('menu-open');
-        } else {
-            document.body.classList.remove('menu-open');
-        }
-        return () => document.body.classList.remove('menu-open');
+        document.body.style.overflow = isMobileMenuActive ? 'hidden' : '';
+        return () => { document.body.style.overflow = ''; };
     }, [isMobileMenuActive]);
+
+    // Close menu on route change
+    useEffect(() => { close(); }, [location]);
+
+    // The mobile menu is rendered via a Portal directly into document.body,
+    // completely escaping any parent stacking context (backdrop-filter, overflow, transform).
+    const mobileMenu = ReactDOM.createPortal(
+        <>
+            {/* Full-screen frosted glass menu panel */}
+            <nav
+                className={`mobile-nav ${isMobileMenuActive ? 'mobile-nav--open' : ''}`}
+                aria-label="Mobile Navigation"
+            >
+                {/* Close button */}
+                <button className="mobile-nav__close" onClick={close} aria-label="Close menu">
+                    <i className="fas fa-times"></i>
+                </button>
+
+                <Link to="/" className={location.pathname === '/' ? 'mobile-nav__link active' : 'mobile-nav__link'} style={{ '--i': 1 }} onClick={close}>Home</Link>
+                <Link to="/about" className={location.pathname === '/about' ? 'mobile-nav__link active' : 'mobile-nav__link'} style={{ '--i': 2 }} onClick={close}>About Us</Link>
+                <Link to="/team" className={location.pathname === '/team' ? 'mobile-nav__link active' : 'mobile-nav__link'} style={{ '--i': 3 }} onClick={close}>Our Team</Link>
+                <Link to="/events" className={location.pathname === '/events' ? 'mobile-nav__link active' : 'mobile-nav__link'} style={{ '--i': 4 }} onClick={close}>Events & Gallery</Link>
+                <Link to="/contact" className={location.pathname === '/contact' ? 'mobile-nav__link active' : 'mobile-nav__link'} style={{ '--i': 5 }} onClick={close}>Contact Us</Link>
+            </nav>
+        </>,
+        document.body
+    );
 
     return (
         <>
-            {/* Full-screen blur overlay — sits above page content, below the header+menu */}
-            <div
-                className={`menu-blur-overlay ${isMobileMenuActive ? 'active' : ''}`}
-                onClick={() => setIsMobileMenuActive(false)}
-            />
-
             <header className="header">
                 <div className="logo-container">
-                    <Link to="/" onClick={() => setIsMobileMenuActive(false)}>
+                    <Link to="/" onClick={close}>
                         <img src={collegeLogo} className="logo-left" alt="College Logo" />
                     </Link>
                     <img src={ieeeLogo} className="logo-right" alt="IEEE CS Logo" />
                 </div>
 
-                <nav className={`navbar ${isMobileMenuActive ? 'active' : ''}`} aria-label="Main Navigation">
-                    <Link to="/" onClick={() => setIsMobileMenuActive(false)}>Home</Link>
-                    <Link to="/about" className={location.pathname === '/about' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>About Us</Link>
-                    <Link to="/team" className={location.pathname === '/team' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Our Team</Link>
-                    <Link to="/events" className={location.pathname === '/events' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Events & Gallery</Link>
-                    <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''} onClick={() => setIsMobileMenuActive(false)}>Contact Us</Link>
+                {/* Desktop nav — inline in header */}
+                <nav className="navbar" aria-label="Main Navigation">
+                    <Link to="/" className={location.pathname === '/' ? 'active' : ''} onClick={close}>Home</Link>
+                    <Link to="/about" className={location.pathname === '/about' ? 'active' : ''} onClick={close}>About Us</Link>
+                    <Link to="/team" className={location.pathname === '/team' ? 'active' : ''} onClick={close}>Our Team</Link>
+                    <Link to="/events" className={location.pathname === '/events' ? 'active' : ''} onClick={close}>Events & Gallery</Link>
+                    <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''} onClick={close}>Contact Us</Link>
                 </nav>
 
                 <button
                     className="mobile-menu-btn"
-                    aria-label="Open menu"
-                    onClick={() => setIsMobileMenuActive(!isMobileMenuActive)}
+                    aria-label={isMobileMenuActive ? 'Close menu' : 'Open menu'}
+                    aria-expanded={isMobileMenuActive}
+                    onClick={() => setIsMobileMenuActive(prev => !prev)}
                 >
                     <i className={`fas ${isMobileMenuActive ? 'fa-times' : 'fa-bars'}`}></i>
                 </button>
             </header>
+
+            {/* Portal: renders outside #root, directly into body */}
+            {mobileMenu}
         </>
     );
 };
