@@ -123,13 +123,13 @@ const Contact = () => {
           <div className="social-links" data-aos="fade-up" data-aos-delay="500">
             <span className="social-label">// REACH US ON</span>
             <div className="social-icons">
-              <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Instagram">
+              <a href="https://www.instagram.com/ieee_cs_rec/" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Instagram">
                 <span className="social-icon-inner">
                   <i className="fab fa-instagram"></i>
                 </span>
                 <span className="social-icon-glow"></span>
               </a>
-              <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="WhatsApp">
+              <a href="https://chat.whatsapp.com/IbXOHjznUCH5UYCUS0V3Jr?mode=gi_t" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="WhatsApp">
                 <span className="social-icon-inner">
                   <i className="fab fa-whatsapp"></i>
                 </span>
