@@ -115,10 +115,10 @@ const Contact = () => {
             Have questions or want to collaborate?<br /> Drop us a message.
           </p>
 
-          
-           <a href="#contact-main" className="btn-join-cyber" style={{ margin: "50px" }}>
-  <span className="btn-text">SEND MESSAGE</span>
-</a>
+
+          <a href="#contact-main" className="btn-join-cyber" style={{ margin: "50px" }}>
+            <span className="btn-text">SEND MESSAGE</span>
+          </a>
 
           <div className="social-links" data-aos="fade-up" data-aos-delay="500">
             <span className="social-label">// REACH US ON</span>
@@ -162,7 +162,7 @@ const Contact = () => {
             </span>
           </h2>
 
-          <p style={{paddingBottom:"50px"}}>
+          <p style={{ paddingBottom: "50px" }}>
             We'd love to hear from you. <br />
             Fill out the form below and we'll get back to you soon.
           </p>
@@ -197,7 +197,7 @@ const Contact = () => {
       </section>
 
       <footer className="copyright-footer">
-        © 2025 IEEE Computer Society — Rajalakshmi Engineering College
+        © 2026 IEEE Computer Society — Rajalakshmi Engineering College
       </footer>
     </div>
   );

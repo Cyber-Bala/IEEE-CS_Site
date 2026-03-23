@@ -902,7 +902,7 @@
 /* Large desktop */
 @media (min-width: 1440px) {
     .hero-section { padding: 120px 80px 90px; }
-    .pillars-section, .events-section, .timeline-section { padding: 140px 80px; }
+    .pillars-section, .events-section, .timeline-section, .domains-section { padding: 140px 80px; }
     .stats-section  { padding: 80px; }
     .footer-inner   { padding: 100px 80px 80px; }
 }
@@ -910,7 +910,7 @@
 /* Tablet */
 @media (max-width: 1024px) {
     .hero-section   { padding: 90px 40px 70px; }
-    .pillars-section, .events-section, .timeline-section { padding: 90px 40px; }
+    .pillars-section, .events-section, .timeline-section, .domains-section { padding: 90px 40px; }
     .stats-section  { padding: 60px 40px; }
     .footer-inner   { padding: 70px 40px; }
 
@@ -926,6 +926,7 @@
     .stat-item:last-child { border-bottom: none; }
 
     .events-grid { grid-template-columns: 1fr 1fr; }
+    .domains-grid { grid-template-columns: repeat(2, 1fr); }
 
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .footer-cta   { grid-column: span 2; }
@@ -945,7 +946,7 @@
 /* Large mobile */
 @media (max-width: 768px) {
     .hero-section   { padding: 80px 24px 60px; }
-    .pillars-section, .events-section, .timeline-section { padding: 80px 24px; }
+    .pillars-section, .events-section, .timeline-section, .domains-section { padding: 80px 24px; }
     .stats-section  { padding: 50px 24px; }
     .footer-inner   { padding: 60px 24px 50px; grid-template-columns: 1fr; }
     .footer-bar     { padding: 18px 24px; }
@@ -957,14 +958,15 @@
     .pillars-grid   { grid-template-columns: 1fr; }
     .stats-inner    { grid-template-columns: 1fr 1fr; }
     .events-grid    { grid-template-columns: 1fr; }
+    .domains-grid   { grid-template-columns: 1fr; }
 
     .section-sub    { font-size: 0.92rem; }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
-    .hero-section   { padding: 70px 18px 50px; }
-    .pillars-section, .events-section, .timeline-section { padding: 70px 18px; }
+    .hero-section   { padding: 70px 18px 140px; }
+    .pillars-section, .events-section, .timeline-section, .domains-section { padding: 70px 18px; }
     .stats-section  { padding: 40px 18px; }
     .footer-inner   { padding: 50px 18px 40px; }
     .footer-bar     { padding: 16px 18px; font-size: 0.68rem; letter-spacing: 1px; }

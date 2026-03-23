@@ -394,8 +394,9 @@
 
 @media (max-width: 480px) {
     .team-hero-section {
-        min-height: 50vh;
+        min-height: 75vh;
         padding-top: 100px;
+        padding-bottom: 80px;
     }
 
     .scroll-hint {
