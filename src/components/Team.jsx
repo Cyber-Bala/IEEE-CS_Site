@@ -57,21 +57,20 @@ import balamurugan from '../assets/team/balamurugan.jpg';
 import venkat from '../assets/team/venkat.jpg';
 
 const TeamMember = ({ name, role, image, linkedin, instagram, delay, imgPosition }) => (
-    <div className="team-card" data-aos="fade-up" data-aos-delay={delay}>
-        <div className="card-inner">
-            <div className="member-image">
-                <img src={image} alt={name} style={{ objectPosition: imgPosition || 'center center' }} />
-                <div className="image-glow"></div>
-            </div>
-            <div className="card-info-overlay">
-                <h3>{name}</h3>
-                <p>{role}</p>
-                <div className="team-social">
-                    {linkedin && <a href={linkedin} target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>}
-                    {instagram && <a href={instagram} target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>}
-                </div>
+    <div className="team-bento-card" data-aos="fade-up" data-aos-delay={delay}>
+        <div className="team-img-wrap">
+            <img src={image} alt={name} style={{ objectPosition: imgPosition || 'center center' }} />
+            <div className="team-img-overlay"></div>
+        </div>
+        <div className="team-info">
+            <span className="team-role-tag">{role}</span>
+            <h3 className="team-name">{name}</h3>
+            <div className="team-socials">
+                {linkedin && linkedin !== '#' && <a href={linkedin} className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>}
+                {instagram && instagram !== '#' && <a href={instagram} className="social-btn" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>}
             </div>
         </div>
+        <div className="team-glow-effect"></div>
     </div>
 );
 
@@ -89,27 +88,25 @@ const Team = () => {
         <div className="team-page-container">
             <Navbar />
 
-            <section className="team-hero">
-                <div className="cyber-grid"></div>
-                <div className="hero-noise"></div>
-                <div className="hero-content" data-aos="zoom-out">
-                    <h1 className="glitch-text" data-text="OUR TEAM">
-                        <span>OUR</span><span>TEAM</span>
+            <section className="team-hero-section">
+                <div className="hero-bg-gradient" />
+                <div className="team-hero-content" data-aos="zoom-out">
+                    <span className="hero-eyebrow">
+                        <span className="eyebrow-dot" />
+                        MEET THE MINDS
+                    </span>
+                    <h1 className="hero-heading">
+                        Our <span className="gold">Team</span>
                     </h1>
-                    <p className="hero-subtitle">Meet the visionary minds driving technical excellence at IEEE REC.</p>
+                    <p className="hero-sub">
+                        The visionary minds driving technical excellence, executing flawless events, and shaping the future of IEEE REC.
+                    </p>
                 </div>
 
-                <a href="#team-main" className="hero-scroll-indicator">
-                    <div className="mouse-icon">
-                        <div className="wheel"></div>
-                    </div>
-                    <div className="scroll-metadata">
-                        <span className="metadata-tag">SCAN_TEAM</span>
-                        <div className="arrow-pulse">
-                            <i className="fas fa-chevron-down"></i>
-                        </div>
-                    </div>
-                </a>
+                <div className="scroll-hint">
+                    <span>explore</span>
+                    <div className="scroll-line" />
+                </div>
             </section>
 
             <main className="team-main" id="team-main">

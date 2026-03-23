@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -7,357 +7,326 @@ import { loadSlim } from "@tsparticles/slim";
 import './home.css';
 import Navbar from './Navbar';
 
-// Import assets
-import collegeLogo from '../assets/logo/college.png';
 import ieeeLogo from '../assets/logo/ieee_cs.png';
-
-// Event Assets
-import event1 from '../assets/events/event1.JPG';
-import promptIq from '../assets/events/prompt-iq.JPG';
-import replica from '../assets/events/replica.JPG';
-import alumnilecture from '../assets/events/alumnilecture.JPG';
 import iccds from '../assets/events/ICCDS.JPG';
-import recruitment from '../assets/events/rectrutment.jpg';
-import streamlit from '../assets/events/streamlit.jpg';
-import techATwist from '../assets/events/tech-a-twist.JPG';
 import techtopia from '../assets/events/techtopia.png';
 import xyntra from '../assets/events/xyntra.JPG';
+import promptIq from '../assets/events/prompt-iq.JPG';
+
+/* ─── Animated stat counter sub-component (rules-of-hooks safe) ─── */
+const StatCounter = ({ target, suffix, label, start }) => {
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+        if (!start) return;
+        let startTime = null;
+        const duration = 1800;
+        const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            setCount(Math.floor(progress * target));
+            if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    }, [start, target]);
+
+    return (
+        <div className="stat-item">
+            <span className="stat-num">{count}{suffix}</span>
+            <span className="stat-label">{label}</span>
+        </div>
+    );
+};
+
+/* ─── Data ─── */
+const stats = [
+    { value: 12, suffix: '+', label: 'Annual Events' },
+    { value: 45, suffix: '+', label: 'Active Members' },
+    { value: 6, suffix: '+', label: 'Years Active' },
+    { value: 25, suffix: '+', label: 'Workshops' },
+];
+
+const featuredEvents = [
+    {
+        image: techtopia,
+        tag: 'Flagship',
+        title: 'Techtopia',
+        desc: 'Our mega annual tech event — competitions, exhibitions, and industry talks all under one roof.',
+    },
+    {
+        image: xyntra,
+        tag: 'Competition',
+        title: 'XYNTRA 2.0',
+        desc: 'A high-stakes technical quiz and debugging challenge pushing students beyond their limits.',
+    },
+    {
+        image: promptIq,
+        tag: 'Workshop',
+        title: 'Prompt IQ',
+        desc: 'Hands-on AI prompt engineering training — learn to speak the language of large language models.',
+    },
+];
+
+const pillars = [
+    { icon: 'fas fa-code', title: 'Technical Skills', desc: 'Workshops, hackathons and live projects to make you industry-ready.' },
+    { icon: 'fas fa-users', title: 'Strong Community', desc: 'A network of 45+ driven students who push each other to excel.' },
+    { icon: 'fas fa-globe', title: 'Global Access', desc: "Direct connection to IEEE's worldwide professional network." },
+];
+
+const domains = [
+    { icon: 'fas fa-globe', title: 'Web Team', desc: 'Develop and maintain responsive websites and web platforms for seamless user experiences.' },
+    { icon: 'fas fa-calendar-alt', title: 'Event Management', desc: 'Plan, organize, and execute events efficiently, ensuring smooth coordination and engagement.' },
+    { icon: 'fas fa-bullhorn', title: 'Public Relations', desc: 'Handle communications, outreach, and build strong relationships with external audiences.' },
+    { icon: 'fas fa-paint-brush', title: 'Design Team', desc: 'Create visually compelling graphics, branding, and design assets for various platforms.' },
+    { icon: 'fas fa-photo-video', title: 'Media Team', desc: 'Capture, edit, and produce high-quality photos and videos for promotions and documentation.' },
+    { icon: 'fas fa-pen-nib', title: 'Content Team', desc: 'Write, curate, and manage engaging content for social media, blogs, and campaigns.' },
+    { icon: 'fas fa-robot', title: 'ML Team', desc: 'Work on machine learning models, data analysis, and AI-driven solutions.' },
+    { icon: 'fas fa-mobile-alt', title: 'App Team', desc: 'Design and develop mobile applications with smooth performance and great user experience.' },
+];
 
 const Home = () => {
-    const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
-
-    const identityCards = [
-        {
-            id: 'mission',
-            title: 'Our Mission',
-            icon: 'fas fa-bullseye',
-            content: 'Empowering students to lead in computing innovations through hands-on projects and professional development.',
-            details: [
-                'Foster technical excellence',
-                'Encourage collaboration',
-                'Real-world problem solving'
-            ]
-        },
-        {
-            id: 'vision',
-            title: 'Our Vision',
-            icon: 'fas fa-eye',
-            content: 'To establish ourselves as the premier hub of creativity and technical leadership in our institution and beyond.',
-            details: [
-                'Inspire technical innovation',
-                'Build future leaders',
-                'Global IEEE connection'
-            ]
-        },
-        {
-            id: 'what-we-do',
-            title: 'What We Do',
-            icon: 'fas fa-users',
-            content: 'We organize a variety of activities to help students grow technically and professionally.',
-            details: [
-                'Workshops & Hackathons',
-                'Industry Guest Lectures',
-                'Technical Research'
-            ]
-        }
-    ];
-
-    const gallerySlides = [
-        { title: 'XYNTRA 2.0', date: 'January 2024', image: xyntra },
-        { title: 'Prompt IQ', date: 'February 2024', image: promptIq },
-        { title: 'Replica', date: 'March 2024', image: replica },
-        { title: 'ICCDS Conference', date: 'April 2024', image: iccds },
-        { title: 'DVP Talk', date: 'May 2024', image: event1 },
-        { title: 'Alumni Lecture', date: 'June 2024', image: alumnilecture },
-        { title: 'Streamlit Workshop', date: 'July 2024', image: streamlit },
-        { title: 'Tech-A-Twist', date: 'August 2024', image: techATwist },
-        { title: 'Techtopia', date: 'September 2024', image: techtopia },
-        { title: 'Recruitment Drive', date: 'October 2024', image: recruitment }
-    ];
+    const [statsVisible, setStatsVisible] = useState(false);
+    const statsRef = useRef(null);
+    const particlesInit = useCallback(async (engine) => { await loadSlim(engine); }, []);
 
     useEffect(() => {
-        AOS.init({
-            duration: 1000,
-            easing: 'ease-out-back',
-            once: false,
-            mirror: true,
-            offset: 120,
-            disable: window.innerWidth < 768
-        });
+        AOS.init({ duration: 900, easing: 'ease-out-quart', once: true, offset: 80 });
 
-        const galleryInterval = setInterval(() => {
-            setCurrentGalleryIndex((prev) => (prev + 1) % gallerySlides.length);
-        }, 5000);
-
-        return () => {
-            clearInterval(galleryInterval);
-        };
-    }, [gallerySlides.length]);
-
-    const particlesInit = useCallback(async (engine) => {
-        await loadSlim(engine);
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setStatsVisible(true); },
+            { threshold: 0.3 }
+        );
+        if (statsRef.current) observer.observe(statsRef.current);
+        return () => observer.disconnect();
     }, []);
 
     const particlesOptions = {
         particles: {
-            number: { value: 100, density: { enable: true, area: 800 } },
-            color: { value: "#00f3ff" },
-            shape: { type: "circle" },
-            opacity: { value: 0.5 },
-            size: { value: 3, random: true },
-            links: { enable: true, distance: 150, color: "#00f3ff", opacity: 0.2, width: 1 },
-            move: { enable: true, speed: 3, direction: "none", random: true, straight: false, outModes: "out" }
+            number: { value: 45, density: { enable: true, area: 1000 } },
+            color: { value: '#FFA300' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.22, random: true },
+            size: { value: 2, random: true },
+            links: { enable: true, distance: 160, color: '#FFA300', opacity: 0.07, width: 1 },
+            move: { enable: true, speed: 1.0, direction: 'none', random: true, outModes: 'out' },
         },
         interactivity: {
-            events: { onHover: { enable: true, mode: "grab" }, onClick: { enable: true, mode: "push" }, resize: true },
-            modes: { grab: { distance: 140, links: { opacity: 1 } }, push: { quantity: 4 } }
+            events: { onHover: { enable: true, mode: 'grab' }, resize: true },
+            modes: { grab: { distance: 150, links: { opacity: 0.25 } } },
         },
-        retina_detect: true
-    };
-
-    const nextGallerySlide = () => setCurrentGalleryIndex((prev) => (prev + 1) % gallerySlides.length);
-    const prevGallerySlide = () => setCurrentGalleryIndex((prev) => (prev - 1 + gallerySlides.length) % gallerySlides.length);
-
-    // Touch swipe support for the events section
-    const touchStartX = React.useRef(null);
-    const handleTouchStart = (e) => {
-        touchStartX.current = e.touches[0].clientX;
-    };
-    const handleTouchEnd = (e) => {
-        if (touchStartX.current === null) return;
-        const deltaX = e.changedTouches[0].clientX - touchStartX.current;
-        if (Math.abs(deltaX) > 50) { // 50px threshold
-            if (deltaX < 0) nextGallerySlide(); // swipe left = next
-            else prevGallerySlide();             // swipe right = prev
-        }
-        touchStartX.current = null;
+        retina_detect: true,
     };
 
     return (
-        <div className="home-container">
+        <div className="home-wrap">
             <Navbar />
 
             <div id="particles-js">
                 <Particles id="tsparticles" init={particlesInit} options={particlesOptions} />
             </div>
 
-            {/* Hero Section */}
-            <section className="hero" id="home">
-                <div className="cyber-grid"></div>
-                <div className="hero-noise"></div>
+            {/* ══════════════════════════ HERO ══════════════════════════ */}
+            <section className="hero-section" id="home">
+                <div className="hero-bg-gradient" />
 
-                <div className="hero-hud-decor">
-                    <div className="hud-line top"></div>
-                    <div className="hud-line bottom"></div>
-                    <div className="hud-corner tl"></div>
-                    <div className="hud-corner tr"></div>
-                    <div className="hud-corner bl"></div>
-                    <div className="hud-corner br"></div>
+                <div className="hero-inner">
+                    {/* Left */}
+                    <div className="hero-text-col" data-aos="fade-right">
+                        <span className="hero-eyebrow">
+                            <span className="eyebrow-dot" />
+                            IEEE COMPUTER SOCIETY — REC CHAPTER
+                        </span>
+
+                        <h1 className="hero-heading">
+                            Build.<br />
+                            <span className="gold">Innovate.</span><br />
+                            Lead.
+                        </h1>
+
+                        <p className="hero-sub">
+                            Rajalakshmi Engineering College's premier IEEE student chapter —
+                            where ambitious engineers sharpen skills, forge real connections,
+                            and shape the future of computing together.
+                        </p>
+
+                        <div className="hero-ctas">
+                            <a href="https://www.ieee.org/" className="btn-primary-gold" target="_blank" rel="noopener noreferrer">
+                                Join IEEE Now &nbsp;<i className="fas fa-arrow-right" />
+                            </a>
+                            <Link to="/events" className="btn-ghost">
+                                Explore Events
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Right — bento */}
+                    <div className="hero-bento-col" data-aos="fade-left" data-aos-delay="200">
+                        <div className="bento-card bento-tall">
+                            <img src={techtopia} alt="Techtopia" />
+                            <div className="bento-overlay">
+                                <span className="bento-tag">Flagship</span>
+                                <p>Techtopia 2024</p>
+                            </div>
+                        </div>
+                        <div className="bento-col-right">
+                            <div className="bento-card bento-stat-card">
+                                <span className="bstat-num">45<sup>+</sup></span>
+                                <span className="bstat-label">Active Members</span>
+                            </div>
+                            <div className="bento-card bento-img-sm">
+                                <img src={iccds} alt="ICCDS" />
+                                <div className="bento-overlay">
+                                    <span className="bento-tag">Conference</span>
+                                    <p>ICCDS 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="hero-content" data-aos="zoom-out" data-aos-duration="1500">
-                    <div className="hero-glitch-wrapper">
-                        <h1 className="glitch-text" data-text="IEEE COMPUTER SOCIETY">
-                            <span>IEEE COMPUTER</span><span>SOCIETY</span>
-                        </h1>
-                    </div>
-                    <div className="hero-subtitle-container">
-                        <div className="subtitle-line"></div>
-                        <p>Empowering the next generation of computing professionals through innovation, collaboration, and technical excellence.</p>
-                        <div className="subtitle-line"></div>
-                    </div>
-                    <div className="hero-actions">
-                        <a href="https://www.ieee.org/" className="btn-join-cyber" target="_blank" rel="noopener noreferrer">
-                            <span className="btn-text">JOIN US TODAY</span>
-                            <span className="btn-glitch"></span>
-                        </a>
-                    </div>
+                <div className="scroll-hint">
+                    <span>scroll</span>
+                    <div className="scroll-line" />
                 </div>
             </section>
 
-            {/* Identity Grid (Mission, Vision, What We Do) */}
-            <section className="identity-section" id="about">
-                <div className="container">
-                    <div className="identity-grid">
-                        {identityCards.map((card, index) => (
-                            <div
-                                key={card.id}
-                                className={`identity-card ${card.id}`}
-                                data-aos="fade-up"
-                                data-aos-delay={index * 200}
-                            >
-                                <div className="card-inner">
-                                    <div className="card-glow"></div>
-                                    <div className="icon-box">
-                                        <i className={card.icon}></i>
-                                    </div>
-                                    <h2>{card.title}</h2>
-                                    <p>{card.content}</p>
-                                    <div className="details-tags">
-                                        {card.details.map((detail, i) => (
-                                            <span key={i}>{detail}</span>
-                                        ))}
-                                    </div>
-                                    {card.id === 'vision' && <div className="vision-scanline"></div>}
-                                </div>
+            {/* ══════════════════════════ PILLARS ══════════════════════════ */}
+            <section className="pillars-section">
+                <div className="pillars-inner">
+                    <span className="section-label" data-aos="fade-up">About the Chapter</span>
+                    <h2 className="section-title" data-aos="fade-up" data-aos-delay="80">
+                        One Chapter. Endless Opportunities.
+                    </h2>
+                    <p className="section-sub" data-aos="fade-up" data-aos-delay="140">
+                        Founded in 2019 at Rajalakshmi Engineering College, our IEEE CS chapter
+                        accelerates the journey from curious student to computing professional.
+                    </p>
+
+                    <div className="pillars-grid">
+                        {pillars.map((p, i) => (
+                            <div className="pillar-card" key={i} data-aos="fade-up" data-aos-delay={i * 120}>
+                                <div className="pillar-icon"><i className={p.icon} /></div>
+                                <h3>{p.title}</h3>
+                                <p>{p.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Holographic Past Events Hub */}
-            <section className="past-events-hub" id="events">
-                <div className="hub-background-glow"></div>
-                <div className="section-header" data-aos="fade-up">
-                    <div className="header-hud-line"></div>
-                    <h2>Past Events</h2>
-                </div>
-
-                <div
-                    className="hub-container"
-                    data-aos="zoom-in"
-                    data-aos-delay="200"
-                    onTouchStart={handleTouchStart}
-                    onTouchEnd={handleTouchEnd}
-                    style={{ touchAction: 'pan-y' }}
-                >
-                    <div className="event-deck">
-                        {gallerySlides.map((slide, index) => {
-                            const offset = index - currentGalleryIndex;
-                            const isActive = index === currentGalleryIndex;
-                            const isPrev = index === (currentGalleryIndex - 1 + gallerySlides.length) % gallerySlides.length;
-                            const isNext = index === (currentGalleryIndex + 1) % gallerySlides.length;
-
-                            let className = "event-card";
-                            if (isActive) className += " active";
-                            else if (isPrev) className += " prev";
-                            else if (isNext) className += " next";
-                            else if (Math.abs(offset) > 1) className += " hidden";
-
-                            return (
-                                <div
-                                    key={index}
-                                    className={className}
-                                    onClick={() => setCurrentGalleryIndex(index)}
-                                >
-                                    <div className="card-hud-frame">
-                                        <div className="bracket tl"></div>
-                                        <div className="bracket tr"></div>
-                                        <div className="bracket bl"></div>
-                                        <div className="bracket br"></div>
-
-                                        <div className="card-image-wrapper">
-                                            <img src={slide.image} alt={slide.title} />
-                                            <div className="image-scanline"></div>
-                                            <div className="hologram-flicker"></div>
-                                        </div>
-
-                                        <div className="card-info-hud">
-                                            <div className="hud-data-top">
-                                                <span className="event-date">DAT_LOG: {slide.date}</span>
-                                                <span className="event-id">UID_{index.toString().padStart(3, '0')}</span>
-                                            </div>
-                                            <h3>{slide.title}</h3>
-                                            <div className="hud-data-btm">
-                                                <div className="data-bar"><div className="fill"></div></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    <div className="hub-controls">
-                        <button className="hub-nav-btn prev" onClick={prevGallerySlide}>
-                            <i className="fas fa-chevron-left"></i>
-                        </button>
-                        <div className="hub-indicators">
-                            {gallerySlides.map((_, index) => (
-                                <div
-                                    key={index}
-                                    className={`hub-dot ${currentGalleryIndex === index ? 'active' : ''}`}
-                                    onClick={() => setCurrentGalleryIndex(index)}
-                                ></div>
-                            ))}
-                        </div>
-                        <button className="hub-nav-btn next" onClick={nextGallerySlide}>
-                            <i className="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div className="view-more-container" data-aos="fade-up" data-aos-delay="100">
-                    <a href="#events" className="btn-archive-access">Access Full Archive</a>
+            {/* ══════════════════════════ STATS ══════════════════════════ */}
+            <section className="stats-section" ref={statsRef}>
+                <div className="stats-inner">
+                    {stats.map((s, i) => (
+                        <StatCounter key={i} target={s.value} suffix={s.suffix} label={s.label} start={statsVisible} />
+                    ))}
                 </div>
             </section>
 
-            {/* Footer / Reach Out Section */}
-            <footer className="footer" id="contact">
-                <div className="footer-hud-grid"></div>
-                {/* <div className="footer-metadata">
-                    SYS_STATUS: ACTIVE<br />
-                    LOC_REF: REC_CHENNAI<br />
-                    SEC_AUTH: IEEE_CS_PROTOCOL
-                </div> */}
+            {/* ══════════════════════════ EVENTS ══════════════════════════ */}
+            <section className="events-section" id="events">
+                <div className="events-inner">
+                    <span className="section-label" data-aos="fade-up">What We Run</span>
+                    <h2 className="section-title" data-aos="fade-up" data-aos-delay="80">
+                        Events That Define Us
+                    </h2>
 
-                <div className="section-header" data-aos="fade-up">
-                    <div className="header-hud-line"></div>
-                    <h3 className="glitch-text" data-text="Reach Out">Reach Out</h3>
-                    <p className="footer-subtitle">COMMAND_CENTER: COORDINATE WITH FACULTY REPRESENTATIVES AND SYSTEM ARCHITECTS.</p>
-                </div>
+                    <div className="events-grid">
+                        {featuredEvents.map((ev, i) => (
+                            <div className="event-tile" key={i} data-aos="fade-up" data-aos-delay={i * 120}>
+                                <div className="event-img-wrap">
+                                    <img src={ev.image} alt={ev.title} />
+                                    <span className="ev-tag">{ev.tag}</span>
+                                </div>
+                                <div className="event-body">
+                                    <h3>{ev.title}</h3>
+                                    <p>{ev.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
-                <div className="contact-info">
-                    <div className="contact-person" data-aos="fade-up" data-aos-delay="100">
-                        <div className="role-tag">FACULTY CO-ORDINATOR</div>
-                        <strong>Dr. N. Duraimurugan</strong>
-                        <p>Rajalakshmi Engineering College</p>
-                        <a href="mailto:duraimurugan.n@rajalakshmi.edu.in" className="email-link">
-                            <i className="fas fa-envelope"></i> duraimurugan.n@rajalakshmi.edu.in
-                        </a>
-                    </div>
-                    <div className="contact-person" data-aos="fade-up" data-aos-delay="200">
-                        <div className="role-tag">FACULTY CO-ORDINATOR</div>
-                        <strong>Dr. K. Anandhajothi</strong>
-                        <p>Rajalakshmi Engineering College</p>
-                        <a href="mailto:ananthajothi.k@rajalakshmi.edu.in" className="email-link">
-                            <i className="fas fa-envelope"></i> ananthajothi.k@rajalakshmi.edu.in
-                        </a>
-                    </div>
-                    <div className="contact-person" data-aos="fade-up" data-aos-delay="300">
-                        <div className="role-tag">FACULTY CO-ORDINATOR</div>
-                        <strong>Dr. S. Vinod Kumar</strong>
-                        <p>Rajalakshmi Engineering College</p>
-                        <a href="mailto:vinodkumar.s@rajalakshmi.edu.in" className="email-link">
-                            <i className="fas fa-envelope"></i> vinodkumar.s@rajalakshmi.edu.in
-                        </a>
+                    <div className="events-cta-wrap" data-aos="fade-up">
+                        <Link to="/events" className="btn-outline-gold">
+                            View All Events &nbsp;<i className="fas fa-arrow-right" />
+                        </Link>
                     </div>
                 </div>
+            </section>
 
-                <div className="join-us-container" data-aos="fade-up" data-aos-delay="400">
-                    <a href="https://www.ieee.org/" className="btn-join-ieee" target="_blank" rel="noopener noreferrer">
-                        INITIALIZE_MEMBERSHIP
-                    </a>
+            {/* ══════════════════════════ DOMAINS ══════════════════════════ */}
+            <section className="domains-section">
+                <div className="domains-inner">
+                    <span className="section-label" data-aos="fade-up">Tracks We Explore</span>
+                    <h2 className="section-title" data-aos="fade-up" data-aos-delay="80">
+                        OUR DOMAINS
+                    </h2>
+                    <p className="section-sub" data-aos="fade-up" data-aos-delay="140">
+                        From building technology to managing events and creating impactful content, explore the domains that shape our community.
+                    </p>
+
+                    <div className="domains-grid">
+                        {domains.map((d, i) => (
+                            <div className="domain-card" key={i} data-aos="fade-up" data-aos-delay={i * 80}>
+                                <div className="domain-icon"><i className={d.icon} /></div>
+                                <h3>{d.title}</h3>
+                                <p>{d.desc}</p>
+                                <div className="domain-shine" />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ══════════════════════════ FOOTER ══════════════════════════ */}
+            <footer className="site-footer" id="contact">
+                <div className="footer-inner">
+                    {/* Brand */}
+                    <div className="footer-brand" data-aos="fade-right">
+                        <img src={ieeeLogo} alt="IEEE CS" className="footer-logo" />
+                        <p>
+                            IEEE Computer Society<br />
+                            Rajalakshmi Engineering College<br />
+                            Chennai, Tamil Nadu, India
+                        </p>
+                        <div className="footer-socials">
+                            <a href="https://www.instagram.com/ieee_cs_rec" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
+                            <a href="https://www.youtube.com/@IEEECSREC" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" /></a>
+                        </div>
+                    </div>
+
+                    {/* Contacts */}
+                    <div className="footer-contacts" data-aos="fade-up">
+                        <h4>Faculty Coordinators</h4>
+                        {[
+                            { name: 'Dr. N. Duraimurugan', email: 'duraimurugan.n@rajalakshmi.edu.in' },
+                            { name: 'Dr. K. Anandhajothi', email: 'ananthajothi.k@rajalakshmi.edu.in' },
+                            { name: 'Dr. S. Vinod Kumar', email: 'vinodkumar.s@rajalakshmi.edu.in' },
+                        ].map((c, i) => (
+                            <div className="fc-row" key={i}>
+                                <strong>{c.name}</strong>
+                                <a href={`mailto:${c.email}`}><i className="fas fa-envelope" /> {c.email}</a>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* CTA */}
+                    <div className="footer-cta" data-aos="fade-left">
+                        <h4>Ready to level up?</h4>
+                        <p>Join the IEEE Computer Society and unlock a global community of professionals, resources, and opportunities.</p>
+                        <a href="https://www.ieee.org/" className="btn-primary-gold" target="_blank" rel="noopener noreferrer">
+                            Become a Member
+                        </a>
+                        <Link to="/creators" className="creators-link">
+                            Website Creators &nbsp;<i className="fas fa-arrow-right" />
+                        </Link>
+                    </div>
                 </div>
 
-                <div className="social-links" data-aos="fade-up" data-aos-delay="500">
-                    <a href="https://www.instagram.com/ieee_cs_rec?utm_source=ig_web_button_share_sheet&igsh=dzM1N2Z5cWRxcnVj" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-                    <a href="https://www.youtube.com/@IEEECSREC" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
-                </div>
-
-                <div className="creators">
-                    <Link to="/creators" className="creator-link-main" data-aos="fade-up">
-                        <h3 className="glitch-text" data-text="Website Creators">Website Creators</h3>
-                        <span className="view-team-tag">VIEW_SYSTEM_ARCHITECTS <i className="fas fa-arrow-right"></i></span>
-                    </Link>
+                <div className="footer-bar">
+                    &copy; 2026 IEEE Computer Society — Rajalakshmi Engineering College
                 </div>
             </footer>
-
-            <div className="copyright-footer">
-                &copy; 2026 IEEE Computer Society — Rajalakshmi Engineering College
-            </div>
         </div>
     );
 };
