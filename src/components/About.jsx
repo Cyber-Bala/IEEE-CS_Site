@@ -79,6 +79,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
+            
 
             {/* 02. IMPACT (Right Title, Left Image - ZIGZAG) */}
             <section className="pin-section reverse">
