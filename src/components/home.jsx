@@ -7,6 +7,7 @@ import { loadSlim } from "@tsparticles/slim";
 import './home.css';
 import Navbar from './Navbar';
 
+import heroBg from '../assets/background.png';
 import ieeeLogo from '../assets/logo/ieee_cs.png';
 import iccds from '../assets/events/ICCDS.JPG';
 import techtopia from '../assets/events/techtopia.png';
@@ -126,68 +127,59 @@ const Home = () => {
 
             {/* ══════════════════════════ HERO ══════════════════════════ */}
             <section className="hero-section" id="home">
-                <div className="hero-bg-gradient" />
 
+                {/* ── RIGHT BACKGROUND PANEL (spans full section width) ── */}
+                <div
+                    className="hero-visual-col"
+                    data-aos="fade-in"
+                    data-aos-duration="2000"
+                    style={{ backgroundImage: `url(${heroBg})` }}
+                />
+
+                {/* particles sit behind everything */}
                 <div className="hero-inner">
-                    {/* Left */}
+                    {/* ── LEFT ── */}
                     <div className="hero-text-col" data-aos="fade-right">
-                        <span className="hero-eyebrow">
-                            <span className="eyebrow-dot" />
-                            IEEE COMPUTER SOCIETY — REC CHAPTER
-                        </span>
-
                         <h1 className="hero-heading">
-                            Build.<br />
-                            <span className="gold">Innovate.</span><br />
-                            Lead.
+                            BUILD.<br />
+                            <span className="hero-glow-text">INNOVATE.</span><br />
+                            LEAD.
                         </h1>
 
-                        <p className="hero-sub">
-                            Rajalakshmi Engineering College's premier IEEE student chapter —
-                            where ambitious engineers sharpen skills, forge real connections,
-                            and shape the future of computing together.
+                        <p className="hero-line1">
+                            Rajalakshmi Engineering College's premier IEEE student chapter.
+                        </p>
+                        <p className="hero-line2">
+                            Empowering the next generation of computing professionals.
                         </p>
 
+                        <div className="hero-scroll-hint">
+                            <span className="scroll-label">SCROLL TO EXPLORE</span>
+                            <div className="scroll-mouse">
+                                <span className="scroll-dot" />
+                            </div>
+                        </div>
+
                         <div className="hero-ctas">
-                            <a href="https://www.ieee.org/" className="btn-primary-gold" target="_blank" rel="noopener noreferrer">
-                                Join IEEE Now &nbsp;<i className="fas fa-arrow-right" />
+                            <a
+                                href="https://www.ieee.org/"
+                                className="btn-hero-primary"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Join IEEE Now
                             </a>
-                            <Link to="/events" className="btn-ghost">
+                            <Link to="/events" className="btn-hero-secondary">
                                 Explore Events
                             </Link>
                         </div>
                     </div>
 
-                    {/* Right — bento */}
-                    <div className="hero-bento-col" data-aos="fade-left" data-aos-delay="200">
-                        <div className="bento-card bento-tall">
-                            <img src={techtopia} alt="Techtopia" />
-                            <div className="bento-overlay">
-                                <span className="bento-tag">Flagship</span>
-                                <p>Techtopia 2024</p>
-                            </div>
-                        </div>
-                        <div className="bento-col-right">
-                            <div className="bento-card bento-stat-card">
-                                <span className="bstat-num">45<sup>+</sup></span>
-                                <span className="bstat-label">Active Members</span>
-                            </div>
-                            <div className="bento-card bento-img-sm">
-                                <img src={iccds} alt="ICCDS" />
-                                <div className="bento-overlay">
-                                    <span className="bento-tag">Conference</span>
-                                    <p>ICCDS 2024</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="scroll-hint">
-                    <span>scroll</span>
-                    <div className="scroll-line" />
+                    {/* Empty spacer so the left column retains its crisp 1fr 50% width inside the grid */}
+                    <div className="hero-grid-spacer" />
                 </div>
             </section>
+
 
             {/* ══════════════════════════ PILLARS ══════════════════════════ */}
             <section className="pillars-section">
