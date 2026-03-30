@@ -113,26 +113,11 @@ const About = () => {
                 </div>
             </section>
 
-            <section className="team-section">
-                <h2 className="team-head">Core Team</h2>
-                <div className="team-grid-wrapper">
-                    {[
-                        { name: "Gokulasarathy P S", role: "Chairman" },
-                        { name: "Himeshwar N", role: "Secretary" },
-                        { name: "Gokul Anand B", role: "Webmaster" },
-                        { name: "Srivarshini", role: "Treasurer" },
-                        { name: "Jayadharshini", role: "PR Lead" }
-                    ].map((m, i) => (
-                        <div className="team-card" key={i}>
-                            <span className="count">/0{i+1}</span>
-                            <h4>{m.name}</h4>
-                            <p>{m.role}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
+            
 
-            <footer className="simple-footer">© 2025 IEEE CS — REC</footer>
+            <footer class="simple-footer">
+  © 2026 <span>   IEEE Computer Society</span> — Rajalakshmi Engineering College
+</footer>
         </div>
     );
 };
