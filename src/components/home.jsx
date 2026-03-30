@@ -170,11 +170,11 @@ const Home = () => {
                     <button className="mob-overlay-close" onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
                         <i className="fas fa-times" />
                     </button>
-                    <Link to="/"        className={`mob-nav-link${location.pathname === '/'        ? ' mob-nav-link--active' : ''}`} style={{'--i':1}} onClick={() => setMobileMenuOpen(false)}>Home</Link>
-                    <Link to="/about"   className={`mob-nav-link${location.pathname === '/about'   ? ' mob-nav-link--active' : ''}`} style={{'--i':2}} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
-                    <Link to="/team"    className={`mob-nav-link${location.pathname === '/team'    ? ' mob-nav-link--active' : ''}`} style={{'--i':3}} onClick={() => setMobileMenuOpen(false)}>Our Team</Link>
-                    <Link to="/events"  className={`mob-nav-link${location.pathname === '/events'  ? ' mob-nav-link--active' : ''}`} style={{'--i':4}} onClick={() => setMobileMenuOpen(false)}>Events &amp; Gallery</Link>
-                    <Link to="/contact" className={`mob-nav-link${location.pathname === '/contact' ? ' mob-nav-link--active' : ''}`} style={{'--i':5}} onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
+                    <Link to="/" className={`mob-nav-link${location.pathname === '/' ? ' mob-nav-link--active' : ''}`} style={{ '--i': 1 }} onClick={() => setMobileMenuOpen(false)}>Home</Link>
+                    <Link to="/about" className={`mob-nav-link${location.pathname === '/about' ? ' mob-nav-link--active' : ''}`} style={{ '--i': 2 }} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
+                    <Link to="/team" className={`mob-nav-link${location.pathname === '/team' ? ' mob-nav-link--active' : ''}`} style={{ '--i': 3 }} onClick={() => setMobileMenuOpen(false)}>Our Team</Link>
+                    <Link to="/events" className={`mob-nav-link${location.pathname === '/events' ? ' mob-nav-link--active' : ''}`} style={{ '--i': 4 }} onClick={() => setMobileMenuOpen(false)}>Events &amp; Gallery</Link>
+                    <Link to="/contact" className={`mob-nav-link${location.pathname === '/contact' ? ' mob-nav-link--active' : ''}`} style={{ '--i': 5 }} onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
                 </div>
 
                 {/* particles sit behind everything */}
@@ -294,7 +294,7 @@ const Home = () => {
             </section>
 
             {/* ══════════════════════════ DOMAINS ══════════════════════════ */}
-            <section className="domains-section">
+            {/* <section className="domains-section">
                 <div className="domains-inner">
                     <span className="section-label" data-aos="fade-up">Tracks We Explore</span>
                     <h2 className="section-title" data-aos="fade-up" data-aos-delay="80">
@@ -315,7 +315,7 @@ const Home = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* ══════════════════════════ FOOTER ══════════════════════════ */}
             <footer className="site-footer" id="contact">
