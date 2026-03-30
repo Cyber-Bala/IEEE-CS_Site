@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Particles from "@tsparticles/react";
@@ -9,6 +9,7 @@ import Navbar from './Navbar';
 
 import heroBg from '../assets/background.png';
 import ieeeLogo from '../assets/logo/ieee_cs.png';
+import recLogo from '../assets/logo/college.png';
 import iccds from '../assets/events/ICCDS.JPG';
 import techtopia from '../assets/events/techtopia.png';
 import xyntra from '../assets/events/xyntra.JPG';
@@ -86,8 +87,19 @@ const domains = [
 
 const Home = () => {
     const [statsVisible, setStatsVisible] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const statsRef = useRef(null);
+    const location = useLocation();
     const particlesInit = useCallback(async (engine) => { await loadSlim(engine); }, []);
+
+    // Close mobile menu on route change
+    useEffect(() => { setMobileMenuOpen(false); }, [location]);
+
+    // Lock body scroll when mobile menu is open
+    useEffect(() => {
+        document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+        return () => { document.body.style.overflow = ''; };
+    }, [mobileMenuOpen]);
 
     useEffect(() => {
         AOS.init({ duration: 900, easing: 'ease-out-quart', once: true, offset: 80 });
@@ -128,7 +140,7 @@ const Home = () => {
             {/* ══════════════════════════ HERO ══════════════════════════ */}
             <section className="hero-section" id="home">
 
-                {/* ── RIGHT BACKGROUND PANEL (spans full section width) ── */}
+                {/* ── DESKTOP: right-panel background image ── */}
                 <div
                     className="hero-visual-col"
                     data-aos="fade-in"
@@ -136,9 +148,38 @@ const Home = () => {
                     style={{ backgroundImage: `url(${heroBg})` }}
                 />
 
+                {/* ── MOBILE ONLY: Logo header row ── */}
+                <div className="mob-header">
+                    <div className="mob-logo-row">
+                        <img src={recLogo} alt="Rajalakshmi Engineering College" className="mob-logo mob-logo-rec" />
+                        <span className="mob-logo-sep" />
+                        <img src={ieeeLogo} alt="IEEE Computer Society" className="mob-logo mob-logo-ieee" />
+                    </div>
+                    <button
+                        className="mob-burger"
+                        aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                        onClick={() => setMobileMenuOpen(p => !p)}
+                    >
+                        <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`} />
+                    </button>
+                    <span className="mob-header-line" />
+                </div>
+
+                {/* ── MOBILE ONLY: Full-screen nav overlay ── */}
+                <div className={`mob-overlay${mobileMenuOpen ? ' mob-overlay--open' : ''}`}>
+                    <button className="mob-overlay-close" onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
+                        <i className="fas fa-times" />
+                    </button>
+                    <Link to="/"        className={`mob-nav-link${location.pathname === '/'        ? ' mob-nav-link--active' : ''}`} style={{'--i':1}} onClick={() => setMobileMenuOpen(false)}>Home</Link>
+                    <Link to="/about"   className={`mob-nav-link${location.pathname === '/about'   ? ' mob-nav-link--active' : ''}`} style={{'--i':2}} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
+                    <Link to="/team"    className={`mob-nav-link${location.pathname === '/team'    ? ' mob-nav-link--active' : ''}`} style={{'--i':3}} onClick={() => setMobileMenuOpen(false)}>Our Team</Link>
+                    <Link to="/events"  className={`mob-nav-link${location.pathname === '/events'  ? ' mob-nav-link--active' : ''}`} style={{'--i':4}} onClick={() => setMobileMenuOpen(false)}>Events &amp; Gallery</Link>
+                    <Link to="/contact" className={`mob-nav-link${location.pathname === '/contact' ? ' mob-nav-link--active' : ''}`} style={{'--i':5}} onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
+                </div>
+
                 {/* particles sit behind everything */}
                 <div className="hero-inner">
-                    {/* ── LEFT ── */}
+                    {/* ── LEFT (desktop) / CENTER (mobile) ── */}
                     <div className="hero-text-col" data-aos="fade-right">
                         <h1 className="hero-heading">
                             BUILD.<br />
@@ -152,6 +193,13 @@ const Home = () => {
                         <p className="hero-line2">
                             Empowering the next generation of computing professionals.
                         </p>
+
+                        {/* ── MOBILE ONLY: chip illustration as real img ── */}
+                        <img
+                            src={heroBg}
+                            alt="IEEE CS Tech Illustration"
+                            className="mob-chip-img"
+                        />
 
                         <div className="hero-scroll-hint">
                             <span className="scroll-label">SCROLL TO EXPLORE</span>
@@ -175,7 +223,7 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Empty spacer so the left column retains its crisp 1fr 50% width inside the grid */}
+                    {/* Empty spacer for desktop grid */}
                     <div className="hero-grid-spacer" />
                 </div>
             </section>

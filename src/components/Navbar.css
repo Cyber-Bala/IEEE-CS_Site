@@ -2,14 +2,14 @@
    TOKENS (mirror home.css)
 ═══════════════════════════════════════ */
 :root {
-    --gold:       #FFA300;
-    --gold-dim:   rgba(255, 163, 0, 0.10);
-    --gold-glow:  rgba(255, 163, 0, 0.28);
-    --dark:       #080808;
-    --txt:        #F0EFEB;
-    --muted:      rgba(240, 239, 235, 0.50);
-    --border:     rgba(255, 163, 0, 0.10);
-    --radius-sm:  8px;
+    --gold: #FFA300;
+    --gold-dim: rgba(255, 163, 0, 0.10);
+    --gold-glow: rgba(255, 163, 0, 0.28);
+    --dark: #080808;
+    --txt: #F0EFEB;
+    --muted: rgba(240, 239, 235, 0.50);
+    --border: rgba(255, 163, 0, 0.10);
+    --radius-sm: 8px;
     --transition: 0.30s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -34,7 +34,7 @@
 
     /* Gold bottom border — the primary brand accent */
     border-bottom: 1px solid rgba(255, 163, 0, 0.20);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 4px 28px rgba(0,0,0,0.50);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 4px 28px rgba(0, 0, 0, 0.50);
 
     transition: var(--transition);
 }
@@ -64,7 +64,7 @@
 .logo-right {
     height: 42px;
     transition: var(--transition);
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
 }
 
 .logo-left:hover,
@@ -241,8 +241,15 @@
 }
 
 @keyframes navSlideIn {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0);    }
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .mobile-nav__link::after {
@@ -276,29 +283,78 @@
    RESPONSIVE
 ═══════════════════════════════════════ */
 @media (min-width: 1441px) {
-    .header { padding: 0 80px; height: 78px; }
-    .logo-left, .logo-right { height: 48px; }
-    .navbar a { font-size: 0.88rem; padding: 9px 20px; }
+    .header {
+        padding: 0 80px;
+        height: 78px;
+    }
+
+    .logo-left,
+    .logo-right {
+        height: 48px;
+    }
+
+    .navbar a {
+        font-size: 0.88rem;
+        padding: 9px 20px;
+    }
 }
 
 @media (max-width: 1440px) and (min-width: 1025px) {
-    .header { padding: 0 60px; }
+    .header {
+        padding: 0 60px;
+    }
 }
 
 @media (max-width: 1024px) {
-    .header { padding: 0 24px; height: 64px; }
-    .navbar  { display: none; }
-    .mobile-menu-btn { display: block; }
+    .header {
+        padding: 0 24px;
+        height: 64px;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
 }
 
-@media (max-width: 768px) {
-    .logo-left, .logo-right { height: 36px; }
+@media (max-width: 1024px) {
+    /* Hide the fixed Navbar bar on mobile — mob-header in home.jsx takes its place */
+    .header {
+        display: none !important;
+    }
+
+    .logo-left,
+    .logo-right {
+        height: 36px;
+    }
 }
 
 @media (max-width: 480px) {
-    .header { padding: 0 16px; height: 60px; }
-    .logo-container { gap: 12px; }
-    .logo-left, .logo-right { height: 32px; }
-    .mobile-menu-btn { font-size: 1.05rem; padding: 6px 10px; }
-    .mobile-nav__link { font-size: 1.4rem; letter-spacing: 3px; padding: 14px 20px; }
+    .header {
+        padding: 0 16px;
+        height: 60px;
+    }
+
+    .logo-container {
+        gap: 12px;
+    }
+
+    .logo-left,
+    .logo-right {
+        height: 32px;
+    }
+
+    .mobile-menu-btn {
+        font-size: 1.05rem;
+        padding: 6px 10px;
+    }
+
+    .mobile-nav__link {
+        font-size: 1.4rem;
+        letter-spacing: 3px;
+        padding: 14px 20px;
+    }
 }
