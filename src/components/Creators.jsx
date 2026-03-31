@@ -113,7 +113,7 @@ const Creators = () => {
             </main>
 
             <footer className="creators-footer">
-                <p>&copy; 2025 IEEE Computer Society — Rajalakshmi Engineering College</p>
+                <p>&copy; 2026 IEEE Computer Society — Rajalakshmi Engineering College</p>
             </footer>
         </div>
     );
