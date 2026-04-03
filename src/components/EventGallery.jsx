@@ -1,35 +1,111 @@
+// EventGallery.jsx
 import React, { useEffect, useState, useMemo } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "./Navbar";
 import "./event.css";
 
-// images
-import collegeLogo from "../assets/logo/college.png";
-import ieeeCsLogo from "../assets/logo/ieee_cs.png";
+// === IMAGE IMPORTS ====================================================
 
+// DVP talk
 import event1 from "../assets/events/event1.JPG";
-import promptIq from "../assets/events/prompt-iq.JPG";
-import replica from "../assets/events/replica.JPG";
-import alumniLecture from "../assets/events/alumnilecture.JPG";
-import streamlit from "../assets/events/streamlit.jpg";
-import techtopia from "../assets/events/techtopia.png";
-import techATwist from "../assets/events/tech-a-twist.JPG";
-import xyntra from "../assets/events/xyntra.JPG";
-import iccds from "../assets/events/ICCDS.JPG";
+import event2 from "../assets/events/DCP1.JPG";
+import event3 from "../assets/events/DCP2.JPG";
+import event4 from "../assets/events/DCP3.JPG";
+import event5 from "../assets/events/DCP4.JPG";
+import event6 from "../assets/events/DCP5.JPG";
+import event7 from "../assets/events/DCP6.JPG";
+import event8 from "../assets/events/DCP7.JPG";
 
-// TEMP: demo photo dumps per event (repeat same image just to show animation)
-// Replace with real arrays later.
+// Prompt IQ workshop
+import promptIq from "../assets/events/prompt-iq.JPG";
+import promptIq1 from "../assets/events/PIq1.JPG";
+import promptIq2 from "../assets/events/PIq2.JPEG";
+import promptIq3 from "../assets/events/PIq3.JPEG";
+import promptIq4 from "../assets/events/PIq4.JPEG";
+import promptIq5 from "../assets/events/PIq5.JPEG";
+import promptIq6 from "../assets/events/PIq6.JPEG";
+import promptIq7 from "../assets/events/PIq7.JPEG";
+
+// Replica
+import replica from "../assets/events/replica.JPG";
+
+// Alumni lecture
+import alumniLecture from "../assets/events/alumnilecture.JPG";
+import alumniLecture2 from "../assets/events/Al2.JPG";
+import alumniLecture3 from "../assets/events/Al3.JPG";
+import alumniLecture4 from "../assets/events/Al4.JPG";
+import alumniLecture5 from "../assets/events/Al5.JPG";
+import alumniLecture6 from "../assets/events/Al6.JPG";
+import alumniLecture7 from "../assets/events/Al7.JPG";
+
+// Streamlit workshop
+import streamlit from "../assets/events/streamlit.jpg";
+import streamlit1 from "../assets/events/sl1.jpg";
+import streamlit2 from "../assets/events/sl2.jpg";
+import streamlit3 from "../assets/events/sl3.jpg";
+import streamlit4 from "../assets/events/sl4.jpg";
+import streamlit5 from "../assets/events/sl5.jpg";
+import streamlit6 from "../assets/events/sl6.jpg";
+import streamlit7 from "../assets/events/sl7.jpg";
+
+// Techtopia
+import techtopia from "../assets/events/techtopia.png";
+import techtopia1 from "../assets/events/Tech1.jpg";
+import techtopia2 from "../assets/events/Tech2.jpg";
+import techtopia3 from "../assets/events/Tech3.jpg";
+import techtopia4 from "../assets/events/Tech4.jpg";
+import techtopia5 from "../assets/events/Tech5.jpg";
+import techtopia6 from "../assets/events/Tech6.jpg";
+
+// Tech-a-twist
+import techATwist from "../assets/events/tech-a-twist.JPG";
+import techATwist1 from "../assets/events/Techatwist1.JPG";
+import techATwist2 from "../assets/events/Techatwist2.JPG";
+import techATwist3 from "../assets/events/Techatwist3.JPG";
+import techATwist4 from "../assets/events/Techatwist4.jpg";
+import techATwist5 from "../assets/events/Techatwist5.jpg";
+
+// XYNTRA
+import xyntra from "../assets/events/xyntra.JPG";
+import xyntra1 from "../assets/events/XYNTRA1.png";
+import xyntra2 from "../assets/events/XYNTRA2.png";
+import xyntra3 from "../assets/events/XYNTRA3.png";
+import xyntra4 from "../assets/events/Xyntra1.JPG";
+import xyntra5 from "../assets/events/Xyntra2.JPG";
+import xyntra6 from "../assets/events/Xyntra3.JPG";
+import xyntra7 from "../assets/events/Xyntra4.JPG";
+import xyntra8 from "../assets/events/Xyntra5.JPG";
+import xyntra9 from "../assets/events/Xyntra6.JPG";
+import xyntra0 from "../assets/events/Xyntra7.JPG";
+
+// ICCDS
+import iccds from "../assets/events/ICCDS.JPG";
+import iccds1 from "../assets/events/ICCDS1.JPG";
+import iccds2 from "../assets/events/ICCDS2.JPG";
+import iccds3 from "../assets/events/ICCDS3.JPG";
+import iccds4 from "../assets/events/ICCDS4.JPG";
+import iccds5 from "../assets/events/ICCDS5.JPG";
+import iccds6 from "../assets/events/ICCDS6.JPG";
+import iccds7 from "../assets/events/ICCDS7.JPG";
+import iccds8 from "../assets/events/ICCDS8.JPG";
+import iccds9 from "../assets/events/ICCDS9.JPG";
+import iccds10 from "../assets/events/ICCDS10.JPG";
+import iccds11 from "../assets/events/ICCDS11.JPG";
+
+// === DATA =============================================================
+
+// Per‑event photo sets
 const EVENT_PHOTOS = {
-  1: [event1, event1, event1, event1, event1, event1],
-  2: [promptIq, promptIq, promptIq, promptIq, promptIq, promptIq],
-  3: [replica, replica, replica, replica, replica, replica],
-  4: [alumniLecture, alumniLecture, alumniLecture, alumniLecture],
-  5: [streamlit, streamlit, streamlit, streamlit, streamlit],
-  6: [techtopia, techtopia, techtopia, techtopia],
-  7: [techATwist, techATwist, techATwist, techATwist],
-  8: [xyntra, xyntra, xyntra, xyntra, xyntra, xyntra],
-  9: [iccds, iccds, iccds, iccds]
+  1: [event1, event2, event3, event4, event5, event6, event7, event8],
+  2: [promptIq, promptIq1, promptIq2, promptIq3, promptIq4, promptIq5, promptIq6, promptIq7],
+  3: [replica],
+  4: [alumniLecture, alumniLecture2, alumniLecture3, alumniLecture4, alumniLecture5, alumniLecture6, alumniLecture7],
+  5: [streamlit, streamlit1, streamlit2, streamlit3, streamlit4, streamlit5, streamlit6, streamlit7],
+  6: [techtopia, techtopia1, techtopia2, techtopia3, techtopia4, techtopia5, techtopia6],
+  7: [techATwist, techATwist1, techATwist2, techATwist3, techATwist4, techATwist5],
+  8: [xyntra, xyntra1, xyntra2, xyntra3, xyntra4, xyntra5, xyntra6, xyntra7, xyntra8, xyntra9, xyntra0],
+  9: [iccds, iccds1, iccds2, iccds3, iccds4, iccds5, iccds6, iccds7, iccds8, iccds9, iccds10, iccds11]
 };
 
 const EVENTS = [
@@ -150,26 +226,44 @@ const FILTERS = [
   { key: "competition", label: "Competitions" }
 ];
 
+// subtle unique rotation per index (kept but clamped)
+const getRandomRotation = (index) => {
+  const seed = (index + 3) * 7919;
+  const val = ((seed % 9) - 4); // -4 to 4 degrees, small
+  return val;
+};
+
+const eventIntroClass = (event) => {
+  if (!event) return "eg-photo-intro-generic";
+  switch (event.category) {
+    case "workshop":
+      return "eg-photo-intro-workshop";
+    case "talk":
+      return "eg-photo-intro-talk";
+    case "competition":
+      return "eg-photo-intro-competition";
+    default:
+      return "eg-photo-intro-generic";
+  }
+};
+
 export default function EventGallery() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxEvent, setLightboxEvent] = useState(null);
 
-  // photo-dump viewer
   const [photoViewerEvent, setPhotoViewerEvent] = useState(null);
   const [photoIntroDone, setPhotoIntroDone] = useState(false);
   const [photoCycleIndex, setPhotoCycleIndex] = useState(0);
-
-  // NEW: reactive grid transform
   const [photoGridTransform, setPhotoGridTransform] = useState({
-    rotateX: 12,
+    rotateX: 16,
     rotateY: -10
   });
 
   useEffect(() => {
     window.scrollTo(0, 0);
     AOS.init({
-      duration: 900,
+      duration: 700,
       easing: "ease-out-cubic",
       once: true
     });
@@ -184,6 +278,7 @@ export default function EventGallery() {
     setActiveIndex(0);
   }, [activeFilter]);
 
+  // auto slideshow
   useEffect(() => {
     if (!filteredEvents.length) return;
     const interval = setInterval(() => {
@@ -195,9 +290,6 @@ export default function EventGallery() {
   }, [filteredEvents.length]);
 
   const currentEvent = filteredEvents[activeIndex] || null;
-
-  const handleDotClick = (index) => setActiveIndex(index);
-  const handleThumbClick = (index) => setActiveIndex(index);
 
   const handleNext = () => {
     if (!filteredEvents.length) return;
@@ -217,13 +309,15 @@ export default function EventGallery() {
     setPhotoViewerEvent(eventObj);
     setPhotoIntroDone(false);
     setPhotoCycleIndex(0);
-    // reset grid tilt
     setPhotoGridTransform({ rotateX: 16, rotateY: -10 });
   };
 
+  // auto cycle photos only after intro
   useEffect(() => {
     if (!photoViewerEvent || !photoIntroDone) return;
-    const photos = EVENT_PHOTOS[photoViewerEvent.id] || [];
+    const photos = EVENT_PHOTOS[photoViewerEvent.id] || [
+      photoViewerEvent.image
+    ];
     if (!photos.length) return;
 
     const interval = setInterval(() => {
@@ -240,15 +334,14 @@ export default function EventGallery() {
       photoCycleIndex
     ];
 
-  // handle cursor movement over photo viewer – updates grid transform
   const handlePhotoMouseMove = (e) => {
     if (!photoViewerEvent) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width; // 0 to 1
-    const y = (e.clientY - rect.top) / rect.height; // 0 to 1
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
 
-    const rotateY = (x - 0.5) * 18; // tilt left/right
-    const rotateX = (0.5 - y) * 18; // tilt up/down
+    const rotateY = (x - 0.5) * 14;
+    const rotateX = (0.5 - y) * 14;
 
     setPhotoGridTransform({
       rotateX,
@@ -256,10 +349,44 @@ export default function EventGallery() {
     });
   };
 
+  // keyboard navigation inside viewer
+  useEffect(() => {
+    if (!photoViewerEvent) return;
+    const handler = (e) => {
+      if (e.key === "Escape") {
+        setPhotoViewerEvent(null);
+        return;
+      }
+      if (!photoIntroDone) {
+        // hitting any key exits intro fast
+        setPhotoIntroDone(true);
+        return;
+      }
+
+      const photos =
+        EVENT_PHOTOS[photoViewerEvent.id] || [photoViewerEvent.image];
+      if (!photos.length) return;
+
+      if (e.key === "ArrowRight") {
+        setPhotoCycleIndex((prev) =>
+          prev + 1 >= photos.length ? 0 : prev + 1
+        );
+      }
+      if (e.key === "ArrowLeft") {
+        setPhotoCycleIndex((prev) =>
+          prev - 1 < 0 ? photos.length - 1 : prev - 1
+        );
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [photoViewerEvent, photoIntroDone]);
+
   return (
     <div className="eg-body">
       <Navbar />
 
+      {/* HERO */}
       <section className="eg-hero">
         <div className="cyber-grid" />
         <div className="hero-noise" />
@@ -284,6 +411,7 @@ export default function EventGallery() {
         </div>
       </section>
 
+      {/* FILTERS */}
       <div id="events-main" className="eg-filters" data-aos="fade-up">
         {FILTERS.map((f) => (
           <button
@@ -298,7 +426,9 @@ export default function EventGallery() {
         ))}
       </div>
 
+      {/* MAIN */}
       <main className="eg-main">
+        {/* SLIDESHOW */}
         <section
           className="eg-slideshow eg-slide-animate"
           key={currentEvent ? currentEvent.id : "empty"}
@@ -365,7 +495,7 @@ export default function EventGallery() {
                     className={
                       "eg-dot " + (idx === activeIndex ? "active" : "")
                     }
-                    onClick={() => handleDotClick(idx)}
+                    onClick={() => setActiveIndex(idx)}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
                 ))}
@@ -381,6 +511,7 @@ export default function EventGallery() {
           )}
         </section>
 
+        {/* GRID OF EVENTS */}
         <section className="eg-grid-section" data-aos="fade-up">
           <h3 className="eg-section-title">All Moments</h3>
           <div className="eg-grid">
@@ -423,6 +554,7 @@ export default function EventGallery() {
         </section>
       </main>
 
+      {/* LIGHTBOX (SINGLE POSTER IMAGE) */}
       {lightboxEvent && (
         <div className="eg-lightbox" onClick={() => setLightboxEvent(null)}>
           <div
@@ -487,7 +619,7 @@ export default function EventGallery() {
         </div>
       )}
 
-      {/* Event photo-dump cinematic viewer with cursor-reactive yellow grid */}
+      {/* IMMERSIVE PHOTO VIEWER */}
       {photoViewerEvent && (
         <div
           className="eg-photo-viewer"
@@ -507,7 +639,7 @@ export default function EventGallery() {
               <i className="fas fa-times" />
             </button>
 
-            {/* yellowish grid that tilts with cursor */}
+            {/* reactive grid bg */}
             <div
               className="eg-photo-bg-grid"
               style={{
@@ -516,59 +648,154 @@ export default function EventGallery() {
             />
             <div className="eg-photo-bg-noise" />
 
+            {/* EVENT-SPECIFIC INTRO (FULLSCREEN) */}
             {!photoIntroDone && (
               <div
-                className="eg-photo-intro"
+                className={
+                  "eg-photo-intro-full " + eventIntroClass(photoViewerEvent)
+                }
                 onAnimationEnd={() => setPhotoIntroDone(true)}
+                onClick={() => setPhotoIntroDone(true)} // tap to skip
               >
-                <span className="eg-pill">
-                  {photoViewerEvent.category.toUpperCase()}
-                </span>
-                <h2 className="eg-photo-intro-title">
-                  {photoViewerEvent.title}
-                </h2>
-                <p className="eg-photo-intro-sub">
-                  {photoViewerEvent.date} • {photoViewerEvent.venue}
-                </p>
+                <div className="eg-photo-intro-left">
+                  <span className="eg-pill eg-photo-intro-tag">
+                    {photoViewerEvent.category.toUpperCase()}
+                  </span>
+                  <h2 className="eg-photo-intro-title">
+                    {photoViewerEvent.title}
+                  </h2>
+                  <p className="eg-photo-intro-meta">
+                    {photoViewerEvent.date} • {photoViewerEvent.venue}
+                  </p>
+                  <p className="eg-photo-intro-desc">
+                    {photoViewerEvent.description}
+                  </p>
+                  <div className="eg-photo-intro-hint">
+                    <span className="eg-photo-intro-dot" />
+                    <span>
+                      Immersive recap loading. Tap or press any key to enter.
+                    </span>
+                  </div>
+                </div>
+                <div className="eg-photo-intro-right">
+                  <div className="eg-photo-intro-preview">
+                    <img
+                      src={
+                        (EVENT_PHOTOS[photoViewerEvent.id] ||
+                          [photoViewerEvent.image])[0]
+                      }
+                      alt={photoViewerEvent.title}
+                    />
+                    <div className="eg-photo-intro-scrim" />
+                  </div>
+                </div>
               </div>
             )}
 
+            {/* BINGE-WORTHY FLOW */}
             {photoIntroDone && (
-              <div className="eg-photo-wall">
-                <div className="eg-photo-wall-main">
-                  <img
-                    src={currentPhotoSrc}
-                    alt={photoViewerEvent.title}
-                    className="eg-photo-wall-main-img"
-                    key={currentPhotoSrc}
-                  />
-                </div>
-                <div className="eg-photo-wall-stripe eg-photo-wall-stripe-top">
-                  {(EVENT_PHOTOS[photoViewerEvent.id] ||
-                    [photoViewerEvent.image]
-                  ).slice(0, 6).map((src, idx) => (
-                    <div
-                      className="eg-photo-wall-strip-item"
-                      key={idx}
-                      style={{ "--eg-strip-index": idx }}
-                    >
-                      <img src={src} alt="" loading="lazy" />
+              <div className="eg-photo-immersive-layout">
+                {/* LEFT: header + main photo + progress */}
+                <div className="eg-photo-main-column">
+                  <header className="eg-photo-header">
+                    <div className="eg-photo-header-text">
+                      <span className="eg-pill eg-photo-header-pill">
+                        {photoViewerEvent.category.toUpperCase()}
+                      </span>
+                      <h2 className="eg-photo-header-title">
+                        {photoViewerEvent.title}
+                      </h2>
+                      <p className="eg-photo-header-sub">
+                        {photoViewerEvent.date} • {photoViewerEvent.venue}
+                      </p>
                     </div>
-                  ))}
-                </div>
-                <div className="eg-photo-wall-stripe eg-photo-wall-stripe-bottom">
-                  {(EVENT_PHOTOS[photoViewerEvent.id] ||
-                    [photoViewerEvent.image]
-                  ).slice(6, 12).map((src, idx) => (
-                    <div
-                      className="eg-photo-wall-strip-item"
-                      key={idx}
-                      style={{ "--eg-strip-index": idx + 6 }}
-                    >
-                      <img src={src} alt="" loading="lazy" />
+                    <div className="eg-photo-header-count">
+                      <span className="eg-photo-count-current">
+                        {photoCycleIndex + 1}
+                      </span>
+                      <span className="eg-photo-count-divider">/</span>
+                      <span className="eg-photo-count-total">
+                        {(EVENT_PHOTOS[photoViewerEvent.id] ||
+                          [photoViewerEvent.image]).length}
+                      </span>
                     </div>
-                  ))}
+                  </header>
+
+                  <div
+                    className="eg-photo-main-frame"
+                    onClick={() => {
+                      const photos =
+                        EVENT_PHOTOS[photoViewerEvent.id] ||
+                        [photoViewerEvent.image];
+                      setPhotoCycleIndex((prev) =>
+                        prev + 1 >= photos.length ? 0 : prev + 1
+                      );
+                    }}
+                  >
+                    <div className="eg-photo-main-parallax">
+                      <img
+                        src={currentPhotoSrc}
+                        alt={photoViewerEvent.title}
+                        className="eg-photo-main-img"
+                        key={currentPhotoSrc}
+                      />
+                    </div>
+                    <div className="eg-photo-main-hint">
+                      Click or press → to jump to next • ← to go back
+                    </div>
+                  </div>
+
+                  <div className="eg-photo-progress">
+                    <div
+                      className="eg-photo-progress-bar"
+                      style={{
+                        width: `${
+                          ((photoCycleIndex + 1) /
+                            (EVENT_PHOTOS[photoViewerEvent.id] ||
+                              [photoViewerEvent.image]).length) * 100
+                        }%`
+                      }}
+                    />
+                  </div>
                 </div>
+
+                {/* RIGHT: vertical film-strip */}
+                <aside className="eg-photo-strip-column">
+                  <div className="eg-photo-strip-header">
+                    <span className="eg-photo-strip-label">Photo reel</span>
+                    <span className="eg-photo-strip-hint">
+                      Scroll & pick any frame
+                    </span>
+                  </div>
+                  <div className="eg-photo-strip-scroll">
+                    {(EVENT_PHOTOS[photoViewerEvent.id] ||
+                      [photoViewerEvent.image]
+                    ).map((src, idx) => {
+                      const rotation = getRandomRotation(idx);
+                      const active = idx === photoCycleIndex;
+                      return (
+                        <button
+                          key={idx}
+                          className={
+                            "eg-photo-strip-item" +
+                            (active ? " eg-photo-strip-item-active" : "")
+                          }
+                          style={{
+                            transform: `rotate(${rotation}deg)`
+                          }}
+                          onClick={() => setPhotoCycleIndex(idx)}
+                        >
+                          <div className="eg-photo-strip-img-wrap">
+                            <img src={src} alt="" loading="lazy" />
+                          </div>
+                          <span className="eg-photo-strip-index">
+                            {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </aside>
               </div>
             )}
           </div>
