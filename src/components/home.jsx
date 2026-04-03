@@ -293,7 +293,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ══════════════════════════ DOMAINS ══════════════════════════ */}
+            {/* ══════════════════════════ DOMAINS ═══════════════════════════ */}
             {/* <section className="domains-section">
                 <div className="domains-inner">
                     <span className="section-label" data-aos="fade-up">Tracks We Explore</span>

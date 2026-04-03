@@ -136,6 +136,7 @@ const Team = () => {
                     <h2 className="section-title">Office Bearers</h2>
                     <div className="team-grid">
                         <TeamMember name="Gokulasarathy P S" role="Chairman" image={gokulasarathy} linkedin="http://www.linkedin.com/in/gokula-sarathy-p-s-8343121b8" instagram="https://www.instagram.com/_mr.gokul_._/" delay="100" />
+                        <TeamMember name="Ritesh S" role="Vice Chairman" image={ritesh} linkedin="https://www.linkedin.com/in/ritesh-sivakumar-667467330" instagram="https://www.instagram.com/riteshsivakumar" delay="300" />
                         <TeamMember name="Himeshwar N" role="Secretary" image={himesh} linkedin="https://www.linkedin.com/in/himeshwarnagarajan/" instagram="https://www.instagram.com/himeshwar_31/" delay="200" />
                         <TeamMember name="Gokul Anand B" role="Webmaster" image={gokulanand} linkedin="https://www.linkedin.com/in/gokul-anand-b8ba612a2/" instagram="https://www.instagram.com/gokul_anand_14/" delay="300" />
                         <TeamMember name="Srivarshini S" role="Treasurer" image={srivarshini} linkedin="#" instagram="https://www.instagram.com/clara_de_sv_/" delay="400" />
@@ -184,7 +185,6 @@ const Team = () => {
                         <TeamMember name="RANNESH KHUMAR B R" role="ML Team" image={ranesh} linkedin="https://www.linkedin.com/in/rannesh-khumar-b-r-507377289" instagram="https://www.instagram.com/ranneshkhumar07" delay="400" />
                         <TeamMember name="Kaarthika S" role="PR Team" image={karthika} linkedin="https://www.linkedin.com/in/kaarthika-s-613ab2304" instagram="https://www.instagram.com/k__rthik_" delay="100" />
                         <TeamMember name="Nivedithaa S" role="PR Team" image={nivedha} linkedin="https://www.linkedin.com/in/nivedithaa-s" instagram="https://www.instagram.com/nivedithaaaaaaaaa" delay="200" />
-                        <TeamMember name="Ritesh S" role="PR Team" image={ritesh} linkedin="https://www.linkedin.com/in/ritesh-sivakumar-667467330" instagram="https://www.instagram.com/riteshsivakumar" delay="300" />
                         <TeamMember name="Sreyaskari Mullapudi" role="PR Team" image={mullapudi} linkedin="https://www.linkedin.com/in/sreyaskari-mullapudi-969aab384" instagram="https://www.instagram.com/sreya_m05" delay="400" />
                         <TeamMember name="T KEERTHI PRIYA" role="PR Team" image={keerthipriya} linkedin="https://www.linkedin.com/in/keerthipriyat" instagram="https://www.instagram.com/_.kiki.xoxo" delay="100" />
                         <TeamMember name="Thivyaa P" role="PR Team" image={thivyaa} linkedin="https://www.linkedin.com/in/thivyaa-padmanaban-b62211318" instagram="https://www.instagram.com/thivyaabtw._" delay="200" />
