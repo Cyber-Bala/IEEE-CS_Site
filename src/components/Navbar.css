@@ -321,9 +321,20 @@
 }
 
 @media (max-width: 1024px) {
-    /* Hide the fixed Navbar bar on mobile — mob-header in home.jsx takes its place */
+    /* Standardize mobile-only header for all pages */
     .header {
-        display: none !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        padding: 0 20px;
+        background: rgba(6, 6, 6, 0.94);
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 9000;
+        border-bottom: 1px solid rgba(255, 163, 0, 0.2);
     }
 
     .logo-left,
