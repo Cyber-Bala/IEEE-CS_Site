@@ -5,6 +5,7 @@ import EventGallery from './components/EventGallery';
 import Team from './components/Team';
 import Contact from './components/Contact';
 import Creators from './components/Creators';
+import Registration from './components/Registration';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/creators" element={<Creators />} />
+          <Route path="/register" element={<Registration />} />
         </Routes>
       </div>
     </Router>
