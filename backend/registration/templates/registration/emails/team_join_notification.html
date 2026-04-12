@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Team Member Joined - Xypher'26</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f7f9; }
+        .container { max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #00629b 0%, #00b0f0 100%); color: white; padding: 30px 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 2px; }
+        .content { padding: 30px; }
+        .content h2 { color: #00629b; margin-top: 0; }
+        .notification-box { background: #f0f7ff; border-left: 4px solid #00b0f0; padding: 20px; margin: 20px 0; border-radius: 0 4px 4px 0; }
+        .notification-box p { margin: 5px 0; font-size: 16px; }
+        .notification-box strong { color: #00629b; }
+        .footer { background: #f4f7f9; padding: 20px; text-align: center; font-size: 12px; color: #777; border-top: 1px solid #eee; }
+        .button { display: inline-block; padding: 12px 24px; background-color: #00629b; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Xypher'26</h1>
+            <p>Annual Symposium | IEEE-CS Student Branch</p>
+        </div>
+        <div class="content">
+            <h2>New Teammate Joined!</h2>
+            <p>Hi <strong>{{ leader_name }}</strong>,</p>
+            <p>Great news! A new member has joined your team <strong>{{ team_name }}</strong> for the event <strong>{{ event_name }}</strong>.</p>
+            
+            <div class="notification-box">
+                <p><strong>New Member:</strong> {{ member_name }}</p>
+                <p><strong>Department:</strong> {{ member_department }}</p>
+                <p><strong>Year:</strong> {{ member_year }}</p>
+            </div>
+
+            <p>You can now see your full team composition in the event dashboard.</p>
+            
+            <a href="https://ieee-cs.yourdomain.com/dashboard" class="button">View Team</a>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 IEEE-CS Student Branch. All rights reserved.</p>
+            <p>Follow us on Instagram for latest updates: @ieee_cs_sb</p>
+        </div>
+    </div>
+</body>
+</html>

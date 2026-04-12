@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmed - Xypher'26</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f7f9; }
+        .container { max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #00629b 0%, #00b0f0 100%); color: white; padding: 30px 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 2px; }
+        .content { padding: 30px; }
+        .content h2 { color: #00629b; margin-top: 0; }
+        .details-box { background: #f8fbfe; border-left: 4px solid #00b0f0; padding: 20px; margin: 20px 0; border-radius: 0 4px 4px 0; }
+        .details-box p { margin: 5px 0; font-size: 14px; }
+        .details-box strong { color: #00629b; }
+        .footer { background: #f4f7f9; padding: 20px; text-align: center; font-size: 12px; color: #777; border-top: 1px solid #eee; }
+        .button { display: inline-block; padding: 12px 24px; background-color: #00629b; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Xypher'26</h1>
+            <p>Annual Symposium | IEEE-CS Student Branch</p>
+        </div>
+        <div class="content">
+            <h2>Registration Confirmed!</h2>
+            <p>Hi <strong>{{ name }}</strong>,</p>
+            <p>Congratulations! Your registration for <strong>Xypher'26</strong> has been received and confirmed. We are excited to have you join us for this event.</p>
+            
+            <div class="details-box">
+                <p><strong>Event:</strong> {{ event_name }}</p>
+                <p><strong>Registration ID:</strong> #{{ registration_id }}</p>
+                {% if team_name %}
+                <p><strong>Team Name:</strong> {{ team_name }}</p>
+                <p><strong>Team Invite Code:</strong> <span style="font-size: 18px; color: #00b0f0; font-weight: bold;">{{ team_code }}</span></p>
+                <p style="font-size: 12px; color: #666;">(Share this code with your teammates to let them join your group)</p>
+                {% endif %}
+            </div>
+
+            <p>Please make sure to bring your college ID card on the day of the event. If you have any questions, feel free to reach out to us.</p>
+            
+            <p>Stay tuned for more updates!</p>
+            
+            <!-- slide -->
+            <a href="https://ieee-cs.yourdomain.com/dashboard" class="button">View Dashboard</a>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 IEEE-CS Student Branch. All rights reserved.</p>
+            <p>Follow us on Instagram for latest updates: @ieee_cs_sb</p>
+        </div>
+    </div>
+</body>
+</html>

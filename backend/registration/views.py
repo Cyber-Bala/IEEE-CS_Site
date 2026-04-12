@@ -4,6 +4,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.utils.crypto import get_random_string
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from .models import Event, Registration, Team
 
 
@@ -73,6 +76,57 @@ def generate_team_code():
         code = get_random_string(6, allowed_chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
         if not Team.objects.filter(code=code).exists():
             return code
+
+
+def send_registration_emails(registration):
+    """Sends confirmation email to student and notification to team leader if applicable."""
+    # 1. Send confirmation email to the student
+    context = {
+        'name': registration.name,
+        'event_name': registration.event.name,
+        'registration_id': registration.id,
+        'team_name': registration.team.name if registration.team else None,
+        'team_code': registration.team.code if registration.team else None,
+    }
+    
+    html_content = render_to_string('registration/emails/registration_confirmation.html', context)
+    text_content = strip_tags(html_content)
+    
+    subject = f"Registration Confirmed: {registration.event.name} - Xypher'26"
+    from_email = None  # Uses DEFAULT_FROM_EMAIL from settings
+    to = [registration.email]
+    
+    try:
+        msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+    except Exception as e:
+        print(f"Error sending confirmation email: {e}")
+
+    # 2. If joined a team, notify the team leader
+    if registration.team and not registration.is_team_leader:
+        leader = Registration.objects.filter(team=registration.team, is_team_leader=True).first()
+        if leader:
+            leader_context = {
+                'leader_name': leader.name,
+                'team_name': registration.team.name,
+                'event_name': registration.event.name,
+                'member_name': registration.name,
+                'member_department': registration.department,
+                'member_year': registration.get_year_display(),
+            }
+            
+            leader_html = render_to_string('registration/emails/team_join_notification.html', leader_context)
+            leader_text = strip_tags(leader_html)
+            
+            leader_subject = f"New teammate joined your team: {registration.team.name}"
+            
+            try:
+                msg = EmailMultiAlternatives(leader_subject, leader_text, from_email, [leader.email])
+                msg.attach_alternative(leader_html, "text/html")
+                msg.send()
+            except Exception as e:
+                print(f"Error sending leader notification email: {e}")
 
 
 @csrf_exempt
@@ -172,6 +226,9 @@ def register(request):
         payment_status='pending',
         payment_method='paypal',  # Default to paypal for future integration
     )
+
+    # Send emails in the background (synchronously for now, but wrapped in try-except)
+    send_registration_emails(registration)
 
     response_data = {
         'id': registration.id,
