@@ -10,7 +10,6 @@ import Navbar from './Navbar';
 import heroBg from '../assets/background.png';
 import ieeeLogo from '../assets/logo/ieee_cs.png';
 import recLogo from '../assets/logo/college.png';
-import iccds from '../assets/events/ICCDS.JPG';
 import techtopia from '../assets/events/techtopia.png';
 import xyntra from '../assets/events/xyntra.JPG';
 import promptIq from '../assets/events/prompt-iq.JPG';
@@ -145,9 +144,9 @@ const Home = () => {
                     {/* ── LEFT (desktop) / CENTER (mobile) ── */}
                     <div className="hero-text-col" data-aos="fade-right">
                         <h1 className="hero-heading">
-                            BUILD.<br />
-                            <span className="hero-glow-text">INNOVATE.</span><br />
-                            LEAD.
+                            IGNITE.<br />
+                            <span className="hero-glow-text">CREATE.</span><br />
+                            ELEVATE.
                         </h1>
 
                         <p className="hero-line1">
@@ -178,7 +177,7 @@ const Home = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Join IEEE Now
+                                XYPHER'26
                             </a>
                             <Link to="/events" className="btn-hero-secondary">
                                 Explore Events
