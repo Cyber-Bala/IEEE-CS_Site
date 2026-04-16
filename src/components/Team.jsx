@@ -126,7 +126,7 @@ const Team = () => {
                 <div className="team-section">
                     <h2 className="section-title">Faculty Coordinators</h2>
                     <div className="team-grid">
-                        <TeamMember name="Dr. S. VinodhKumar" role="Faculty Coordinator" image={vinod} linkedin="https://www.linkedin.com/in/dr-s-vinodh-kumar-79b1b0208" delay="100" />
+                        {/* <TeamMember name="Dr. S. VinodhKumar" role="Faculty Coordinator" image={vinod} linkedin="https://www.linkedin.com/in/dr-s-vinodh-kumar-79b1b0208" delay="100" /> */}
                         <TeamMember name="Dr. N. Duraimurugan" role="Faculty Coordinator" image={duraimurugan} linkedin="https://www.linkedin.com/in/duraimurugan-n-181145ba/" delay="200" />
                         <TeamMember name="Dr. K. Anantajothi" role="Faculty Coordinator" image={anandhajodhii} linkedin="#" delay="300" />
                     </div>

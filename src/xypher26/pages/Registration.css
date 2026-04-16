@@ -1,0 +1,396 @@
+/* Registration.css - Brutalist XYPHER '26 Theme */
+.reg-page {
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+.reg-bg-effects {
+  display: none;
+}
+
+/* Topbar */
+.reg-topbar {
+  border-bottom: 1px solid #222;
+  background: rgba(5, 5, 5, 0.9);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reg-topbar__back {
+  color: var(--xypher-text-muted);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.reg-topbar__back:hover {
+  color: var(--xypher-gold);
+}
+
+.reg-topbar__title {
+  font-family: var(--font-heading);
+  color: var(--xypher-text);
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+/* Layout */
+.reg-container {
+  max-width: 800px;
+  margin: 4rem auto 0;
+  padding: 0 2rem;
+}
+
+/* Form Container */
+.reg-form {
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid #222;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.reg-form__header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: var(--xypher-text);
+}
+
+.reg-form__header p {
+  color: var(--xypher-gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+/* Form Elements */
+.reg-form__row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .reg-form__row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.reg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.reg-field__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--xypher-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.reg-field__input,
+.reg-field__select {
+  padding: 1rem;
+  background: #111;
+  border: 1px solid #333;
+  color: var(--xypher-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.reg-field__select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.reg-field__input:focus,
+.reg-field__select:focus {
+  border-color: var(--xypher-gold);
+  background: #151515;
+}
+
+.reg-field__input--code {
+  font-family: monospace;
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+}
+
+.reg-field__hint {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Checkbox */
+.reg-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: var(--xypher-text);
+  font-size: 0.95rem;
+  user-select: none;
+}
+
+.reg-checkbox input {
+  display: none;
+}
+
+.reg-checkbox__custom {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #333;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.reg-checkbox:hover .reg-checkbox__custom {
+  border-color: var(--xypher-gold);
+}
+
+.reg-checkbox input:checked + .reg-checkbox__custom {
+  background: var(--xypher-gold);
+  border-color: var(--xypher-gold);
+}
+
+/* Divider */
+.reg-divider {
+  text-align: center;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.reg-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #222;
+  z-index: 1;
+}
+
+.reg-divider span {
+  position: relative;
+  z-index: 2;
+  background: rgba(10, 10, 10, 1);
+  padding: 0 1rem;
+  color: var(--xypher-gold);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Event Preview */
+.reg-event-preview {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #333;
+  padding: 1.5rem;
+}
+
+.reg-event-preview h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--xypher-text);
+}
+
+.reg-event-preview__desc {
+  color: #999;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.reg-event-preview__meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--xypher-gold);
+}
+
+/* Team Options */
+.reg-team-options__btns {
+  display: flex;
+  gap: 1rem;
+}
+
+.reg-team-opt {
+  flex: 1;
+  background: #111;
+  border: 1px solid #333;
+  padding: 1rem;
+  color: var(--xypher-text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.reg-team-opt:hover {
+  border-color: #555;
+}
+
+.reg-team-opt--active {
+  background: rgba(194, 148, 59, 0.1);
+  border-color: var(--xypher-gold);
+  color: var(--xypher-gold);
+}
+
+/* Amount Section */
+.reg-amount {
+  background: #000;
+  border: 1px solid var(--xypher-gold);
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.reg-amount__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reg-amount__label {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.reg-amount__value {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--xypher-gold);
+}
+
+.reg-amount__note {
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Button */
+.reg-btn {
+  padding: 1rem 2rem;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-align: center;
+}
+
+.reg-btn--primary {
+  background: var(--xypher-gold);
+  color: #000;
+}
+
+.reg-btn--primary:hover:not(:disabled) {
+  background: #fff;
+}
+
+.reg-btn--secondary {
+  background: transparent;
+  color: var(--xypher-gold);
+  border: 1px solid var(--xypher-gold);
+}
+
+.reg-btn--secondary:hover {
+  background: var(--xypher-gold);
+  color: #000;
+}
+
+.reg-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+/* Success View */
+.reg-success {
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid var(--xypher-gold);
+  padding: 3rem;
+  text-align: center;
+}
+
+.reg-success__icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.reg-success__title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--xypher-gold);
+  margin-bottom: 0.5rem;
+}
+
+.reg-success__text {
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+.reg-success__team-card,
+.reg-success__join-card {
+  background: #050505;
+  border: 1px solid #333;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.reg-success__code {
+  display: block;
+  font-size: 3rem;
+  font-family: monospace;
+  color: var(--xypher-gold);
+  letter-spacing: 5px;
+  margin: 1rem 0;
+}
+
+.reg-success__details {
+  text-align: left;
+  background: #111;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--xypher-gold);
+}
+
+.reg-success__details p {
+  margin-bottom: 0.5rem;
+}
+
+.reg-success__details strong {
+  display: inline-block;
+  width: 150px;
+  color: #888;
+}
+
+.reg-success__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}

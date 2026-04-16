@@ -171,14 +171,12 @@ const Home = () => {
                         </div>
 
                         <div className="hero-ctas">
-                            <a
-                                href="https://www.ieee.org/"
+                            <Link
+                                to="/xypher26"
                                 className="btn-hero-primary"
-                                target="_blank"
-                                rel="noopener noreferrer"
                             >
                                 XYPHER'26
-                            </a>
+                            </Link>
                             <Link to="/events" className="btn-hero-secondary">
                                 Explore Events
                             </Link>
