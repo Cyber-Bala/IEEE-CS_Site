@@ -135,7 +135,7 @@ const Contact = () => {
                 </span>
                 <span className="social-icon-glow"></span>
               </a>
-              <a href="mailto:ieeecs@example.com" className="social-icon-btn" aria-label="Email">
+              <a href="mailto:ieee.cs@rajalakshmi.edu.in" className="social-icon-btn" aria-label="Email">
                 <span className="social-icon-inner">
                   <i className="fas fa-envelope"></i>
                 </span>
