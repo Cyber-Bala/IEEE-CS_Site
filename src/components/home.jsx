@@ -143,17 +143,15 @@ const Home = () => {
                 <div className="hero-inner">
                     {/* ── LEFT (desktop) / CENTER (mobile) ── */}
                     <div className="hero-text-col" data-aos="fade-right">
-                        <h1 className="hero-heading">
-                            IGNITE.<br />
-                            <span className="hero-glow-text">CREATE.</span><br />
-                            ELEVATE.
+                        <h1 className="hero-heading" style={{ marginBottom: '10px' }}>
+                            <span className="hero-glow-text">XYPHER'26</span>
                         </h1>
 
-                        <p className="hero-line1">
-                            Rajalakshmi Engineering College's premier IEEE student chapter.
+                        <p className="hero-line1" style={{ fontSize: 'clamp(1.1rem, 1.5vw, 1.3rem)', color: '#fff', marginBottom: '15px', fontWeight: 'bold', letterSpacing: '2px' }}>
+                            THE ULTIMATE TECHNICAL FEST
                         </p>
                         <p className="hero-line2">
-                            Empowering the next generation of computing professionals.
+                            Experience two days of groundbreaking technology, visionary speakers, and limitless possibilities. Hosted by IEEE CS REC.
                         </p>
 
                         {/* ── MOBILE ONLY: chip illustration as real img ── */}
@@ -174,11 +172,9 @@ const Home = () => {
                             <Link
                                 to="/xypher26"
                                 className="btn-hero-primary"
+                                style={{ padding: '16px 40px', fontSize: '1.1rem' }}
                             >
-                                XYPHER'26
-                            </Link>
-                            <Link to="/events" className="btn-hero-secondary">
-                                Explore Events
+                                ENTER PORTAL
                             </Link>
                         </div>
                     </div>

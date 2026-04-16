@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
@@ -8,8 +8,20 @@ import ieeeLogo from '../assets/logo/ieee_cs.png';
 const Navbar = () => {
     const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
     const location = useLocation();
+    const headerRef = useRef(null);
 
     const close = () => setIsMobileMenuActive(false);
+
+    // Dynamically calculate header height to prevent overlaps globally
+    useEffect(() => {
+        if (!headerRef.current) return;
+        const resizeObserver = new ResizeObserver((entries) => {
+            const navHeight = entries[0].target.offsetHeight;
+            document.documentElement.style.setProperty('--navbar-height', `${navHeight}px`);
+        });
+        resizeObserver.observe(headerRef.current);
+        return () => resizeObserver.disconnect();
+    }, []);
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -46,7 +58,7 @@ const Navbar = () => {
 
     return (
         <>
-            <header className="header">
+            <header className="header" ref={headerRef}>
                 <div className="logo-container">
                     <Link to="/" onClick={close}>
                         <img src={collegeLogo} className="logo-left" alt="College Logo" />
