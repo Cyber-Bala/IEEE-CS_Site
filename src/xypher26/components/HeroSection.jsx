@@ -218,14 +218,14 @@ function HeroSection() {
 
         {/* Event Info */}
         <motion.div
-          className="flex items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-[#fafaf9]/50 tracking-tight"
+          className="flex items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm md:text-lg text-[#fafaf9]/80 tracking-wide"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.6 }}
         >
-          <span>April 28-29</span>
-          <span className="w-px h-3 sm:h-4 bg-[#fafaf9]/20" />
-          <span>Rajalakshmi Engineering College</span>
+          <span className="font-semibold">April 28-29, 2026</span>
+          <span className="w-px h-4 sm:h-5 bg-[#c9a227]/50" />
+          <span className="font-semibold">Rajalakshmi Engineering College</span>
         </motion.div>
 
         {/* Action Buttons */}

@@ -60,12 +60,27 @@ const EventCard = ({ event, onSelect }) => {
           </div>
         </div>
 
-        {/* Title & description area - repositioned to start below the decorative image */}
-        <div className="absolute top-[210px] inset-x-0 bottom-0 flex flex-col items-center px-8">
-          <h3 className="font-cinzel text-xl text-foreground font-bold mb-4 text-center text-glow-black uppercase tracking-wider">
+        {/* Day & Date badge */}
+        {event.day && (
+          <div className="absolute top-[210px] left-1/2 -translate-x-1/2 z-10 whitespace-nowrap">
+            <div className="flex items-center gap-2 bg-[#0d0d0d] border border-primary/50 px-4 py-1.5 rounded-full shadow-[0_0_12px_rgba(201,162,39,0.12)]">
+              <span className="text-primary text-[11px] font-bold uppercase tracking-[0.15em] font-display">
+                {event.day}
+              </span>
+              <span className="w-px h-3.5 bg-primary/40" />
+              <span className="text-foreground/80 text-[11px] font-semibold font-display tracking-wide">
+                {event.date}
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* Title & description area */}
+        <div className={`absolute ${event.day ? 'top-[245px]' : 'top-[210px]'} inset-x-0 bottom-0 flex flex-col items-center px-8`}>
+          <h3 className="font-cinzel text-xl text-foreground font-bold mb-3 text-center text-glow-black uppercase tracking-wider">
             {title}
           </h3>
-          <p className="font-display text-muted-foreground text-center text-[14px] leading-relaxed opacity-90 line-clamp-4">
+          <p className="font-display text-muted-foreground text-center text-[13px] leading-relaxed opacity-90 line-clamp-3">
             {description}
           </p>
         </div>
