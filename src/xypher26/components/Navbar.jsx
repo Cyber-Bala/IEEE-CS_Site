@@ -12,7 +12,7 @@ function Navbar({ forceScrolled, onBack }) {
   const [logoVisible, setLogoVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const isScrolled = forceScrolled ?? internalScrolled;
-  
+
   const location = useLocation()
   const navigate = useNavigate()
   const { isAuthenticated, user, logout } = useAuth()
@@ -24,15 +24,16 @@ function Navbar({ forceScrolled, onBack }) {
     const handleResize = () => setIsMobile(window.innerWidth < 768)
     const handleScroll = () => {
       setInternalScrolled(window.scrollY > 20)
-      // Home page: wait for hero logo to start disappearing (approx 300px)
-      // Other pages: show immediately or after 20px
-      setLogoVisible(location.pathname !== "/" || window.scrollY > 300)
+      // Home page: appear earlier when scrolling (approx 120px)
+      // Other pages: show immediately
+      const isHomePage = location.pathname === "/" || location.pathname === "/xypher26" || location.pathname === "/xypher26/";
+      setLogoVisible(!isHomePage || window.scrollY > 120)
     }
-    
+
     window.addEventListener("resize", handleResize)
     window.addEventListener("scroll", handleScroll, { passive: true })
     handleScroll()
-    
+
     return () => {
       window.removeEventListener("resize", handleResize)
       window.removeEventListener("scroll", handleScroll)
@@ -97,11 +98,10 @@ function Navbar({ forceScrolled, onBack }) {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-40 px-6 md:px-12 transition-all duration-300 ${
-          isScrolled
-            ? "py-6 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-[#fafaf9]/10"
-            : "py-10 bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-40 px-6 md:px-12 transition-all duration-300 ${isScrolled
+          ? "py-6 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-[#fafaf9]/10"
+          : "py-10 bg-transparent"
+          }`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
@@ -110,7 +110,7 @@ function Navbar({ forceScrolled, onBack }) {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="group flex items-center gap-3 text-[#fafaf9] hover:text-[#c9a227] transition-colors"
+              className="group flex items-center gap-3 text-[#fafaf9] hover:text-[#c9a227] transition-colors focus:outline-none"
             >
               <div className="flex flex-col gap-[6px]">
                 <span className="block w-6 h-[2px] bg-current group-hover:w-5 transition-all" />
@@ -125,7 +125,7 @@ function Navbar({ forceScrolled, onBack }) {
             {isSpecialPage && (
               <button
                 onClick={handleBackInternal}
-                className="flex items-center gap-2 text-[#fafaf9]/60 hover:text-[#c9a227] transition-colors pl-4 border-l border-[#fafaf9]/20"
+                className="flex items-center gap-2 text-[#fafaf9]/60 hover:text-[#c9a227] transition-colors pl-4 border-l border-[#fafaf9]/20 focus:outline-none"
               >
                 <span className="text-xl leading-none">&larr;</span>
                 <span className="text-sm tracking-[0.2em] uppercase hidden md:block">
@@ -166,7 +166,7 @@ function Navbar({ forceScrolled, onBack }) {
           {/* Right side: Partner Logos - Dynamic swap on mobile, always visible on desktop */}
           <div className="flex items-center gap-4 md:gap-8">
             {!["/login", "/signup"].includes(location.pathname) && (
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-4 md:gap-6"
                 animate={{
                   opacity: (isMobile && (forceScrolled || logoVisible)) ? 0 : 1,
