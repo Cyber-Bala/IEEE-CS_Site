@@ -50,9 +50,13 @@ function Navbar({ forceScrolled, onBack }) {
   const handleNavClick = (e, href) => {
     e.preventDefault()
 
-    // Events → route
+    // Events → route (or close modal if we're in EventDetail overlay)
     if (href === "/events") {
-      navigate("/xypher26/events")
+      if (onBack) {
+        onBack()
+      } else {
+        navigate("/xypher26/events")
+      }
       setIsMenuOpen(false)
       return
     }
@@ -122,7 +126,7 @@ function Navbar({ forceScrolled, onBack }) {
               </span>
             </button>
 
-            {isSpecialPage && (
+            {(isSpecialPage || onBack) && (
               <button
                 onClick={handleBackInternal}
                 className="flex items-center gap-2 text-[#fafaf9]/60 hover:text-[#c9a227] transition-colors pl-4 border-l border-[#fafaf9]/20 focus:outline-none"
