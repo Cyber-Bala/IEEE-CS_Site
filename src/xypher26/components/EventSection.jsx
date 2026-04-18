@@ -174,6 +174,7 @@ const events = [
     details: [
       { label: "Timing", value: "10:00 AM – 12:00 PM" },
       { label: "Duration", value: "2 hours" },
+      { label: "Registration Fee", value: "Free (IEEE) / ₹50 (Non-IEEE)" },
       { label: "Mode", value: "Hands-on (Laptop + Power BI required)" },
       { label: "Skill Level", value: "Beginner to Intermediate" },
     ],
@@ -349,7 +350,7 @@ const events = [
     details: [
       { label: "Timing", value: "10:00 AM – 12:00 PM" },
       { label: "Duration", value: "2 hours" },
-      { label: "Registration Fee", value: "₹100 (IEEE) / ₹150 (Non-IEEE)" },
+      { label: "Registration Fee", value: "Free (IEEE) / ₹50 (Non-IEEE)" },
       { label: "Mode", value: "Hands-on (Laptop required)" },
       { label: "Certification", value: "Participation Certificate" },
     ],
