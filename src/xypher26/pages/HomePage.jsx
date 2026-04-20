@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar"
 import HeroSection from "../components/HeroSection"
 import AboutSection from "../components/AboutSection"
 import Marquee from "../components/Marquee"
+import CommunityPartners from "../components/CommunityPartners"
 import FAQSection from "../components/FAQSection"
 import Footer from "../components/Footer"
 import IntroAnimation from "../components/IntroAnimation"
@@ -85,6 +86,7 @@ function HomePage() {
           <HeroSection />
           <Marquee />
           <AboutSection />
+          {/* <CommunityPartners /> */}
           <FAQSection />
           <Footer />
         </motion.div>

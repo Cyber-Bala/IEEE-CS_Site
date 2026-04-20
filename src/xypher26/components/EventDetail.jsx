@@ -242,6 +242,34 @@ const EventDetail = ({ event, onBack }) => {
                 </motion.div>
               )}
 
+              {/* Event Head Contact */}
+              {event.eventHead && (
+                <motion.div
+                  className="w-full max-w-4xl mb-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.93, duration: 0.5 }}>
+                  <h3 className="font-cinzel text-3xl lg:text-4xl text-primary font-bold mb-6 flex items-center gap-3">
+                    <span className="w-8 h-px bg-primary/50" />
+                    Event Head
+                  </h3>
+                  <div className="flex items-center gap-5 border border-primary/20 bg-[#070707] p-5 rounded-sm border-glow max-w-sm">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0">
+                      <span className="text-primary text-xl font-display font-bold">{event.eventHead.name.charAt(0)}</span>
+                    </div>
+                    <div>
+                      <p className="text-foreground font-semibold text-lg font-display">{event.eventHead.name}</p>
+                      <a
+                        href={`tel:${event.eventHead.phone.replace(/\s/g, '')}`}
+                        className="text-primary/70 hover:text-primary text-sm font-mono tracking-wide transition-colors duration-300"
+                      >
+                        {event.eventHead.phone}
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
               {/* Prizes */}
               {event.prizes && (
                 <motion.div
@@ -317,6 +345,7 @@ const EventDetail = ({ event, onBack }) => {
                   </div>
                 </motion.div>
               )}
+
 
               {/* Buttons */}
               <motion.div

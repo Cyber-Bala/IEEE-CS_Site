@@ -1,14 +1,24 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
+import { useNavigate, useLocation } from "react-router-dom"
 
 const footerLinks = {
   events: {
     title: "Events",
-    links: ["CTF", "Workshops", "Competitions", "Technical Events"]
+    links: [
+      { label: "CTF", href: "/xypher26/events" },
+      { label: "Workshops", href: "/xypher26/events" },
+      { label: "Competitions", href: "/xypher26/events" },
+      { label: "Technical Events", href: "/xypher26/events" },
+    ]
   },
   support: {
-    title: "Support",
-    links: ["FAQ"]
+    title: "Quick Links",
+    links: [
+      { label: "About", href: "/xypher26#about" },
+      { label: "FAQ", href: "/xypher26#faq" },
+      { label: "Events", href: "/xypher26/events" },
+    ]
   }
 }
 
@@ -36,6 +46,35 @@ const socialLinks = [
 function Footer() {
   const footerRef = useRef(null)
   const isInView = useInView(footerRef, { once: true, margin: "-100px" })
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const handleLinkClick = (e, href) => {
+    e.preventDefault()
+
+    if (href.includes("#")) {
+      const [path, hash] = href.split("#")
+
+      if (location.pathname === path || location.pathname === path + "/") {
+        // Already on home page — just scroll
+        const target = document.getElementById(hash)
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" })
+        }
+      } else {
+        // Navigate to home page then scroll
+        navigate(path)
+        setTimeout(() => {
+          const target = document.getElementById(hash)
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" })
+          }
+        }, 600)
+      }
+    } else {
+      navigate(href)
+    }
+  }
 
   return (
     <footer 
@@ -83,7 +122,7 @@ function Footer() {
             </div>
           </motion.div>
 
-          {/* Middle Space - COUNTDOWNSTARTS */}
+          {/* Middle Space - COUNTDOWN */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -122,7 +161,7 @@ function Footer() {
             </div>
           </motion.div>
 
-          {/* Events & Support Columns - Right Side */}
+          {/* Events & Quick Links Columns */}
           <div className="lg:col-span-1 flex flex-row gap-12 justify-end">
             {Object.entries(footerLinks).map(([key, section], sectionIndex) => (
               <motion.div
@@ -137,17 +176,14 @@ function Footer() {
                 <ul className="space-y-4">
                   {section.links.map((link, linkIndex) => (
                     <li key={linkIndex}>
-                      {key === "events" ? (
-                        <span className="text-white/40 text-sm">{link}</span>
-                      ) : (
-                        <a
-                          href={link === "FAQ" ? "#faq" : "#"}
-                          className="text-white/40 hover:text-white transition-colors duration-300 text-sm relative group"
-                        >
-                          {link}
-                          <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#c9a227] group-hover:w-full transition-all duration-300" />
-                        </a>
-                      )}
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleLinkClick(e, link.href)}
+                        className="text-white/40 hover:text-white transition-colors duration-300 text-sm relative group cursor-pointer"
+                      >
+                        {link.label}
+                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#c9a227] group-hover:w-full transition-all duration-300" />
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -167,12 +203,6 @@ function Footer() {
             <p className="text-white/30 text-sm">
               &copy; 2026 Xypher. All rights reserved.
             </p>
-            
-            <div className="flex items-center gap-8">
-              <a href="#" className="text-white/30 hover:text-white/60 text-sm transition-colors">
-                
-              </a>
-            </div>
           </div>
         </motion.div>
       </div>
