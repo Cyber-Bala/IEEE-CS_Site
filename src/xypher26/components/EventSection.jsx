@@ -132,7 +132,7 @@ const events = [
       { label: "Timing", value: "1:00 PM – 4:00 PM" },
       { label: "Duration", value: "3 hours" },
       { label: "Team Size", value: "2–4 members" },
-      { label: "Registration Fee", value: "₹175 (IEEE) / ₹150 (Non-IEEE)" },
+      { label: "Registration Fee", value: "₹150 (IEEE) / ₹175 (Non-IEEE)" },
       { label: "Prize Pool", value: "₹3,000" },
       { label: "Mode", value: "Offline – Exhibition & Demo" },
     ],
