@@ -80,7 +80,8 @@ function AppRoutes() {
           {/* Making events public based on original Xypher behaviour, or we can protect it. Keeping it public for now */}
           <Route path="events" element={<EventsPage />} />
           
-          {/* Auth routes */}
+          {/* Auth routes — disabled for now */}
+          {/*
           <Route path="login" element={
             !loading && isAuthenticated ? <Navigate to="/xypher26/events" replace /> : <Login />
           } />
@@ -90,6 +91,7 @@ function AppRoutes() {
           <Route path="register" element={
             <ProtectedRoute><Registration /></ProtectedRoute>
           } />
+          */}
 
           <Route path="*" element={<NotFound />} />
         </Routes>
