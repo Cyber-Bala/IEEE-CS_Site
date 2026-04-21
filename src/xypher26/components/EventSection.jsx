@@ -375,10 +375,10 @@ const events = [
       "Follow instructor guidelines during the session.",
       "Actively participate in all hands-on tasks.",
     ],
-    prizes: [
-      { place: "1st Place", amount: "₹1,500" },
-      { place: "2nd Place", amount: "₹1,000" },
-    ],
+    // prizes: [
+    //   { place: "1st Place", amount: "₹1,500" },
+    //   { place: "2nd Place", amount: "₹1,000" },
+    // ],
     eventFlow: [
       { phase: "Introduction", time: "10:00 – 10:15 AM", desc: "Welcome, overview of DevOps" },
       { phase: "Git & Fundamentals", time: "10:15 – 10:45 AM", desc: "Concepts and version control" },
