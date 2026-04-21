@@ -1,5 +1,5 @@
 // src/components/EventSection.jsx
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import EventCard from "./EventCard"
 import EventDetail from "./EventDetail"
@@ -414,6 +414,29 @@ const events = [
 const EventSection = () => {
   const [selectedEvent, setSelectedEvent] = useState(null)
 
+  // Push a history entry when opening an event detail so browser back closes the modal
+  const handleSelectEvent = (event) => {
+    setSelectedEvent(event)
+    window.history.pushState({ eventDetail: true }, "")
+  }
+
+  const handleCloseEvent = () => {
+    setSelectedEvent(null)
+    // If we pushed a state, go back to pop it
+    if (window.history.state && window.history.state.eventDetail) {
+      window.history.back()
+    }
+  }
+
+  // Listen for browser back button / gesture
+  useEffect(() => {
+    const handlePopState = () => {
+      setSelectedEvent(null)
+    }
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [])
+
   return (
     <>
       <section className="relative min-h-screen flex flex-col items-center pt-32 pb-24 overflow-hidden isolate">
@@ -472,7 +495,7 @@ const EventSection = () => {
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.15, duration: 0.5 }}
                     >
-                      <EventCard event={e} onSelect={setSelectedEvent} />
+                      <EventCard event={e} onSelect={handleSelectEvent} />
                     </motion.div>
                   ))}
                 </div>
@@ -485,7 +508,7 @@ const EventSection = () => {
       {/* Detail overlay */}
       <AnimatePresence>
         {selectedEvent && (
-          <EventDetail event={selectedEvent} onBack={() => setSelectedEvent(null)} />
+          <EventDetail event={selectedEvent} onBack={handleCloseEvent} />
         )}
       </AnimatePresence>
     </>
