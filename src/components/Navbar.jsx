@@ -51,6 +51,7 @@ const Navbar = () => {
                 <Link to="/team" className={location.pathname === '/team' ? 'mobile-nav__link active' : 'mobile-nav__link'} style={{ '--i': 3 }} onClick={close}>Our Team</Link>
                 <Link to="/events" className={location.pathname === '/events' ? 'mobile-nav__link active' : 'mobile-nav__link'} style={{ '--i': 4 }} onClick={close}>Events & Gallery</Link>
                 <Link to="/contact" className={location.pathname === '/contact' ? 'mobile-nav__link active' : 'mobile-nav__link'} style={{ '--i': 5 }} onClick={close}>Contact Us</Link>
+                <Link to="/iccds2026" className={location.pathname === '/iccds2026' ? 'mobile-nav__link active' : 'mobile-nav__link'} style={{ '--i': 6 }} onClick={close}>ICCDS 2026</Link>
             </nav>
         </>,
         document.body
@@ -73,6 +74,7 @@ const Navbar = () => {
                     <Link to="/team" className={location.pathname === '/team' ? 'active' : ''} onClick={close}>Our Team</Link>
                     <Link to="/events" className={location.pathname === '/events' ? 'active' : ''} onClick={close}>Events & Gallery</Link>
                     <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''} onClick={close}>Contact Us</Link>
+                    <Link to="/iccds2026" className={location.pathname === '/iccds2026' ? 'active iccds-nav-highlight' : 'iccds-nav-highlight'} onClick={close}>ICCDS 2026</Link>
                 </nav>
 
                 <button
