@@ -76,10 +76,11 @@ const ICCDSGuidelines = () => {
                     </div>
                 </section>
 
-                {/* ═══ GENERAL INFORMATION ═══ */}
+                {/* ═══ GUIDELINES CONTENT ═══ */}
                 <section className="iccds-sect">
                     <div className="iccds-container">
                         <div className="iccds-guidelines-content">
+                            {/* GENERAL INFORMATION */}
                             <SlideReveal>
                                 <div className="iccds-guideline-block">
                                     <div className="iccds-guideline-icon"><FileText size={24} /></div>
@@ -93,45 +94,37 @@ const ICCDSGuidelines = () => {
                                     <p>All submissions will undergo a double-blind peer review by the team of peer reviewers based on originality, relevance to the conference theme, technical strength, significance, quality of results, and organization and clarity of presentation of the paper.</p>
                                 </div>
                             </SlideReveal>
-                        </div>
-                    </div>
-                </section>
 
-                {/* ═══ PLAGIARISM ═══ */}
-                <section className="iccds-sect iccds-sect-alt">
-                    <div className="iccds-container">
-                        <SlideReveal>
-                            <div className="iccds-guideline-block iccds-guideline-plagiarism">
-                                <div className="iccds-guideline-icon"><Shield size={24} /></div>
-                                <h3>Plagiarism</h3>
-                                <div className="iccds-plagiarism-highlight">
-                                    <p><strong>Acceptable plagiarism range is less than 10% (excluding references) with 0% AI Plagiarism.</strong></p>
+                            {/* PLAGIARISM */}
+                            <SlideReveal delay={0.1}>
+                                <div className="iccds-guideline-block iccds-guideline-plagiarism">
+                                    <div className="iccds-guideline-icon"><Shield size={24} /></div>
+                                    <h3>Plagiarism</h3>
+                                    <div className="iccds-plagiarism-highlight">
+                                        <p><strong>Acceptable plagiarism range is less than 10% (excluding references) with 0% AI Plagiarism.</strong></p>
+                                    </div>
+                                    <ul className="iccds-guideline-list">
+                                        <li>Plagiarism, image manipulation, and data fabrication are not tolerated.</li>
+                                        <li>Plagiarism includes copying research ideas, text, images, or data from another source/research literature, even from the author's own publications without giving any credit to the original source</li>
+                                        <li>Text copied from another source must be reused within quotations, and the original source must be referenced. If the design of a research, or the structure or language of the publication, was inspired by previous research, the corresponding works must be explicitly cited.</li>
+                                        <li>If you are using any copyrighted material, you should acquire prior permission from the copyright holder.</li>
+                                        <li>If plagiarism is detected during the peer review process, the manuscript will be rejected. If plagiarism is detected after publication, we will retract the paper.</li>
+                                        <li>Any form of self-plagiarism or plagiarism from others' work(s) should not be there in the article.</li>
+                                        <li>If any model / concept / figure / table / data / conclusive comment by any previously published work is used in your article, you should properly cite a reference to the original work.</li>
+                                    </ul>
+                                    <p className="iccds-guideline-contact">All questions about submissions can be sent as mail to : <a href="mailto:iccds25@rajalakshmi.edu.in">iccds25@rajalakshmi.edu.in</a></p>
                                 </div>
-                                <ul className="iccds-guideline-list">
-                                    <li>Plagiarism, image manipulation, and data fabrication are not tolerated.</li>
-                                    <li>Plagiarism includes copying research ideas, text, images, or data from another source/research literature, even from the author's own publications without giving any credit to the original source</li>
-                                    <li>Text copied from another source must be reused within quotations, and the original source must be referenced. If the design of a research, or the structure or language of the publication, was inspired by previous research, the corresponding works must be explicitly cited.</li>
-                                    <li>If you are using any copyrighted material, you should acquire prior permission from the copyright holder.</li>
-                                    <li>If plagiarism is detected during the peer review process, the manuscript will be rejected. If plagiarism is detected after publication, we will retract the paper.</li>
-                                    <li>Any form of self-plagiarism or plagiarism from others' work(s) should not be there in the article.</li>
-                                    <li>If any model / concept / figure / table / data / conclusive comment by any previously published work is used in your article, you should properly cite a reference to the original work.</li>
-                                </ul>
-                                <p className="iccds-guideline-contact">All questions about submissions can be sent as mail to : <a href="mailto:iccds25@rajalakshmi.edu.in">iccds25@rajalakshmi.edu.in</a></p>
-                            </div>
-                        </SlideReveal>
-                    </div>
-                </section>
+                            </SlideReveal>
 
-                {/* ═══ PUBLICATION ═══ */}
-                <section className="iccds-sect">
-                    <div className="iccds-container">
-                        <SlideReveal>
-                            <div className="iccds-guideline-block iccds-guideline-publication">
-                                <div className="iccds-guideline-icon"><BookOpen size={24} /></div>
-                                <h3>Publication</h3>
-                                <p>The accepted and presented papers of ICCDS- 2026 will be forwarded for possible inclusion in the IEEE Digital Xplore after review</p>
-                            </div>
-                        </SlideReveal>
+                            {/* PUBLICATION */}
+                            <SlideReveal delay={0.2}>
+                                <div className="iccds-guideline-block iccds-guideline-publication">
+                                    <div className="iccds-guideline-icon"><BookOpen size={24} /></div>
+                                    <h3>Publication</h3>
+                                    <p>The accepted and presented papers of ICCDS- 2026 will be forwarded for possible inclusion in the IEEE Digital Xplore after review</p>
+                                </div>
+                            </SlideReveal>
+                        </div>
                     </div>
                 </section>
 

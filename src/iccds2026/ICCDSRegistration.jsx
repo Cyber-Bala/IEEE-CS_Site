@@ -164,12 +164,8 @@ const ICCDSRegistration = () => {
                                 */}
                             </div>
                         </SlideReveal>
-                    </div>
-                </section>
 
-                {/* ═══ COPYRIGHT & CRC ═══ */}
-                <section className="iccds-sect iccds-sect-alt">
-                    <div className="iccds-container">
+                        {/* ═══ COPYRIGHT & CRC ═══ */}
                         <SlideReveal>
                             <div className="iccds-guideline-block">
                                 <div className="iccds-guideline-icon"><Shield size={24} /></div>
