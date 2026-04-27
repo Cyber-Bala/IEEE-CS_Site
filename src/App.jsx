@@ -8,6 +8,8 @@ import Creators from './components/Creators';
 import Registration from './components/Registration';
 import XypherRoutes from './xypher26/XypherRoutes';
 import ICCDSHome from './iccds2026/ICCDSHome';
+import ICCDSRegistration from './iccds2026/ICCDSRegistration';
+import ICCDSGuidelines from './iccds2026/ICCDSGuidelines';
 import './App.css';
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
           <Route path="/register" element={<Registration />} />
           <Route path="/xypher26/*" element={<XypherRoutes />} />
           <Route path="/iccds2026" element={<ICCDSHome />} />
+          <Route path="/iccds2026/registration" element={<ICCDSRegistration />} />
+          <Route path="/iccds2026/guidelines" element={<ICCDSGuidelines />} />
         </Routes>
       </div>
     </Router>
