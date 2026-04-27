@@ -136,6 +136,13 @@ const ICCDSRegistration = () => {
                         <SlideReveal delay={0.1}>
                             <div className="iccds-reg-bank">
                                 <h3 className="iccds-reg-subtitle">Bank Account Details</h3>
+                                
+                                <div style={{ padding: '40px 0', textAlign: 'center' }}>
+                                    <h4 style={{ color: 'var(--purple)', fontFamily: 'Outfit, sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Registration Will Open Soon</h4>
+                                    <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>Please check back later for bank account details and payment forms.</p>
+                                </div>
+
+                                {/* HIDING UNTIL REGISTRATION OPENS
                                 <div className="iccds-bank-grid">
                                     {[
                                         { label: 'Account Name', value: 'REC-IEEE STUDENT' },
@@ -154,6 +161,7 @@ const ICCDSRegistration = () => {
                                     * Fill the form below after successful completion of the transaction<br />
                                     <a href="https://forms.gle/oUKEL2CpTkm4NqL68" target="_blank" rel="noopener noreferrer">Click here to fill the form</a>
                                 </p>
+                                */}
                             </div>
                         </SlideReveal>
                     </div>

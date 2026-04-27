@@ -181,14 +181,9 @@ const ICCDSHome = () => {
         const el = document.getElementById(id);
         if (!el) return;
         const target = el.offsetTop - 80;
-        const start = window.scrollY;
-        const distance = Math.abs(target - start);
-        // Scale duration with distance: min 0.8s, max 2s
-        const duration = Math.min(2, Math.max(0.8, distance / 1200));
-        animate(start, target, {
-            duration,
-            ease: [0.22, 1, 0.36, 1],
-            onUpdate: (v) => window.scrollTo(0, v),
+        window.scrollTo({
+            top: target,
+            behavior: 'smooth'
         });
     };
 
