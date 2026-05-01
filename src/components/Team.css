@@ -5,8 +5,8 @@
     --gold: #FFA300;
     --gold-dim: rgba(255, 163, 0, 0.12);
     --gold-glow: rgba(255, 163, 0, 0.30);
-    --dark: #080808;
-    --dark2: #0F0F0F;
+    --dark: #000000;
+    --dark2: #000000;
     --dark3: #161616;
     --txt: #F0EFEB;
     --muted: rgba(240, 239, 235, 0.55);
@@ -198,7 +198,9 @@
 /* For Convener/Single items to not stretch to massive width, center them */
 .team-grid.single {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 24px;
 }
 
 .team-grid.single .team-bento-card {

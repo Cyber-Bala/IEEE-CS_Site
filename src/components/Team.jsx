@@ -125,7 +125,7 @@ const Team = () => {
 
                 <div className="team-section">
                     <h2 className="section-title">Faculty Coordinators</h2>
-                    <div className="team-grid">
+                    <div className="team-grid single">
                         {/* <TeamMember name="Dr. S. VinodhKumar" role="Faculty Coordinator" image={vinod} linkedin="https://www.linkedin.com/in/dr-s-vinodh-kumar-79b1b0208" delay="100" /> */}
                         <TeamMember name="Dr. N. Duraimurugan" role="Faculty Coordinator" image={duraimurugan} linkedin="https://www.linkedin.com/in/duraimurugan-n-181145ba/" delay="200" />
                         <TeamMember name="Dr. K. Anantajothi" role="Faculty Coordinator" image={anandhajodhii} linkedin="#" delay="300" />
@@ -170,7 +170,7 @@ const Team = () => {
                         <TeamMember name="Vrithishree vj" role="Content Team" image={vrithi} linkedin="https://www.linkedin.com/in/vrithishree-vj-46b74132a" instagram="https://www.instagram.com/vjvs309" delay="100" />
                         <TeamMember name="Merlyn Sosa Saju" role="Design Team" image={merlyn} linkedin="https://www.linkedin.com/in/merlyn-sosa-saju-3b6a52317" instagram="https://www.instagram.com/mer_l48" delay="200" />
                         <TeamMember name="Mukesh V" role="Design Team" image={mukesh} linkedin="https://www.linkedin.com/in/mukesh-v-b4b066318" instagram="https://www.instagram.com/vmukeshh" delay="300" />
-                        <TeamMember name="Nishani B" role="Design Team" image={nishani} linkedin="https://www.linkedin.com/in/nishani-b-0379b3331" instagram="https://www.instagram.com/nisha_100606" delay="400" />
+                        {/* <TeamMember name="Nishani B" role="Design Team" image={nishani} linkedin="https://www.linkedin.com/in/nishani-b-0379b3331" instagram="https://www.instagram.com/nisha_100606" delay="400" /> */}
                         <TeamMember name="ATHIRA M A" role="Event Team" image={athira} linkedin="https://www.linkedin.com/in/athira-m-a-b41047332" instagram="https://www.instagram.com/athira_ajitkumar" delay="100" />
                         <TeamMember name="Keerthana C" role="Event Team" image={keerthana} linkedin="https://www.linkedin.com/in/kikic-code" instagram="https://www.instagram.com/kikic681" delay="200" />
                         <TeamMember name="MRIDHULA DEVI M" role="Event Team" image={mriduladevi} linkedin="https://www.linkedin.com/in/mridhula-devi-m-123bb92a6" instagram="https://www.instagram.com/mridhu_d29" delay="300" />

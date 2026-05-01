@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import collegeLogo from '../assets/logo/college.png';
-import ieeeLogo from '../assets/logo/ieee_cs.png';
+import ieeeLogo from '../assets/logo/ieee_logo_w.png';
 
 const Navbar = () => {
     const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);

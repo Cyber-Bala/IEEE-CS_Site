@@ -8,7 +8,7 @@ import './home.css';
 import Navbar from './Navbar';
 
 import heroBg from '../assets/background.png';
-import ieeeLogo from '../assets/logo/ieee_cs.png';
+import ieeeLogo from '../assets/logo/ieee_logo_w.png';
 import recLogo from '../assets/logo/college.png';
 import techtopia from '../assets/events/techtopia.png';
 import xyntra from '../assets/events/xyntra.JPG';
@@ -56,7 +56,7 @@ const featuredEvents = [
     {
         image: xyntra,
         tag: 'Competition',
-        title: 'XYNTRA 2.0',
+        title: 'XYNTRA',
         desc: 'A high-stakes technical quiz and debugging challenge pushing students beyond their limits.',
     },
     {
@@ -144,14 +144,14 @@ const Home = () => {
                     {/* ── LEFT (desktop) / CENTER (mobile) ── */}
                     <div className="hero-text-col" data-aos="fade-right">
                         <h1 className="hero-heading" style={{ marginBottom: '10px' }}>
-                            <span className="hero-glow-text">XYPHER'26</span>
+                            <span className="hero-glow-text">IEEE CS REC</span>
                         </h1>
 
                         <p className="hero-line1" style={{ fontSize: 'clamp(1.1rem, 1.5vw, 1.3rem)', color: '#fff', marginBottom: '15px', fontWeight: 'bold', letterSpacing: '2px' }}>
-                            THE ULTIMATE TECHNICAL FEST
+                            INNOVATE. COLLABORATE. EXCEL.
                         </p>
                         <p className="hero-line2">
-                            Experience two days of groundbreaking technology, visionary speakers, and limitless possibilities. Hosted by IEEE CS REC.
+                            Where passionate minds converge to push the boundaries of computing. Join Rajalakshmi Engineering College's premier IEEE Computer Society chapter.
                         </p>
 
                         {/* ── MOBILE ONLY: chip illustration as real img ── */}
@@ -170,11 +170,11 @@ const Home = () => {
 
                         <div className="hero-ctas">
                             <Link
-                                to="/xypher26"
+                                to="/about"
                                 className="btn-hero-primary"
                                 style={{ padding: '16px 40px', fontSize: '1.1rem' }}
                             >
-                                ENTER PORTAL
+                                EXPLORE MORE
                             </Link>
                         </div>
                     </div>
@@ -297,7 +297,6 @@ const Home = () => {
                         {[
                             { name: 'Dr. N. Duraimurugan', email: 'duraimurugan.n@rajalakshmi.edu.in' },
                             { name: 'Dr. K. Anandhajothi', email: 'ananthajothi.k@rajalakshmi.edu.in' },
-                            { name: 'Dr. S. Vinod Kumar', email: 'vinodkumar.s@rajalakshmi.edu.in' },
                         ].map((c, i) => (
                             <div className="fc-row" key={i}>
                                 <strong>{c.name}</strong>
