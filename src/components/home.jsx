@@ -143,21 +143,21 @@ const Home = () => {
                 <div className="hero-inner">
                     {/* ── LEFT (desktop) / CENTER (mobile) ── */}
                     <div className="hero-text-col" data-aos="fade-right">
-                        <h1 className="hero-heading" style={{ marginBottom: '10px' }}>
-                            <span className="hero-glow-text">IEEE CS REC</span>
+                        <h1 className="hero-heading">
+                            <span className="hero-glow-text">XYPHER'26</span>
                         </h1>
 
-                        <p className="hero-line1" style={{ fontSize: 'clamp(1.1rem, 1.5vw, 1.3rem)', color: '#fff', marginBottom: '15px', fontWeight: 'bold', letterSpacing: '2px' }}>
-                            INNOVATE. COLLABORATE. EXCEL.
+                        <p className="hero-line1">
+                            A NATIONAL LEVEL TECHNICAL SYMPOSIUM
                         </p>
                         <p className="hero-line2">
-                            Where passionate minds converge to push the boundaries of computing. Join Rajalakshmi Engineering College's premier IEEE Computer Society chapter.
+                            The Ultimate Tech Odyssey of 2026. Join us for 48 hours of relentless innovation, epic challenges, and groundbreaking technology.
                         </p>
 
                         {/* ── MOBILE ONLY: chip illustration as real img ── */}
                         <img
                             src={heroBg}
-                            alt="IEEE CS Tech Illustration"
+                            alt="Xypher Tech Illustration"
                             className="mob-chip-img"
                         />
 
@@ -170,11 +170,11 @@ const Home = () => {
 
                         <div className="hero-ctas">
                             <Link
-                                to="/about"
+                                to="/xypher26"
                                 className="btn-hero-primary"
                                 style={{ padding: '16px 40px', fontSize: '1.1rem' }}
                             >
-                                EXPLORE MORE
+                                ENTER PORTAL
                             </Link>
                         </div>
                     </div>
