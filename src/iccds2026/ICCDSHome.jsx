@@ -593,6 +593,147 @@ const ICCDSHome = () => {
                     </div>
                 </section>
 
+                {/* ═══ REVIEWERS ═══ */}
+                <section className="iccds-sect">
+                    <div className="iccds-container">
+                        <SlideReveal>
+                            <h2 className="iccds-sect-title no-line">REVIEWERS</h2>
+                        </SlideReveal>
+                        <div className="iccds-advisory-frame-grid">
+                            <SlideReveal delay={0.1} className="iccds-advisory-col-frame">
+                                <h4 className="iccds-advisory-subtitle">International</h4>
+                                <div className="iccds-advisory-list" style={{ maxHeight: '500px', overflowY: 'auto', paddingRight: '10px' }}>
+                                    {[
+                                        "Dr.A.Rajalingam, University of Technology and applied sciences – Shinas, Oman",
+                                        "Dr.Hussam Ali, COMSATS University Islamabad (CUI), Pakistan",
+                                        "Dr.George Livanos, Technical University of Crete, Greece",
+                                        "Dr.Alberto Cano, Virginia Commonwealth University,USA",
+                                        "Dr.Bhadrachalam Chitturi, The university of Texas at Dallas",
+                                        "Dr.Thar Baker, School of Arch,Tech and Eng Centre for Secure,Intelligent and Usable Systems,University of Brighton,UK",
+                                        "Dr. Tu N. Nguyen, Kennesaw State University,USA",
+                                        "Dr.Dana Petcu, West University of Timisoara, Romania",
+                                        "Dr.Utku Kose, Suleyman Demirel University, Turkey",
+                                        "Dr.Shahab S Band, National Yunlin University of Science and Technology, Douliu, Taiwan.",
+                                        "Dr.Khalid Al-Hussaini, Univ. of Sultan ZainalAbidin (UniSZA),Kuala Terengganu, Malaysia",
+                                        "Dr.John Cole, The university of Texas at Dallas",
+                                        "Dr.Gong Cheng, Northwestern Polytechnical University in Shenzhen, Shenzhen, China",
+                                        "Dr.Inês Domingues, Instituto Politécnico de Coimbra,Portugal",
+                                        "Dr.Abiel Aguilar-González, Polytechnic University of Chiapas, Tuxtla Gutiérrez, Mexico",
+                                        "Dr. Shuai Li, Swanesa University, United Kingdom",
+                                        "Dr.Mohammed Elmogy, Faculty of Computers and Information, Mansoura University, Egypt.",
+                                        "Dr.Yu Xiang, The university of Texas at Dallas",
+                                        "Dr.Binh P. Nguyen, Victoria University of Wellington (VUW), New Zealand.",
+                                        "Dr.Karl Andersson, Luleå University of Technology (LTU), Skellefteå, Sweden.",
+                                        "Dr.Azeem Irshad, International Islamic University, Islamabad, Pakistan.",
+                                        "Dr.Bestoun S. Ahmed, Karlstad University, Sweden",
+                                        "Dr.Nima Jafari Navimipour, Islamic Azad University ,Tabriz,Iran",
+                                        "Dr.Neeraj Mittal, The university of Texas at Dallas",
+                                        "Dr.Hong Jiang, The university of Texas at Arlington",
+                                        "Dr. Md. Shohel Sayeed, Multimedia University, Malaysia.",
+                                        "Dr. Joao Manuel R. S. Tavares, Faculdade de Engenharia, Universidade do Porto (FEUP), Portugal",
+                                        "Dr. Ibrahiem M.M. El Emary, King Abdulaziz University, Jeddah, Saudi Arabia",
+                                        "Dr. A.Paul, Kyungpook National University, South Korea",
+                                        "Dr. Dilip Mali, Mekelle University, Ethiopia",
+                                        "Dr. Kasun De Zoysa, University of Colombo, Srilanka",
+                                        "Dr. Mgr. Silvester Czanner, Liverpool John Moores University, UK",
+                                        "Dr Peter Chapman, Edinburgh Napier University, UK",
+                                        "Martyn Amos, Northumbria University",
+                                        "Dr Nicholas Costen, Manchester Metropolitan University, UK",
+                                        "Dr Kurt Debattista, University of Warwick, United Kingdom",
+                                        "Dr. Gheorghita Ghinea, Brunel University, United Kingdom",
+                                        "Dr.Celestine Iwendi, Central South University of Forestry and Technology,Hunan,China.",
+                                        "Dr.Lipo Wang, Nanyang Technological University, Singapore",
+                                        "Dr. You-Wing Leung, Hongkong Baptist University, Hongkong"
+                                    ].map((name, i) => <div key={i} className="iccds-advisory-item"><span>{name}</span></div>)}
+                                </div>
+                            </SlideReveal>
+                            <SlideReveal delay={0.2} className="iccds-advisory-col-frame">
+                                <h4 className="iccds-advisory-subtitle">National</h4>
+                                <div className="iccds-advisory-list" style={{ maxHeight: '500px', overflowY: 'auto', paddingRight: '10px' }}>
+                                    {[
+                                        "Dr.B.Surendiran, National Institute of Technology, Puducherry",
+                                        "Dr.M.Sivabalakrishnan, Vellore Institute of Technology, Chennai",
+                                        "Dr.S.P.Chokkalimgam, Amrita Vishwa vidyapeetham, Chennai",
+                                        "Dr.S.N.Sangeetha, Bannari Amman Institute of Technology, Erode",
+                                        "Dr.M.Mohamed Iqbal, Vellore Institute of Technology, Amaravathi",
+                                        "Dr.P. Gururama Senthilvel, Saveetha School of Engineering, Chennai",
+                                        "Dr.R.Venkatesan, Karunya Institute of Science and Technology, Coimbatore",
+                                        "Dr.M.Subramaniam, Chaitanya Bharathi Institute of Technology, Hyderabad",
+                                        "Dr.D.Divya, Jerusalem College of Engineering, Chennai",
+                                        "Dr.S.Meera, Vels Institute Science and Technology, Chennai",
+                                        "Dr.S.Saravanan, Saveetha School of Engineering, Chennai",
+                                        "Dr.S.Udayakumar, Amrita Vishwa Vidyapeetham, Chennai",
+                                        "Dr.M.Sangeetha, SRM Institute of Science & Technology, Chennai",
+                                        "Dr.S.Jagadeesan, Vellore Institute of Technology",
+                                        "Dr.R.Saminathan, Annamalai University, Chidambaram",
+                                        "Dr.Kiruthiga Devi M, Dr. M.G.R. Educational and Research Institute, Chennai",
+                                        "Dr.Parthasarathy R, Vel Tech Rangarjan Dr. Sagunthala R&D Institute of Science and Technology, Chennai",
+                                        "Dr. Bharathi V C, Vellore Institute of Technology, Amaravathi",
+                                        "Dr.Santhosh R, Karpagam Academy of Higher Education",
+                                        "Dr. S. Nagendra Prabhu, SRM Institute of Science & Technology, Chennai",
+                                        "Dr.S.Chakaravarthy, Panimalar College of Engineernig, Chennai",
+                                        "Dr.C.Govindasamy, Saveetha School of Engineering, Chennai",
+                                        "Dr.J.Jayalakshmi, Amrita Vishwa vidyapeetham, Chennai",
+                                        "Dr.M.Kavitha, Vel Tech Rangarjan Dr. Sagunthala R&D Institute of Science and Technology, Chennai",
+                                        "Dr.N.Saravanan, Misrimal Navajee Munoth Jain Engineering College, Chennai",
+                                        "Dr.K.Sudharson, RMD College of Engineering",
+                                        "Dr. Sheela Jayachandran, Vellore Institute of Technology, Amaravathi",
+                                        "Dr.A.Moorthy, Easwari Engineering College, Ramapuram",
+                                        "Dr.P V Gopirajan, SRM Institute of Science & Technology, Chennai",
+                                        "Dr.A.Pandiyaraj, SRM Institute of Science & Technology, Chennai",
+                                        "Dr.R.Thiagarajan, Prathyusha Engineering College",
+                                        "Dr.A.Senthilselvi, SRM Institute of Science & Technology, Ramapuram",
+                                        "Dr. C. Sivasankar, Saveetha Institute of Medical and Technical Sciences",
+                                        "Dr.T.R.Ganesh Babu, Muthayammal Engineering College, Namakkal",
+                                        "Dr.P.Valarmathie, RMK College of Engineering and Technology",
+                                        "Dr.M.Anbarasan, Chennai Institute of Technology",
+                                        "Dr.M.C.Babu, Chennai Institute of Technology",
+                                        "Dr. G. Nagappan, Saveetha Engineering College",
+                                        "Dr.S.Sasikumar, Saveetha Engineering College",
+                                        "Dr. B. Muthu Senthil, SRM Valliammai Engineering College",
+                                        "Dr. M. Murugan, SRM Valliammai Engineering College",
+                                        "Dr. A. Vijayaraj, RMK Engineering College",
+                                        "Dr.K.Priya, SRM Institute of Science and Technology, Ramapuram",
+                                        "Dr.S.Saravanan, Builder Engineering College",
+                                        "R.Loganathan, Paavai Engineering College",
+                                        "Dr.J.Nandha Gopal, Velammal Institute of Technology",
+                                        "A.Anitha rani, Excel Engineering college",
+                                        "G.Gnana Priya, Ramco Institute of Technology",
+                                        "Dr. Pankaj Dadheech, Swami Keshvanand Institute of Technology, Jaipur",
+                                        "Dr. R. Gangai Selvi, Agrl. Engg. College & RI",
+                                        "Dr. S. Nalini, SRM Institute of Science & Technology, Chennai",
+                                        "Mohit Tiwari, Bharati Vidyapeeth’s College of Engineering, Delhi",
+                                        "Dr. E Bhuvaneswari, Chennai Institute of Technology",
+                                        "Dr Prajakta Yawalkar, Christ University",
+                                        "Dr Ambika, St.Francis college",
+                                        "Dr.S.Russia, Velalar College of Engineering and Technology, Erode.",
+                                        "Dr Payal Bansal, Poornima College of Engineering, Jaipur Rajashthan",
+                                        "Dr G Revathy, SASTRA DEEMED UNIVERSITY",
+                                        "Vaibhav C. Gandhi, Charotar University of Science & Technology- Changa,",
+                                        "Dr Sabyasachi Pramanik, Haldia Institute of Technology",
+                                        "Ameer Rashed Khan, The New College",
+                                        "Khaja Mannanuddin, SR University",
+                                        "Dr.N.Ananthi, Easwari Engineering College, Ramapuram",
+                                        "Dr.A. Muthulakshmi, Sathyabama Institute of Science and Technology, Chennai",
+                                        "Dr.R.Sivakami, Vellore Institute of Technology, Chennai",
+                                        "Dr. G. Subathra, Sathyabama Institute of Science and Technology, Chennai",
+                                        "Dr.K. Kalaivani, Vels Institute Science and Technology, Chennai",
+                                        "Dr. Rupali Atul Mahajan, Vishwakarma Institute of Information Technology, Pune.",
+                                        "Dr. Ashutosh Gaur, Mangalmay Institute of Management and Technology, Greater Noida",
+                                        "Dr. T. Gunsekar, Vel Tech Rangarjan Dr. Sagunthala R&D Institute of Science and Technology, Chennai",
+                                        "Dr.J.Raja, Adhiparasakthi Engineering College, Chennai",
+                                        "Dr.R. Pitchai, B V Raju Institute of Technology, Telangan",
+                                        "Dr. M. Malathi, Adhiparasakthi Engineering College, Chennai",
+                                        "Dr. Prashant Kumar Shukla, KL University, Andhara Pradesh",
+                                        "Dr.G.Gangadevi, SRM Institute of Science & Technology, Chennai",
+                                        "Dr.P. Chinnasamy, MLR Institute of Technology, Hederabad"
+                                    ].map((name, i) => <div key={i} className="iccds-advisory-item"><span>{name}</span></div>)}
+                                </div>
+                            </SlideReveal>
+                        </div>
+                    </div>
+                </section>
+
                 {/* ═══ KEYNOTE SPEAKERS ═══ */}
                 <section id="speakers" className="iccds-sect">
                     <div className="iccds-container">
