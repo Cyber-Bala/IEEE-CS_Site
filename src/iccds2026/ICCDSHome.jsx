@@ -5,6 +5,7 @@ import './ICCDS.css';
 import GlassBackground from './GlassBackground';
 import collegeLogo from '../assets/logo/college.png';
 import ieeeLogo from '../assets/logo/ieee_cs.png';
+import ICCDSNav from './ICCDSNav';
 
 /* ── Keynote Speaker Photos ──────────────────────────────────────── */
 import photoPadma from './photo/padma_deepika.jpg';
@@ -150,7 +151,6 @@ const SplashScreen = ({ onComplete }) => {
                 </motion.p>
             </div>
 
-            {/* Reveal overlays */}
             <motion.div className="iccds-splash-overlay top" exit={{ y: '-100%' }} transition={{ duration: 1, ease }} />
             <motion.div className="iccds-splash-overlay bot" exit={{ y: '100%' }} transition={{ duration: 1, ease }} />
         </motion.div>
@@ -160,7 +160,7 @@ const SplashScreen = ({ onComplete }) => {
 /* ══════════════════════════════════════════════════════════════════ */
 const ICCDSHome = () => {
     const [showSplash, setShowSplash] = useState(true);
-    const [scrolled, setScrolled] = useState(false);
+    const [activeAboutTab, setActiveAboutTab] = useState(0);
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
     const ease = [0.16, 1, 0.3, 1];
@@ -171,20 +171,9 @@ const ICCDSHome = () => {
         return () => { document.body.style.overflow = ''; };
     }, [showSplash]);
 
-    useEffect(() => {
-        const fn = () => setScrolled(window.scrollY > 40);
-        window.addEventListener('scroll', fn);
-        return () => window.removeEventListener('scroll', fn);
-    }, []);
-
     const scrollTo = (id) => {
         const el = document.getElementById(id);
-        if (!el) return;
-        const target = el.offsetTop - 80;
-        window.scrollTo({
-            top: target,
-            behavior: 'smooth'
-        });
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
     };
 
     const stagger = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
@@ -196,33 +185,11 @@ const ICCDSHome = () => {
             <GlassBackground />
             <motion.div className="iccds-scroll-progress" style={{ scaleX }} />
 
-            {/* ═══ SPLASH SCREEN ═══ */}
             <AnimatePresence>
                 {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
             </AnimatePresence>
 
-            {/* ═══ HEADER ═══ */}
-            <header className={`iccds-hdr ${scrolled ? 'scrolled' : ''}`}>
-                <div className="iccds-hdr-left">
-                    <img src={collegeLogo} alt="Rajalakshmi Engineering College" className="iccds-hdr-logo" />
-                    <div className="iccds-hdr-divider" />
-                    <img src={ieeeLogo} alt="IEEE Computer Society" className="iccds-hdr-logo" />
-                    <div className="iccds-hdr-divider" />
-                    <div className="iccds-hdr-brand">
-                        <span className="iccds-hdr-brand-name">ICCDS 2026</span>
-                        <span className="iccds-hdr-brand-sub">IEEE Conference</span>
-                    </div>
-                </div>
-                <nav className="iccds-hdr-nav">
-                    {['about', 'topics', 'timeline', 'committee', 'speakers'].map(s => (
-                        <button key={s} onClick={() => scrollTo(s)}>
-                            {s === 'topics' ? 'Call for Papers' : s === 'speakers' ? 'Speakers' : s.charAt(0).toUpperCase() + s.slice(1)}
-                        </button>
-                    ))}
-                    <button onClick={() => window.location.href = '/iccds2026/guidelines'}>Guidelines</button>
-                    <button onClick={() => window.location.href = '/iccds2026/registration'} className="iccds-hdr-cta">Registration</button>
-                </nav>
-            </header>
+            <ICCDSNav />
 
             <main>
                 {/* ═══ HERO ═══ */}
@@ -230,23 +197,13 @@ const ICCDSHome = () => {
                     <div className="iccds-hero-bg-pattern" />
                     <motion.div style={{ y: yPar }} className="iccds-hero-inner">
 
-                        {/* Top pill badges */}
-                        <motion.div className="iccds-hero-badges"
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2, ease }}
-                        >
-                            <span className="iccds-badge"><Award size={13} /> IEEE Conference Record #64403</span>
-                            <span className="iccds-badge iccds-badge-accent"><Globe size={13} /> Technically Sponsored by IEEE</span>
-                        </motion.div>
-
                         {/* Main conference name */}
                         <motion.div className="iccds-hero-conf-name"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.35, ease }}
                         >
-                            <span className="iccds-hero-conf-label iccds-hero-conf-label-lg">3rd International Conference on</span>
+                            <span className="iccds-hero-conf-label iccds-hero-conf-label-lg">3<sup>rd</sup> International Conference on</span>
                         </motion.div>
 
                         <motion.h1 className="iccds-hero-title iccds-hero-title-lg"
@@ -264,6 +221,25 @@ const ICCDSHome = () => {
                             transition={{ duration: 0.8, delay: 0.7, ease }}
                         >
                             (ICCDS-2026)
+                        </motion.div>
+
+                        <motion.div 
+                            className="iccds-hero-organizer"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.85, ease }}
+                        >
+                            Organized by Department of Computer Science and Engineering
+                        </motion.div>
+
+                        {/* Moved badges below ICCDS-2026 */}
+                        <motion.div className="iccds-hero-badges"
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 1, ease }}
+                        >
+                            <span className="iccds-badge"><Award size={13} /> IEEE Conference Record #64403</span>
+                            <span className="iccds-badge iccds-badge-accent"><Globe size={13} /> Technically Sponsored by IEEE</span>
                         </motion.div>
 
                         {/* Divider line */}
@@ -345,33 +321,53 @@ const ICCDSHome = () => {
                 <section id="about" className="iccds-sect">
                     <div className="iccds-container">
                         <SlideReveal>
-                            <span className="iccds-sect-label">About</span>
-                            <h2 className="iccds-sect-title">The Conference</h2>
+                            <h2 className="iccds-sect-title no-line">ABOUT CONFERENCE</h2>
                         </SlideReveal>
 
+                        <div className="iccds-about-frame-wrapper">
+                            <div className="iccds-about-tabs">
+                                {['Conference', 'College', 'Department'].map((tab, idx) => (
+                                    <button 
+                                        key={tab}
+                                        className={`iccds-about-tab ${activeAboutTab === idx ? 'active' : ''}`}
+                                        onClick={() => setActiveAboutTab(idx)}
+                                    >
+                                        <span className="iccds-about-tab-num">0{idx + 1}</span>
+                                        <span className="iccds-about-tab-text">{tab}</span>
+                                        {activeAboutTab === idx && (
+                                            <motion.div layoutId="activeTab" className="iccds-about-tab-bg" />
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
 
-
-                        <motion.div className="iccds-about-grid"
-                            initial="hidden" whileInView="visible"
-                            viewport={{ once: true, margin: '-60px' }}
-                            variants={stagger}
-                        >
-                            <motion.div variants={fadeUp} className="iccds-about-card">
-                                <span className="iccds-about-num">01</span>
-                                <h4>About College</h4>
-                                <p>Rajalakshmi Engineering College, an Autonomous institution affiliated to Anna University, Chennai, was established in the year 1997 under the aegis of Rajalakshmi Educational Trust whose members have had consummate experience in the fields of education and industry. The College has grown from strength to strength in the last 25 years and progressing towards Excellence in Engineering Education, Research and Development. The College presently offers 19 Undergraduate and 11 Post Graduate programmes.</p>
-                            </motion.div>
-                            <motion.div variants={fadeUp} className="iccds-about-card">
-                                <span className="iccds-about-num">02</span>
-                                <h4>About Department</h4>
-                                <p>Since its inception in 1997, the Department of Computer Science and Engineering has been continuously making progress in teaching and R&D activities. The Department was recognized as Collaborative Research Centre by Anna University to offer M.S. (by research) and Ph.D. programmes. The Department has entered into an MoU with IBM, Infosys, TCS, Zoho, Virtusa, Pega, Oracle, Wipro, VMWare, UiPath, Dell, Cognizant, AWS, U.S. Technologies and many other renowned software companies for software training and Faculty Development Programmes, besides R&D activities.</p>
-                            </motion.div>
-                            <motion.div variants={fadeUp} className="iccds-about-card iccds-about-card-highlight">
-                                <span className="iccds-about-num">03</span>
-                                <h4>About Conference</h4>
-                                <p>International Conference on Computing and Data Science (ICCDS-2026) is the platform where academicians and industry research present their contemporary findings so that new inclinations and thoughts on computing and data science can be explored. The key objective is to offer the participants all over the nation to share their ideas and experience with peers. Eminent personalities from various industries have consented to be part of this conference by delivering special lectures on recent advanced topics.</p>
-                            </motion.div>
-                        </motion.div>
+                            <div className="iccds-about-frame">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={activeAboutTab}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -20 }}
+                                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                        className="iccds-about-content"
+                                    >
+                                        <div className="iccds-about-content-header">
+                                            <span className="iccds-about-content-num">0{activeAboutTab + 1}</span>
+                                            <h3>About {activeAboutTab === 0 ? 'Conference' : activeAboutTab === 1 ? 'College' : 'Department'}</h3>
+                                        </div>
+                                        <p className="iccds-about-text">
+                                            {activeAboutTab === 0 && "International Conference on Computing and Data Science (ICCDS-2026) is the platform where academicians and industry research present their contemporary findings so that new inclinations and thoughts on computing and data science can be explored. The key objective is to offer the participants all over the nation to share their ideas and experience with peers. Eminent personalities from various industries have consented to be part of this conference by delivering special lectures on recent advanced topics."}
+                                            {activeAboutTab === 1 && "Rajalakshmi Engineering College, an Autonomous institution affiliated to Anna University, Chennai, was established in the year 1997 under the aegis of Rajalakshmi Educational Trust whose members have had consummate experience in the fields of education and industry. The College has grown from strength to strength in the last 25 years and progressing towards Excellence in Engineering Education, Research and Development. The College presently offers 19 Undergraduate and 11 Post Graduate programmes."}
+                                            {activeAboutTab === 2 && "Since its inception in 1997, the Department of Computer Science and Engineering has been continuously making progress in teaching and R&D activities. The Department was recognized as Collaborative Research Centre by Anna University to offer M.S. (by research) and Ph.D. programmes. The Department has entered into an MoU with IBM, Infosys, TCS, Zoho, Virtusa, Pega, Oracle, Wipro, VMWare, UiPath, Dell, Cognizant, AWS, U.S. Technologies and many other renowned software companies for software training and Faculty Development Programmes, besides R&D activities."}
+                                        </p>
+                                        <div className="iccds-about-decoration">
+                                            <div className="iccds-about-dot" />
+                                            <div className="iccds-about-line" />
+                                        </div>
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -379,20 +375,7 @@ const ICCDSHome = () => {
                 <section id="topics" className="iccds-sect iccds-sect-alt">
                     <div className="iccds-container">
                         <SlideReveal>
-                            <span className="iccds-sect-label">Research Tracks</span>
-                            <h2 className="iccds-sect-title">Call for Papers</h2>
-                        </SlideReveal>
-
-                        <SlideReveal delay={0.1}>
-                            <div className="iccds-cfp-intro">
-                                <p>We solicit original research and technical papers which have not published elsewhere.</p>
-                                <p>Paper Submissions will be reviewed and evaluated based on the originality, technical quality and relevance to conference.</p>
-                            </div>
-                        </SlideReveal>
-
-                        <SlideReveal delay={0.15}>
-                            <h3 className="iccds-cfp-topics-heading">TOPICS OF INTEREST INCLUDE, BUT NOT LIMITED TO</h3>
-                            <p className="iccds-cfp-topics-sub">Authors are invited to contribute in the conference by submitting the articles in the following areas,</p>
+                            <h2 className="iccds-sect-title no-line">CALL FOR PAPERS</h2>
                         </SlideReveal>
 
                         <motion.div className="iccds-tracks-grid"
@@ -401,22 +384,24 @@ const ICCDSHome = () => {
                             variants={stagger}
                         >
                             {[
-                                { title: 'AI & Computing', items: ['Artificial Intelligence', 'Machine Learning', 'Deep Learning', 'Natural language Processing', 'Human Computer Interaction'] },
-                                { title: 'Data Science & Analytics', items: ['Data Science', 'Big Data Analytics', 'Medical Image Processing', 'Digital Image Processing'] },
-                                { title: 'Cloud & Distributed', items: ['Cloud Computing', 'Distributed Computing', 'Mobile & Pervasive Computing', 'Internet of Things'] },
-                                { title: 'Networks & Security', items: ['Virtual Reality & Augmented Reality', 'Information and Data Security', 'Green Computing', 'Smart Networking', 'Adhoc Networks', 'Wireless Sensor Networks', 'Network & Data Security', 'Network Protocols, QOS'] },
+                                { title: 'AI & Computing', icon: <Award size={28} />, items: ['Artificial Intelligence', 'Machine Learning', 'Deep Learning', 'Natural language Processing', 'Human Computer Interaction'] },
+                                { title: 'Data Science & Analytics', icon: <Globe size={28} />, items: ['Data Science', 'Big Data Analytics', 'Medical Image Processing', 'Digital Image Processing'] },
+                                { title: 'Cloud & Distributed', icon: <Users size={28} />, items: ['Cloud Computing', 'Distributed Computing', 'Mobile & Pervasive Computing', 'Internet of Things'] },
+                                { title: 'Networks & Security', icon: <Shield size={28} />, items: ['Virtual Reality & Augmented Reality', 'Information and Data Security', 'Green Computing', 'Smart Networking', 'Adhoc Networks', 'Wireless Sensor Networks', 'Network & Data Security', 'Network Protocols, QOS'] },
                             ].map((track, idx) => (
-                                <motion.div key={idx} variants={fadeUp} className="iccds-track-card">
-                                    <div className="iccds-track-icon">
-                                        {idx === 0 && <Award size={24} />}
-                                        {idx === 1 && <Globe size={24} />}
-                                        {idx === 2 && <Users size={24} />}
-                                        {idx === 3 && <Mail size={24} />}
+                                <motion.div key={idx} variants={fadeUp} className="iccds-track-card-new">
+                                    <div className="iccds-track-header">
+                                        <div className="iccds-track-icon-wrap">
+                                            {track.icon}
+                                        </div>
+                                        <h4>{track.title}</h4>
                                     </div>
-                                    <h4>{track.title}</h4>
-                                    <ul>
-                                        {track.items.map(item => <li key={item}>{item}</li>)}
-                                    </ul>
+                                    <div className="iccds-track-list-wrap">
+                                        <ul className="iccds-track-list">
+                                            {track.items.map(item => <li key={item}>{item}</li>)}
+                                        </ul>
+                                    </div>
+                                    <div className="iccds-track-number">0{idx + 1}</div>
                                     <div className="iccds-track-glow" />
                                 </motion.div>
                             ))}
@@ -428,30 +413,30 @@ const ICCDSHome = () => {
                 <section id="timeline" className="iccds-sect">
                     <div className="iccds-container">
                         <SlideReveal>
-                            <span className="iccds-sect-label">Schedule</span>
-                            <h2 className="iccds-sect-title">Important Dates</h2>
+                            <h2 className="iccds-sect-title no-line">IMPORTANT DATES</h2>
                         </SlideReveal>
 
-                        <div className="iccds-steps">
-                            <div className="iccds-steps-connector" />
+                        <div className="iccds-timeline-wrapper">
                             {[
-                                { step: '01', month: 'August', date: 'Aug 15', label: 'Full Paper Submission', icon: <Mail size={22} /> },
-                                { step: '02', month: 'September', date: 'Sept 10', label: 'Notification Acceptance', icon: <Award size={22} /> },
-                                { step: '03', month: 'September', date: 'Sept 30', label: 'Final Camera Ready Paper', icon: <ArrowRight size={22} /> },
-                                { step: '04', month: 'October', date: 'Oct 23–24', label: 'Conference Days', icon: <Globe size={22} />, highlight: true },
+                                { step: '01', date: 'Aug 15', label: 'Full Paper Submission', icon: <Mail size={22} /> },
+                                { step: '02', date: 'Sept 10', label: 'Notification Acceptance', icon: <Award size={22} /> },
+                                { step: '03', date: 'Sept 30', label: 'Final Camera Ready Paper', icon: <ArrowRight size={22} /> },
+                                { step: '04', date: 'Oct 23–24', label: 'Conference Days', icon: <Globe size={22} />, highlight: true },
                             ].map((item, idx) => (
                                 <motion.div key={idx}
-                                    className={`iccds-step-card ${item.highlight ? 'highlight' : ''}`}
+                                    className={`iccds-timeline-card ${item.highlight ? 'highlight' : ''}`}
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: idx * 0.12 }}
-                                    whileHover={{ y: -6 }}
                                 >
-                                    <div className="iccds-step-icon">{item.icon}</div>
-                                    <div className="iccds-step-num">{item.step}</div>
-                                    <div className="iccds-step-date">{item.date}</div>
-                                    <div className="iccds-step-label">{item.label}</div>
+                                    <div className="iccds-timeline-icon-box">
+                                        {item.icon}
+                                    </div>
+                                    <div className="iccds-timeline-step-num">{item.step}</div>
+                                    <div className="iccds-timeline-date">{item.date}</div>
+                                    <div className="iccds-timeline-label">{item.label}</div>
+                                    {idx < 3 && <div className="iccds-timeline-arrow"><ArrowRight size={16} /></div>}
                                 </motion.div>
                             ))}
                         </div>
@@ -475,8 +460,7 @@ const ICCDSHome = () => {
                 <section id="committee" className="iccds-sect iccds-sect-alt">
                     <div className="iccds-container">
                         <SlideReveal>
-                            <span className="iccds-sect-label">Leadership</span>
-                            <h2 className="iccds-sect-title">Organizing Committee</h2>
+                            <h2 className="iccds-sect-title no-line">ORGANIZING COMMITTEE</h2>
                         </SlideReveal>
 
                         <motion.div className="iccds-comm-grid"
@@ -534,20 +518,30 @@ const ICCDSHome = () => {
                 <section className="iccds-sect">
                     <div className="iccds-container">
                         <SlideReveal>
-                            <span className="iccds-sect-label">Committee</span>
-                            <h2 className="iccds-sect-title">Technical Committee</h2>
+                            <h2 className="iccds-sect-title no-line">TECHNICAL COMMITTEE</h2>
                         </SlideReveal>
-                        <SlideReveal delay={0.15}>
-                            <ul className="iccds-committee-list">
-                                <li>Dr. V. Nagarajan, Professor, Pondicherry University, Puducherry, India</li>
-                                <li>Dr. A. Kandasamy, Professor, National Institute of Technology, Karnataka, India</li>
-                                <li>Dr. A. Amuthan, Professor and Associate Dean, Pondicherry Technological University, India</li>
-                                <li>Dr. Subhash Chandra Yadav, Professor &amp; Head, Central University of Jharkhand, Ranchi, India</li>
-                                <li>Dr. Brojo Kishore Mishra, Professor, NIST Institute of Science and Technology, Berhampur Odisha, India</li>
-                                <li>Dr. B. Surendiran, Associate Dean, NIT Puducherry, India</li>
-                                <li>Dr. Durgesh Mishra, Director &amp; Campus Director, Symbiosis University of Applied Sciences, India</li>
-                            </ul>
-                        </SlideReveal>
+                        <div className="iccds-comm-frame">
+                            <div className="iccds-comm-list-grid">
+                                {[
+                                    "Dr. V. Nagarajan, Professor, Pondicherry University, Puducherry, India",
+                                    "Dr. A. Kandasamy, Professor, National Institute of Technology, Karnataka, India",
+                                    "Dr. A. Amuthan, Professor and Associate Dean, Pondicherry Technological University, India",
+                                    "Dr. Subhash Chandra Yadav, Professor & Head, Central University of Jharkhand, Ranchi, India",
+                                    "Dr. Brojo Kishore Mishra, Professor, NIST Institute of Science and Technology, Berhampur Odisha, India",
+                                    "Dr. B. Surendiran, Associate Dean, NIT Puducherry, India",
+                                    "Dr. Durgesh Mishra, Director & Campus Director, Symbiosis University of Applied Sciences, India"
+                                ].map((name, i) => (
+                                    <motion.div key={i} className="iccds-comm-item-simple"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: i * 0.05 }}
+                                    >
+                                        <div className="iccds-comm-dot" />
+                                        <span>{name}</span>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -555,45 +549,44 @@ const ICCDSHome = () => {
                 <section className="iccds-sect iccds-sect-alt">
                     <div className="iccds-container">
                         <SlideReveal>
-                            <span className="iccds-sect-label">Committee</span>
-                            <h2 className="iccds-sect-title">Advisory Committee</h2>
+                            <h2 className="iccds-sect-title no-line">ADVISORY COMMITTEE</h2>
                         </SlideReveal>
-                        <div className="iccds-advisory-grid">
-                            <SlideReveal delay={0.1}>
-                                <div className="iccds-advisory-col">
-                                    <h4 className="iccds-advisory-heading">International</h4>
-                                    <ul className="iccds-committee-list">
-                                        <li>Dr. Shuai Li, Associate Professor, Swansea University, UK</li>
-                                        <li>Dr. Stephen Olatundeolabiyisi, Professor, LadokeAkintola University, Nigeria</li>
-                                        <li>Dr. Joy Long-Zhong Chen, Professor, Brunel University, London</li>
-                                        <li>Dr. Neda Azizi, Senior Lecturer, Torrens University, Australia</li>
-                                        <li>Bhadrachalam Chitturi, Associate Professor, The University of Texas at Dallas, USA</li>
-                                        <li>Yu Xiang, Assistant Professor, The University of Texas at Dallas, USA</li>
-                                        <li>John Cole, Senior Lecturer, The University of Texas at Dallas, USA</li>
-                                        <li>Dr. Kinshuk, Dean, The University of North Texas, USA</li>
-                                        <li>Saif Aldeen Saad Alkadhim, Assistant Lecturer, Xian Jiatong University, Xian, China</li>
-                                        <li>Maleika Heenaye-Mamode Khan, Associate Professor, University of Mauritius, Africa</li>
-                                        <li>Fatma Sayed Gadelrab, Associate Professor, Helwan University, Cairo, Egypt</li>
-                                    </ul>
+                        <div className="iccds-advisory-frame-grid">
+                            <SlideReveal delay={0.1} className="iccds-advisory-col-frame">
+                                <h4 className="iccds-advisory-subtitle">International</h4>
+                                <div className="iccds-advisory-list">
+                                    {[
+                                        "Dr. Shuai Li, Associate Professor, Swansea University, UK",
+                                        "Dr. Stephen Olatundeolabiyisi, Professor, LadokeAkintola University, Nigeria",
+                                        "Dr. Joy Long-Zhong Chen, Professor, Brunel University, London",
+                                        "Dr. Neda Azizi, Senior Lecturer, Torrens University, Australia",
+                                        "Bhadrachalam Chitturi, Associate Professor, The University of Texas at Dallas, USA",
+                                        "Yu Xiang, Assistant Professor, The University of Texas at Dallas, USA",
+                                        "John Cole, Senior Lecturer, The University of Texas at Dallas, USA",
+                                        "Dr. Kinshuk, Dean, The University of North Texas, USA",
+                                        "Saif Aldeen Saad Alkadhim, Assistant Lecturer, Xian Jiatong University, Xian, China",
+                                        "Maleika Heenaye-Mamode Khan, Associate Professor, University of Mauritius, Africa",
+                                        "Fatma Sayed Gadelrab, Associate Professor, Helwan University, Cairo, Egypt"
+                                    ].map((name, i) => <div key={i} className="iccds-advisory-item"><span>{name}</span></div>)}
                                 </div>
                             </SlideReveal>
-                            <SlideReveal delay={0.2}>
-                                <div className="iccds-advisory-col">
-                                    <h4 className="iccds-advisory-heading">National</h4>
-                                    <ul className="iccds-committee-list">
-                                        <li>Dr. Dr.T.shanmuganantham, Vice Chairman(Academics), IEEE Madras Section</li>
-                                        <li>Dr. Ramalatha Marimuthu, Vice Chairman (Industry),IEEE Madras Section</li>
-                                        <li>Dr. R. Radha, Secretary, IEEE Madras Section  &amp; Principal, SSN College of Engineering, Chennai, India</li>
-                                        <li>Dr. S. Brindha, Treasurer, IEEE Madras Section</li>
-                                        <li>Dr. M. Palanivelan, IEEE-Student Branch Counsellor, REC</li>
-                                        <li>Dr. S. Joseph Gladwin, BigCat Wireless Pvt. Ltd., IIT Madras Research Park, Chennai, India</li>
-                                        <li>Dr. R. Murugan, Associate Professor, NIT Silchar, India</li>
-                                        <li>Dr. B. Surendiran, Associate Dean, NIT Puducherry, India</li>
-                                        <li>Dr. V.D. Ambeth Kumar, Associate Professor, Mizoram University, India</li>
-                                        <li>Dr. R. Saminathan, Associate Professor, Annamalai University, India</li>
-                                        <li>Dr. M.D. Selvaraj, Associate Professor, IIITDM, Kancheepuram, India</li>
-                                        <li>Dr. G. Kumaravelan, Associate Professor, Pondicherry University, Pondicherry, India</li>
-                                    </ul>
+                            <SlideReveal delay={0.2} className="iccds-advisory-col-frame">
+                                <h4 className="iccds-advisory-subtitle">National</h4>
+                                <div className="iccds-advisory-list">
+                                    {[
+                                        "Dr. Dr.T.shanmuganantham, Vice Chairman(Academics), IEEE Madras Section",
+                                        "Dr. Ramalatha Marimuthu, Vice Chairman (Industry),IEEE Madras Section",
+                                        "Dr. R. Radha, Secretary, IEEE Madras Section & Principal, SSN College of Engineering, Chennai, India",
+                                        "Dr. S. Brindha, Treasurer, IEEE Madras Section",
+                                        "Dr. M. Palanivelan, IEEE-Student Branch Counsellor, REC",
+                                        "Dr. S. Joseph Gladwin, BigCat Wireless Pvt. Ltd., IIT Madras Research Park, Chennai, India",
+                                        "Dr. R. Murugan, Associate Professor, NIT Silchar, India",
+                                        "Dr. B. Surendiran, Associate Dean, NIT Puducherry, India",
+                                        "Dr. V.D. Ambeth Kumar, Associate Professor, Mizoram University, India",
+                                        "Dr. R. Saminathan, Associate Professor, Annamalai University, India",
+                                        "Dr. M.D. Selvaraj, Associate Professor, IIITDM, Kancheepuram, India",
+                                        "Dr. G. Kumaravelan, Associate Professor, Pondicherry University, Pondicherry, India"
+                                    ].map((name, i) => <div key={i} className="iccds-advisory-item"><span>{name}</span></div>)}
                                 </div>
                             </SlideReveal>
                         </div>
@@ -604,40 +597,47 @@ const ICCDSHome = () => {
                 <section id="speakers" className="iccds-sect">
                     <div className="iccds-container">
                         <SlideReveal>
-                            <span className="iccds-sect-label">Speakers</span>
-                            <h2 className="iccds-sect-title">Keynote Speakers</h2>
+                            <h2 className="iccds-sect-title no-line">KEYNOTE SPEAKERS</h2>
                         </SlideReveal>
-                        <motion.div className="iccds-keynote-grid"
+                        <motion.div className="iccds-speaker-grid"
                             initial="hidden" whileInView="visible"
                             viewport={{ once: true, margin: '-60px' }}
                             variants={stagger}
                         >
                             {[
-                                { name: 'Padma Deepika N.', role: 'Senior Software Engineer at Apple — Product Integrity Hardware Engineering | Full-Stack Engineer | AI-Enabled Developer Tooling', org: 'Apple', location: 'Austin, Texas, USA', education: 'Anna University Chennai', photo: photoPadma, linkedin: 'https://www.linkedin.com/in/padma-deepika-narayanaswamy-0605/' },
-                                { name: 'Vinod Balachandran', role: 'Software Engineer at Microsoft', org: 'Microsoft', location: 'Greater Seattle Area', education: 'UC Davis', photo: null, linkedin: 'https://www.linkedin.com/in/vinod-balachandran/' },
-                                { name: 'Farha Haider', role: 'AI ML Developer @ Nokia | MEng @ McMaster University | Machine Learning | ex-Senior Software Engineer @ Tiger Analytics', org: 'Nokia', location: 'Canada', education: 'McMaster University', photo: photoFarha, linkedin: 'https://www.linkedin.com/in/farhahaider/' },
-                                { name: 'Sriram Subramanian', role: 'Senior Member of Technical Staff @ Oracle Cloud Infrastructure / OCI', org: 'Oracle', location: 'Issaquah, Washington, USA', education: 'Arizona State University', photo: photoSriram, linkedin: 'https://www.linkedin.com/in/sriramopensource/' },
-                                { name: 'Arthi Nagarajan', role: 'Senior Software Engineer at Microsoft', org: 'Microsoft', location: 'Austin, Texas, USA', education: 'Texas State University', photo: photoArthi, linkedin: 'https://www.linkedin.com/in/arthi-nagarajan-1b9b3b94/' },
-                                { name: 'Chandrika Kadirvel Mani', role: 'AI Principal Architect @ Google | Leading APAC\'s Agentic AI Revolution | Scaling Multi-Agent Systems & Responsible GenAI Strategy for Google Cloud Enterprise Customers', org: 'Google', location: 'Singapore', education: 'National University of Singapore', photo: photoChandrika, linkedin: 'https://www.linkedin.com/in/chandrikakadirvelmani/' },
-                                { name: 'Divyanshi Kothari', role: 'Software Engineer @ Apple | AI & Data Platforms', org: 'Apple', location: 'San Francisco Bay Area', education: '', photo: null, linkedin: 'https://www.linkedin.com/in/divyanshikot/' },
-                                { name: 'Ashwini Rajaram', role: 'Applied AI Research | LLMs, RAG, Agentic AI | Master\'s Machine Learning @ UdeM, MILA Quebec AI', org: 'TD', location: 'Greater Montreal Metropolitan Area', education: 'Mila — Quebec Artificial Intelligence Institute', photo: photoAshwini, linkedin: 'https://www.linkedin.com/in/ashwini-r-1910a61aa/' },
-                                { name: 'Pavithra Gunasekaran', role: 'MBA (Finance & Marketing) | Aspiring Marketing Strategist | PR Lead @ Yukthi Management Club | Ex-Senior Finance Associate | 3+ Years in Data Analysis & Financial Operations | SEO', org: 'Savancys Inc', location: 'Greater Chennai Area', education: 'Rajalakshmi Engineering College', photo: photoPavithra, linkedin: 'https://www.linkedin.com/in/contact-pavithra-gunasekaran/' },
-                                { name: 'Nandakumar Kuthalaraja', role: 'Senior Principal Architect @ Northern Trust | TOGAF Certified Enterprise Architect | MS Candidate @ University of Arizona', org: 'Northern Trust', location: '', education: 'University of Arizona', photo: photoNandakumar, linkedin: '' },
+                                { name: 'Padma Deepika N.', role: 'Senior Software Engineer at Apple — Product Integrity Hardware Engineering | Full-Stack Engineer | AI-Enabled Developer Tooling', org: 'Apple', location: 'Austin, Texas, USA', photo: photoPadma },
+                                { name: 'Vinod Balachandran', role: 'Software Engineer at Microsoft', org: 'Microsoft', location: 'Greater Seattle Area', photo: null },
+                                { name: 'Farha Haider', role: 'AI ML Developer @ Nokia | MEng @ McMaster University | Machine Learning | ex-Senior Software Engineer @ Tiger Analytics', org: 'Nokia', location: 'Canada', photo: photoFarha },
+                                { name: 'Sriram Subramanian', role: 'Senior Member of Technical Staff @ Oracle Cloud Infrastructure / OCI', org: 'Oracle', location: 'Issaquah, Washington, USA', photo: photoSriram },
+                                { name: 'Arthi Nagarajan', role: 'Senior Software Engineer at Microsoft', org: 'Microsoft', location: 'Austin, Texas, USA', photo: photoArthi },
+                                { name: 'Chandrika Kadirvel Mani', role: 'AI Principal Architect @ Google | Leading APAC\'s Agentic AI Revolution | Scaling Multi-Agent Systems & Responsible GenAI Strategy for Google Cloud Enterprise Customers', org: 'Google', location: 'Singapore', photo: photoChandrika },
+                                { name: 'Divyanshi Kothari', role: 'Software Engineer @ Apple | AI & Data Platforms', org: 'Apple', location: 'San Francisco Bay Area', photo: null },
+                                { name: 'Ashwini Rajaram', role: 'Applied AI Research | LLMs, RAG, Agentic AI | Master\'s Machine Learning @ UdeM, MILA Quebec AI', org: 'TD', location: 'Montreal, Canada', photo: photoAshwini },
+                                { name: 'Pavithra Gunasekaran', role: 'MBA (Finance & Marketing) | Aspiring Marketing Strategist | PR Lead @ Yukthi Management Club | Ex-Senior Finance Associate | 3+ Years in Data Analysis & Financial Operations | SEO', org: 'Savancys Inc', location: 'Chennai, India', photo: photoPavithra },
+                                { name: 'Nandakumar Kuthalaraja', role: 'Senior Principal Architect @ Northern Trust | TOGAF Certified Enterprise Architect | MS Candidate @ University of Arizona', org: 'Northern Trust', location: 'USA', photo: photoNandakumar },
                             ].map((speaker, idx) => (
-                                <motion.div key={idx} variants={fadeUp} className="iccds-keynote-card">
-                                    <div className="iccds-keynote-avatar">
+                                <motion.div key={idx} variants={fadeUp} className="iccds-speaker-card full-photo-card">
+                                    <div className="iccds-speaker-bg">
                                         {speaker.photo ? (
-                                            <img src={speaker.photo} alt={speaker.name} className="iccds-keynote-photo" />
+                                            <img src={speaker.photo} alt={speaker.name} className="iccds-speaker-full-img" />
                                         ) : (
-                                            <Users size={32} />
+                                            <div className="iccds-speaker-full-placeholder"><Users size={60} /></div>
                                         )}
+                                        <div className="iccds-speaker-overlay-base">
+                                            <h4>{speaker.name}</h4>
+                                            <p className="iccds-speaker-org-tag">{speaker.org}</p>
+                                        </div>
                                     </div>
-                                    <span className="iccds-member-name">{speaker.name}</span>
-                                    <span className="iccds-keynote-org">{speaker.org}</span>
-                                    <span className="iccds-member-role">{speaker.role}</span>
-                                    <a href={speaker.linkedin} target="_blank" rel="noopener noreferrer" className="iccds-keynote-linkedin">
-                                        <ExternalLink size={14} /> LinkedIn
-                                    </a>
+                                    
+                                    <div className="iccds-speaker-hover-reveal">
+                                        <div className="iccds-speaker-reveal-inner">
+                                            <span className="iccds-reveal-label">Expertise</span>
+                                            <p className="iccds-speaker-full-role">{speaker.role}</p>
+                                            <div className="iccds-speaker-loc-tag">
+                                                <MapPin size={12} /> {speaker.location}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </motion.div>
                             ))}
                         </motion.div>
@@ -654,7 +654,7 @@ const ICCDSHome = () => {
                                     <img src={ieeeLogo} alt="IEEE CS" />
                                 </div>
                                 <p className="iccds-footer-tagline">
-                                    3rd International Conference on Computing and Data Science (ICCDS-2026)
+                                    3<sup>rd</sup> International Conference on Computing and Data Science (ICCDS-2026)
                                 </p>
                             </div>
                             <div className="iccds-footer-cols">
