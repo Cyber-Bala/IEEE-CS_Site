@@ -7,6 +7,8 @@ import GlassBackground from './GlassBackground';
 import collegeLogo from '../assets/logo/college.png';
 import ieeeLogo from '../assets/logo/ieee_cs.png';
 
+import ICCDSNav from './ICCDSNav';
+
 /* ── SlideReveal ─────────────────────────────────────────────────── */
 const SlideReveal = ({ children, className, delay = 0 }) => {
     const ref = useRef(null);
@@ -22,42 +24,18 @@ const SlideReveal = ({ children, className, delay = 0 }) => {
 
 /* ══════════════════════════════════════════════════════════════════ */
 const ICCDSGuidelines = () => {
-    const [scrolled, setScrolled] = useState(false);
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
     const navigate = useNavigate();
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
-    useEffect(() => {
-        const fn = () => setScrolled(window.scrollY > 40);
-        window.addEventListener('scroll', fn);
-        return () => window.removeEventListener('scroll', fn);
-    }, []);
-
     return (
         <div className="iccds-page">
             <GlassBackground />
             <motion.div className="iccds-scroll-progress" style={{ scaleX }} />
 
-            {/* ═══ HEADER ═══ */}
-            <header className={`iccds-hdr ${scrolled ? 'scrolled' : ''}`}>
-                <div className="iccds-hdr-left">
-                    <img src={collegeLogo} alt="Rajalakshmi Engineering College" className="iccds-hdr-logo" />
-                    <div className="iccds-hdr-divider" />
-                    <img src={ieeeLogo} alt="IEEE Computer Society" className="iccds-hdr-logo" />
-                    <div className="iccds-hdr-divider" />
-                    <div className="iccds-hdr-brand">
-                        <span className="iccds-hdr-brand-name">ICCDS 2026</span>
-                        <span className="iccds-hdr-brand-sub">IEEE Conference</span>
-                    </div>
-                </div>
-                <nav className="iccds-hdr-nav">
-                    <button onClick={() => navigate('/iccds2026')}>
-                        <ArrowLeft size={14} style={{ marginRight: 4, verticalAlign: 'middle' }} /> Back to Home
-                    </button>
-                </nav>
-            </header>
+            <ICCDSNav />
 
             <main>
                 {/* ═══ GUIDELINES HERO ═══ */}
@@ -67,11 +45,10 @@ const ICCDSGuidelines = () => {
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            <span className="iccds-sect-label">Submission</span>
-                            <h1 className="iccds-reg-page-title">Paper Submission Guidelines</h1>
-                            <p className="iccds-reg-page-sub">3rd International Conference on Computing & Data Science (ICCDS-2026)</p>
+                            <h1 className="iccds-reg-page-title">PAPER SUBMISSION GUIDELINES</h1>
+                            <p className="iccds-reg-page-sub">3<sup>rd</sup> International Conference on Computing & Data Science (ICCDS-2026)</p>
                         </motion.div>
                     </div>
                 </section>
@@ -138,7 +115,7 @@ const ICCDSGuidelines = () => {
                                     <img src={ieeeLogo} alt="IEEE CS" />
                                 </div>
                                 <p className="iccds-footer-tagline">
-                                    3rd International Conference on Computing and Data Science (ICCDS-2026)
+                                    3<sup>rd</sup> International Conference on Computing and Data Science (ICCDS-2026)
                                 </p>
                             </div>
                             <div className="iccds-footer-cols">
