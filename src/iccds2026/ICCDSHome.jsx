@@ -19,7 +19,7 @@ import photoNandakumar from './photo/Nandakumar Kuthalaraja.jfif';
 import photoSathishkumar from './photo/Dr Sathishkumar.webp';
 import photoSumendra from './photo/Dr. Sumendra.jpeg';
 import photoGeorge from './photo/George Ghinea.jpg';
-import photoJey from './photo/Jeyakesavan.jpg';
+import photoJey from './photo/Jeyakesavan.png';
 import photoDivyanshi from './photo/Divyanshi Kothari.jfif';
 import photoVinod from './photo/Vinod Balachandran.jfif';
 
