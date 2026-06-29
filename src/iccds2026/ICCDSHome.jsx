@@ -4,7 +4,7 @@ import { Mail, Calendar, MapPin, ExternalLink, ArrowRight, ChevronDown, Award, G
 import './ICCDS.css';
 import GlassBackground from './GlassBackground';
 import collegeLogo from '../assets/logo/college.png';
-import ieeeLogo from '../assets/logo/ieee_cs.png';
+import ieeeLogo from '../assets/logo/ieee_logo_b.png';
 import ICCDSNav from './ICCDSNav';
 
 /* ── Keynote Speaker Photos ──────────────────────────────────────── */
@@ -200,7 +200,12 @@ const ICCDSHome = () => {
             <main>
                 {/* ═══ HERO ═══ */}
                 <section id="home" className="iccds-hero">
-                    <div className="iccds-hero-bg-pattern" />
+                    <div className="iccds-hero-bg-wrapper">
+                        <div className="iccds-hero-tech-grid"></div>
+                        <div className="iccds-hero-shape iccds-shape-circle"></div>
+                        <div className="iccds-hero-shape iccds-shape-square"></div>
+                        <div className="iccds-hero-shape iccds-shape-cross">+</div>
+                    </div>
                     <motion.div style={{ y: yPar }} className="iccds-hero-inner">
 
                         {/* Main conference name */}

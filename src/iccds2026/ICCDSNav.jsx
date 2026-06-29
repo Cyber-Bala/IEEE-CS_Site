@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import collegeLogo from '../assets/logo/college.png';
-import ieeeLogo from '../assets/logo/ieee_cs.png';
+import ieeeLogo from '../assets/logo/ieee_logo_b.png';
 
 const ICCDSNav = () => {
     const [scrolled, setScrolled] = useState(false);
