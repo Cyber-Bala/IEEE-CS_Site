@@ -321,6 +321,17 @@ html {
 .iccds-badge-accent {
     background: var(--purple); border-color: var(--purple); color: #fff;
 }
+.iccds-badge-record {
+    font-size: 1.05rem;
+    padding: 10px 22px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, rgba(255, 200, 55, 0.15), rgba(255, 160, 30, 0.10));
+    border: 1.5px solid rgba(255, 200, 55, 0.5);
+    color: #ffd369;
+    letter-spacing: 1px;
+    font-weight: 800;
+    text-shadow: 0 0 12px rgba(255, 200, 55, 0.25);
+}
 
 .iccds-hero-conf-name { margin-bottom: 10px; }
 .iccds-hero-conf-label {
@@ -1035,6 +1046,13 @@ html {
 }
 .iccds-member-role {
     display: block; font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px;
+}
+
+.iccds-comm-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple), transparent);
+    margin: 24px 0;
+    opacity: 0.5;
 }
 
 /* ═══ COMMITTEE FRAME DESIGN ═══ */

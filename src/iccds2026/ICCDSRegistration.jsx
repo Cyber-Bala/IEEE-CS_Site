@@ -74,12 +74,12 @@ const ICCDSRegistration = () => {
                                         <tr>
                                             <td rowSpan={3} className="iccds-reg-category">IEEE Member</td>
                                             <td>Student</td>
-                                            <td>INR 8,000</td>
+                                            <td>INR 8,500</td>
                                             <td>USD 175</td>
                                         </tr>
                                         <tr>
                                             <td>Academic / Industry</td>
-                                            <td>INR 8,500</td>
+                                            <td>INR 9,000</td>
                                             <td>USD 200</td>
                                         </tr>
                                         <tr>
@@ -90,12 +90,12 @@ const ICCDSRegistration = () => {
                                         <tr>
                                             <td rowSpan={3} className="iccds-reg-category iccds-reg-category-alt">Non-IEEE Member</td>
                                             <td>Student</td>
-                                            <td>INR 8,500</td>
+                                            <td>INR 9,000</td>
                                             <td>USD 200</td>
                                         </tr>
                                         <tr>
                                             <td>Academic / Industry</td>
-                                            <td>INR 9,000</td>
+                                            <td>INR 9,500</td>
                                             <td>USD 225</td>
                                         </tr>
                                         <tr>

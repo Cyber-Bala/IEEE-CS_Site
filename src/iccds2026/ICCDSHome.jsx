@@ -16,6 +16,12 @@ import photoChandrika from './photo/chandrika_kadirvel_mani.jpg';
 import photoAshwini from './photo/ashwini_rajaram.png';
 import photoPavithra from './photo/pavithra_gunasekaran.jpg';
 import photoNandakumar from './photo/Nandakumar Kuthalaraja.jfif';
+import photoSathishkumar from './photo/Dr Sathishkumar.webp';
+import photoSumendra from './photo/Dr. Sumendra.jpeg';
+import photoGeorge from './photo/George Ghinea.jpg';
+import photoJey from './photo/Jeyakesavan.jpg';
+import photoDivyanshi from './photo/Divyanshi Kothari.jfif';
+import photoVinod from './photo/Vinod Balachandran.jfif';
 
 /* ── Word Blur Reveal ────────────────────────────────────────────── */
 const BlurReveal = ({ text, className, delay = 0 }) => {
@@ -49,7 +55,7 @@ const SlideReveal = ({ children, className, delay = 0 }) => {
 };
 
 /* ── Countdown Timer ──────────────────────────────────────────────── */
-const EVENT_DATE = new Date('2026-10-23T09:00:00+05:30');
+const EVENT_DATE = new Date('2026-10-09T09:00:00+05:30');
 
 const CountdownTimer = () => {
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -238,7 +244,7 @@ const ICCDSHome = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 1, ease }}
                         >
-                            <span className="iccds-badge"><Award size={13} /> IEEE Conference Record #69942</span>
+                            <span className="iccds-badge iccds-badge-record"><Award size={16} /> IEEE Conference Record #69942</span>
                             <span className="iccds-badge iccds-badge-accent"><Globe size={13} /> Technically Sponsored by IEEE Madras Section</span>
                         </motion.div>
 
@@ -259,7 +265,7 @@ const ICCDSHome = () => {
                                 <Calendar size={20} className="iccds-info-icon" />
                                 <div>
                                     <span className="iccds-info-lbl">Date</span>
-                                    <span className="iccds-info-val">October 23–24, 2026</span>
+                                    <span className="iccds-info-val">October 9–10, 2026</span>
                                 </div>
                             </div>
                             <div className="iccds-hero-info-sep" />
@@ -418,11 +424,11 @@ const ICCDSHome = () => {
 
                         <div className="iccds-timeline-wrapper">
                             {[
-                                { step: '01', date: 'Aug 15', label: 'Full Paper Submission', icon: <Mail size={22} /> },
-                                { step: '02', date: 'Sept 10', label: 'Acceptance Notification', icon: <Award size={22} /> },
-                                { step: '03', date: 'Sept 25', label: 'Registration Closes', icon: <Users size={22} /> },
-                                { step: '04', date: 'Sept 30', label: 'Final Camera Ready Paper Submission', icon: <FileText size={22} /> },
-                                { step: '05', date: 'Oct 23–24', label: 'Conference Dates', icon: <Globe size={22} />, highlight: true },
+                                { step: '01', date: 'Aug 10', label: 'Full Paper Submission', icon: <Mail size={22} /> },
+                                { step: '02', date: 'Sept 1', label: 'Acceptance Notification', icon: <Award size={22} /> },
+                                { step: '03', date: 'Sept 20', label: 'Registration Closes', icon: <Users size={22} /> },
+                                { step: '04', date: 'Sept 20', label: 'Final Camera Ready Paper Submission', icon: <FileText size={22} /> },
+                                { step: '05', date: 'Oct 9–10', label: 'Conference Dates', icon: <Globe size={22} />, highlight: true },
                             ].map((item, idx) => (
                                 <motion.div key={idx}
                                     className={`iccds-timeline-card ${item.highlight ? 'highlight' : ''}`}
@@ -493,11 +499,8 @@ const ICCDSHome = () => {
                                     title: 'Convener',
                                     members: [
                                         { name: 'Dr. P. Kumar', role: 'Professor, Department of CSE' },
-                                    ]
-                                },
-                                {
-                                    title: 'Coordinators',
-                                    members: [
+                                    ],
+                                    coordinators: [
                                         { name: 'Dr. K. Ananthajothi', role: 'Professor, Department of CSE' },
                                         { name: 'Dr. N. Duraimurugan', role: 'Associate Professor, Department of CSE' },
                                     ]
@@ -511,6 +514,18 @@ const ICCDSHome = () => {
                                             <span className="iccds-member-role">{m.role}</span>
                                         </div>
                                     ))}
+                                    {group.coordinators && (
+                                        <>
+                                            <div className="iccds-comm-divider" />
+                                            <h5>Coordinators</h5>
+                                            {group.coordinators.map(m => (
+                                                <div key={m.name} className="iccds-member">
+                                                    <span className="iccds-member-name">{m.name}</span>
+                                                    <span className="iccds-member-role">{m.role}</span>
+                                                </div>
+                                            ))}
+                                        </>
+                                    )}
                                 </motion.div>
                             ))}
                         </motion.div>
@@ -749,13 +764,17 @@ const ICCDSHome = () => {
                             variants={stagger}
                         >
                             {[
+                                { name: 'Prof. Dr. George Ghinea', role: 'Professor of Mulsemedia Computing | Director of Research | Department of Computer Science', org: 'Brunel University London', location: 'London, United Kingdom', photo: photoGeorge },
+                                { name: 'Dr. Jey Veerasamy', role: 'Director of Center for CS Education & Outreach | Professor of Instruction | UT Dallas CS', org: 'University of Texas at Dallas', location: 'United States of America', photo: photoJey },
+                                { name: 'Dr. Sumendra Yogarayan', role: 'Assistant Professor | TTT Certified Trainer | Professional Technologist (Ts.)', org: 'Multimedia University', location: 'Malacca, Malaysia', photo: photoSumendra },
                                 { name: 'Padma Deepika N.', role: 'Senior Software Engineer at Apple — Product Integrity Hardware Engineering | Full-Stack Engineer | AI-Enabled Developer Tooling', org: 'Apple', location: 'Austin, Texas, USA', photo: photoPadma },
-                                { name: 'Vinod Balachandran', role: 'Software Engineer at Microsoft', org: 'Microsoft', location: 'Greater Seattle Area', photo: null },
+                                { name: 'Vinod Balachandran', role: 'Software Engineer at Microsoft', org: 'Microsoft', location: 'Greater Seattle Area', photo: photoVinod },
                                 { name: 'Farha Haider', role: 'AI ML Developer @ Nokia | MEng @ McMaster University | Machine Learning | ex-Senior Software Engineer @ Tiger Analytics', org: 'Nokia', location: 'Canada', photo: photoFarha },
+                                { name: 'Dr. Sathishkumar V E', role: 'Senior Lecturer in Data Science & AI | Healthcare AI, Data Mining, Blockchain & Predictive Modelling | Computer Scientist | Academic Innovator | Journal Editor', org: 'Sunway University', location: 'Subang Jaya, Selangor, Malaysia', photo: photoSathishkumar },
                                 { name: 'Sriram Subramanian', role: 'Senior Member of Technical Staff @ Oracle Cloud Infrastructure / OCI', org: 'Oracle', location: 'Issaquah, Washington, USA', photo: photoSriram },
                                 { name: 'Arthi Nagarajan', role: 'Senior Software Engineer at Microsoft', org: 'Microsoft', location: 'Austin, Texas, USA', photo: photoArthi },
                                 { name: 'Chandrika Kadirvel Mani', role: 'AI Principal Architect @ Google | Leading APAC\'s Agentic AI Revolution | Scaling Multi-Agent Systems & Responsible GenAI Strategy for Google Cloud Enterprise Customers', org: 'Google', location: 'Singapore', photo: photoChandrika },
-                                { name: 'Divyanshi Kothari', role: 'Software Engineer @ Apple | AI & Data Platforms', org: 'Apple', location: 'San Francisco Bay Area', photo: null },
+                                { name: 'Divyanshi Kothari', role: 'Software Engineer @ Apple | AI & Data Platforms', org: 'Apple', location: 'San Francisco Bay Area', photo: photoDivyanshi },
                                 { name: 'Ashwini Rajaram', role: 'Applied AI Research | LLMs, RAG, Agentic AI | Master\'s Machine Learning @ UdeM, MILA Quebec AI', org: 'TD', location: 'Montreal, Canada', photo: photoAshwini },
                                 { name: 'Pavithra Gunasekaran', role: 'MBA (Finance & Marketing) | Aspiring Marketing Strategist | PR Lead @ Yukthi Management Club | Ex-Senior Finance Associate | 3+ Years in Data Analysis & Financial Operations | SEO', org: 'Savancys Inc', location: 'Chennai, India', photo: photoPavithra },
                                 { name: 'Nandakumar Kuthalaraja', role: 'Senior Principal Architect @ Northern Trust | TOGAF Certified Enterprise Architect | MS Candidate @ University of Arizona', org: 'Northern Trust', location: 'USA', photo: photoNandakumar },
