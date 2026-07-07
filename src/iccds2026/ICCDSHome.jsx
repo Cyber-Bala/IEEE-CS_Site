@@ -494,7 +494,7 @@ const ICCDSHome = () => {
                                     members: [
                                         { name: 'Dr. C.R. Muthukrishnan', role: 'Advisor, Rajalakshmi Institutions' },
                                         { name: 'Dr. S.N. Murugesan', role: 'Principal, Rajalakshmi Engineering College' },
-                                        { name: 'Dr. S.P. Srinivasan', role: 'Principal, Rajalakshmi Engineering College' },
+                                        { name: 'Dr. S.P. Srinivasan', role: 'Vice Principal, Rajalakshmi Engineering College' },
                                         { name: 'Dr. K. Malathi', role: 'Dean - Academics, Rajalakshmi Engineering College' },
                                         { name: 'Dr. P. Sakthivel', role: 'Chairman, IEEE Madras Section' },
                                         { name: 'Dr. J. Manoranjini', role: 'HOD, Department of CSE, Rajalakshmi Engineering College' },

@@ -23,7 +23,7 @@ const SlideReveal = ({ children, className, delay = 0 }) => {
 };
 
 /* ══════════════════════════════════════════════════════════════════ */
-const ICCDSPublisher = () => {
+const ICCDSPaperSubmission = () => {
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
     const navigate = useNavigate();
@@ -47,7 +47,7 @@ const ICCDSPublisher = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            <h1 className="iccds-reg-page-title">PUBLISHER GUIDELINES</h1>
+                            <h1 className="iccds-reg-page-title">PAPER SUBMISSION GUIDELINES</h1>
                             <p className="iccds-reg-page-sub">3<sup>rd</sup> International Conference on Computing & Data Science (ICCDS-2026)</p>
                         </motion.div>
                     </div>
@@ -139,4 +139,4 @@ const ICCDSPublisher = () => {
     );
 };
 
-export default ICCDSPublisher;
+export default ICCDSPaperSubmission;

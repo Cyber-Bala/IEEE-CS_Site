@@ -55,7 +55,7 @@ const ICCDSNav = () => {
                         {s === 'topics' ? 'Call for Papers' : s === 'speakers' ? 'Speakers' : s.charAt(0).toUpperCase() + s.slice(1)}
                     </button>
                 ))}
-                 <button onClick={() => { setIsMenuOpen(false); navigate('/iccds2026/publisher'); }}>Publisher</button>
+                 <button onClick={() => { setIsMenuOpen(false); navigate('/iccds2026/paper-submission'); }}>Paper Submission</button>
                  <button onClick={() => { setIsMenuOpen(false); window.open('https://ieeexplore.ieee.org/xpl/conhome/10560061/proceeding', '_blank'); }}>Past Editions</button>
                 <button onClick={() => { setIsMenuOpen(false); navigate('/iccds2026/registration'); }} 
                     className={`iccds-hdr-cta ${location.pathname.includes('registration') ? 'active' : ''}`}>

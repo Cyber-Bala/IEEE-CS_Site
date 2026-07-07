@@ -9,7 +9,7 @@ import Registration from './components/Registration';
 import XypherRoutes from './xypher26/XypherRoutes';
 import ICCDSHome from './iccds2026/ICCDSHome';
 import ICCDSRegistration from './iccds2026/ICCDSRegistration';
-import ICCDSPublisher from './iccds2026/ICCDSPublisher';
+import ICCDSPaperSubmission from './iccds2026/ICCDSPaperSubmission';
 import NotFound from './components/NotFound';
 import './App.css';
 
@@ -28,7 +28,7 @@ function App() {
           <Route path="/xypher26/*" element={<XypherRoutes />} />
           <Route path="/iccds2026" element={<ICCDSHome />} />
           <Route path="/iccds2026/registration" element={<ICCDSRegistration />} />
-          <Route path="/iccds2026/publisher" element={<ICCDSPublisher />} />
+          <Route path="/iccds2026/paper-submission" element={<ICCDSPaperSubmission />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
