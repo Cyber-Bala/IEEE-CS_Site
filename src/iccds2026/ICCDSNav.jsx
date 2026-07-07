@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import collegeLogo from '../assets/logo/college.png';
-import ieeeLogo from '../assets/logo/ieee_cs.png';
+import ieeeLogo from '../assets/logo/ieee_logo_b.png';
 
 const ICCDSNav = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -55,8 +55,8 @@ const ICCDSNav = () => {
                         {s === 'topics' ? 'Call for Papers' : s === 'speakers' ? 'Speakers' : s.charAt(0).toUpperCase() + s.slice(1)}
                     </button>
                 ))}
-                <button onClick={() => { setIsMenuOpen(false); navigate('/iccds2026/publisher'); }}>Publisher</button>
-                <button onClick={() => { setIsMenuOpen(false); window.open('https://rajalakshmi.org/iccds2025', '_blank'); }}>Past Editions</button>
+                 <button onClick={() => { setIsMenuOpen(false); navigate('/iccds2026/publisher'); }}>Publisher</button>
+                 <button onClick={() => { setIsMenuOpen(false); window.open('https://ieeexplore.ieee.org/xpl/conhome/10560061/proceeding', '_blank'); }}>Past Editions</button>
                 <button onClick={() => { setIsMenuOpen(false); navigate('/iccds2026/registration'); }} 
                     className={`iccds-hdr-cta ${location.pathname.includes('registration') ? 'active' : ''}`}>
                     Registration
