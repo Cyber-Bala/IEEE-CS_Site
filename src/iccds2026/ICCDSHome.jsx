@@ -461,7 +461,7 @@ const ICCDSHome = () => {
                 <section id="committee" className="iccds-sect iccds-sect-alt">
                     <div className="iccds-container">
                         <SlideReveal>
-                            <h2 className="iccds-sect-title no-line">ORGANIZING COMMITTEE</h2>
+                            <h2 className="iccds-sect-title no-line">COMMITTEE</h2>
                         </SlideReveal>
 
                         <motion.div className="iccds-comm-grid"
@@ -483,10 +483,10 @@ const ICCDSHome = () => {
                                     members: [
                                         { name: 'Dr. C.R. Muthukrishnan', role: 'Advisor, Rajalakshmi Institutions' },
                                         { name: 'Dr. S.N. Murugesan', role: 'Principal, Rajalakshmi Engineering College' },
+                                        { name: 'Dr. S.P. Srinivasan', role: 'Principal, Rajalakshmi Engineering College' },
                                         { name: 'Dr. K. Malathi', role: 'Dean - Academics, Rajalakshmi Engineering College' },
                                         { name: 'Dr. P. Sakthivel', role: 'Chairman, IEEE Madras Section' },
-                                        { name: 'Dr. E.M. Malathy', role: 'HOD, Department of CSE, Rajalakshmi Engineering College' },
-                                        { name: 'Dr. J. Manoranjini', role: 'Deputy HOD, Department of CSE, Rajalakshmi Engineering College' },
+                                        { name: 'Dr. J. Manoranjini', role: 'HOD, Department of CSE, Rajalakshmi Engineering College' },
                                     ]
                                 },
                                 {
@@ -498,8 +498,8 @@ const ICCDSHome = () => {
                                 {
                                     title: 'Coordinators',
                                     members: [
-                                        { name: 'Dr. K. Ananthajothi', role: 'Professor, Department of CSE' },
-                                        { name: 'Dr. N. Duraimurugan', role: 'Associate Professor, Department of CSE' },
+                                        { name: 'Dr. K. Ananthajothi', role: 'Professor, Department of CSE, Rajalakshmi Engineering College' },
+                                        { name: 'Dr. N. Duraimurugan', role: 'Associate Professor, Department of CSE, Rajalakshmi Engineering College' },
                                     ]
                                 },
                             ].map(group => (
@@ -548,8 +548,41 @@ const ICCDSHome = () => {
                     </div>
                 </section>
 
-                {/* ═══ ADVISORY COMMITTEE ═══ */}
+                {/* ═══ ORGANIZING COMMITTEE ═══ */}
                 <section className="iccds-sect iccds-sect-alt">
+                    <div className="iccds-container">
+                        <SlideReveal>
+                            <h2 className="iccds-sect-title no-line">ORGANIZING COMMITTEE</h2>
+                        </SlideReveal>
+                        <div className="iccds-comm-frame">
+                            <div className="iccds-comm-list-grid">
+                                {[
+                                    "Dr. V. Murali Bhaskaran, Professor, Department of CSE, Rajalakshmi Engineering College",
+                                    "Dr. S. Anantha Sivaprakasam, Professor, Department of CSE, Rajalakshmi Engineering College",
+                                    "Dr. N. Srinivasan, Professor, Department of CSE, Rajalakshmi Engineering College",
+                                    "Dr. R. Sabitha, Professor, Department of CSE, Rajalakshmi Engineering College",
+                                    "Dr. P. Muneehswari, Professor, Department of CSE, Rajalakshmi Engineering College",
+                                    "Dr. C Parthasarathy, Professor, Department of CSE, Rajalakshmi Engineering College",
+                                    "Dr. K. Anand, Professor, Department of CSE, Rajalakshmi Engineering College",
+                                    "Dr. Chettiyar Vani Vivekanand, Professor, Department of CSE, Rajalakshmi Engineering College",
+                                    "Dr. E.M. Malathy, Professor, Department of CSE, Rajalakshmi Engineering College"
+                                ].map((name, i) => (
+                                    <motion.div key={i} className="iccds-comm-item-simple"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: i * 0.05 }}
+                                    >
+                                        <div className="iccds-comm-dot" />
+                                        <span>{name}</span>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ═══ ADVISORY COMMITTEE ═══ */}
+                <section className="iccds-sect">
                     <div className="iccds-container">
                         <SlideReveal>
                             <h2 className="iccds-sect-title no-line">ADVISORY COMMITTEE</h2>
@@ -597,7 +630,7 @@ const ICCDSHome = () => {
                 </section>
 
                 {/* ═══ REVIEWERS ═══ */}
-                <section className="iccds-sect">
+                <section className="iccds-sect iccds-sect-alt">
                     <div className="iccds-container">
                         <SlideReveal>
                             <h2 className="iccds-sect-title no-line">REVIEWERS</h2>
