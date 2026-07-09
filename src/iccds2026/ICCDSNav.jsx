@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import collegeLogo from '../assets/logo/college.png';
-import ieeeLogo from '../assets/logo/ieee_logo_b.png';
 
 const ICCDSNav = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -36,11 +35,8 @@ const ICCDSNav = () => {
             <div className="iccds-hdr-left">
                 <img src={collegeLogo} alt="REC" className="iccds-hdr-logo" onClick={() => navigate('/iccds2026')} style={{ cursor: 'pointer' }} />
                 <div className="iccds-hdr-divider" />
-                <img src={ieeeLogo} alt="IEEE CS" className="iccds-hdr-logo" onClick={() => navigate('/iccds2026')} style={{ cursor: 'pointer' }} />
-                <div className="iccds-hdr-divider" />
                 <div className="iccds-hdr-brand" onClick={() => navigate('/iccds2026')} style={{ cursor: 'pointer' }}>
                     <span className="iccds-hdr-brand-name">ICCDS 2026</span>
-                    <span className="iccds-hdr-brand-sub">IEEE Conference</span>
                 </div>
             </div>
 

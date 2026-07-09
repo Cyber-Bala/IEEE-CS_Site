@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import './ICCDS.css';
 import GlassBackground from './GlassBackground';
 import collegeLogo from '../assets/logo/college.png';
-import ieeeLogo from '../assets/logo/ieee_cs.png';
 
 import ICCDSNav from './ICCDSNav';
 
@@ -180,7 +179,6 @@ const ICCDSRegistration = () => {
                             <div className="iccds-footer-brand">
                                 <div className="iccds-footer-logos">
                                     <img src={collegeLogo} alt="REC" />
-                                    <img src={ieeeLogo} alt="IEEE CS" />
                                 </div>
                                 <p className="iccds-footer-tagline">
                                     3<sup>rd</sup> International Conference on Computing and Data Science (ICCDS-2026)

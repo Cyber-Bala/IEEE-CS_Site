@@ -4,7 +4,6 @@ import { Mail, Calendar, MapPin, ExternalLink, ArrowRight, ChevronDown, Award, G
 import './ICCDS.css';
 import GlassBackground from './GlassBackground';
 import collegeLogo from '../assets/logo/college.png';
-import ieeeLogo from '../assets/logo/ieee_logo_b.png';
 import ICCDSNav from './ICCDSNav';
 
 /* ── Keynote Speaker Photos ──────────────────────────────────────── */
@@ -122,8 +121,6 @@ const SplashScreen = ({ onComplete }) => {
                     transition={{ duration: 0.8 }}
                 >
                     <img src={collegeLogo} alt="REC" />
-                    <span className="iccds-splash-x">×</span>
-                    <img src={ieeeLogo} alt="IEEE" />
                 </motion.div>
 
                 <motion.div
@@ -852,7 +849,6 @@ const ICCDSHome = () => {
                             <div className="iccds-footer-brand">
                                 <div className="iccds-footer-logos">
                                     <img src={collegeLogo} alt="REC" />
-                                    <img src={ieeeLogo} alt="IEEE CS" />
                                 </div>
                                 <p className="iccds-footer-tagline">
                                     3<sup>rd</sup> International Conference on Computing and Data Science (ICCDS-2026)

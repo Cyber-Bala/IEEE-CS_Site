@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import './ICCDS.css';
 import GlassBackground from './GlassBackground';
 import collegeLogo from '../assets/logo/college.png';
-import ieeeLogo from '../assets/logo/ieee_cs.png';
 
 import ICCDSNav from './ICCDSNav';
 
@@ -47,7 +46,7 @@ const ICCDSPaperSubmission = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            <h1 className="iccds-reg-page-title">PAPER SUBMISSION GUIDELINES</h1>
+                            <h1 className="iccds-reg-page-title">PAPER SUBMISSION</h1>
                             <p className="iccds-reg-page-sub">3<sup>rd</sup> International Conference on Computing & Data Science (ICCDS-2026)</p>
                         </motion.div>
                     </div>
@@ -112,7 +111,6 @@ const ICCDSPaperSubmission = () => {
                             <div className="iccds-footer-brand">
                                 <div className="iccds-footer-logos">
                                     <img src={collegeLogo} alt="REC" />
-                                    <img src={ieeeLogo} alt="IEEE CS" />
                                 </div>
                                 <p className="iccds-footer-tagline">
                                     3<sup>rd</sup> International Conference on Computing and Data Science (ICCDS-2026)
