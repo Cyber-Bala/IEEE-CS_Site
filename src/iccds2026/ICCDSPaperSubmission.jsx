@@ -88,7 +88,7 @@ const ICCDSPaperSubmission = () => {
                                         <li>Any form of self-plagiarism or plagiarism from others' work(s) should not be there in the article.</li>
                                         <li>If any model / concept / figure / table / data / conclusive comment by any previously published work is used in your article, you should properly cite a reference to the original work.</li>
                                     </ul>
-                                    <p className="iccds-guideline-contact">All questions about submissions can be sent as mail to : <a href="mailto:iccds25@rajalakshmi.edu.in">iccds25@rajalakshmi.edu.in</a></p>
+                                    <p className="iccds-guideline-contact">All questions about submissions can be sent as mail to : <a href="mailto:iccds2026@rajalakshmi.edu.in">iccds2026@rajalakshmi.edu.in</a></p>
                                 </div>
                             </SlideReveal>
 
@@ -123,7 +123,7 @@ const ICCDSPaperSubmission = () => {
                                 </div>
                                 <div className="iccds-footer-col">
                                     <h6>Contact</h6>
-                                    <p>Dr. N. Duraimurugan — 9944915267<br />Dr. K. Ananthajothi — 9994075769<br />iccds@rajalakshmi.edu.in</p>
+                                    <p>Dr. N. Duraimurugan — 9944915267<br />Dr. K. Ananthajothi — 9994075769<br />iccds2026@rajalakshmi.edu.in</p>
                                 </div>
                             </div>
                         </div>

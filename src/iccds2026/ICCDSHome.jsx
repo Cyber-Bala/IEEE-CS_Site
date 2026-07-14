@@ -21,6 +21,7 @@ import photoGeorge from './photo/George Ghinea.jpg';
 import photoJey from './photo/Jeyakesavan.png';
 import photoDivyanshi from './photo/Divyanshi Kothari.jfif';
 import photoVinod from './photo/Vinod Balachandran.jfif';
+import iccds_mascot from './photo/iccds_mascot.png';
 
 /* ── Word Blur Reveal ────────────────────────────────────────────── */
 const BlurReveal = ({ text, className, delay = 0 }) => {
@@ -231,7 +232,7 @@ const ICCDSHome = () => {
                             (ICCDS-2026)
                         </motion.div>
 
-                        <motion.div 
+                        <motion.div
                             className="iccds-hero-organizer"
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -315,6 +316,22 @@ const ICCDSHome = () => {
 
 
                     {/* ═══ COUNTDOWN ═══ */}
+
+                    {/* Floating Mascot — bottom-right */}
+                    <motion.div
+                        className="iccds-hero-mascot"
+                        initial={{ opacity: 0, x: 40 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, delay: 1.2, ease }}
+                    >
+                        <motion.img
+                            src={iccds_mascot}
+                            alt="ICCDS-2026 Mascot"
+                            className="iccds-hero-mascot-img"
+                            animate={{ y: [0, -12, 0] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                        />
+                    </motion.div>
                 </section>
                 <section className="iccds-stats">
                     <div className="iccds-container iccds-stats-inner">
@@ -332,7 +349,7 @@ const ICCDSHome = () => {
                         <div className="iccds-about-frame-wrapper">
                             <div className="iccds-about-tabs">
                                 {['Conference', 'College', 'Department'].map((tab, idx) => (
-                                    <button 
+                                    <button
                                         key={tab}
                                         className={`iccds-about-tab ${activeAboutTab === idx ? 'active' : ''}`}
                                         onClick={() => setActiveAboutTab(idx)}
@@ -581,8 +598,7 @@ const ICCDSHome = () => {
                                     "Dr. P. Muneehswari, Professor, Department of CSE, Rajalakshmi Engineering College",
                                     "Dr. C Parthasarathy, Professor, Department of CSE, Rajalakshmi Engineering College",
                                     "Dr. K. Anand, Professor, Department of CSE, Rajalakshmi Engineering College",
-                                    "Dr. Chettiyar Vani Vivekanand, Professor, Department of CSE, Rajalakshmi Engineering College",
-                                    "Dr. E.M. Malathy, Professor, Department of CSE, Rajalakshmi Engineering College"
+                                    "Dr. Chettiyar Vani Vivekanand, Professor, Department of CSE, Rajalakshmi Engineering College"
                                 ].map((name, i) => (
                                     <motion.div key={i} className="iccds-comm-item-simple"
                                         initial={{ opacity: 0, y: 10 }}
@@ -712,7 +728,6 @@ const ICCDSHome = () => {
                                         "Dr. P. Gururama Senthilvel, Saveetha School of Engineering, Chennai",
                                         "Dr. R. Venkatesan, Karunya Institute of Science and Technology, Coimbatore",
                                         "Dr. M. Subramaniam, Chaitanya Bharathi Institute of Technology, Hyderabad",
-                                        "Dr. D. Divya, Jerusalem College of Engineering, Chennai",
                                         "Dr. S. Meera, Vels Institute Science and Technology, Chennai",
                                         "Dr. S. Saravanan, Saveetha School of Engineering, Chennai",
                                         "Dr. S. Udayakumar, Amrita Vishwa Vidyapeetham, Chennai",
@@ -735,7 +750,6 @@ const ICCDSHome = () => {
                                         "Dr. P V Gopirajan, SRM Institute of Science & Technology, Chennai",
                                         "Dr. A. Pandiyaraj, SRM Institute of Science & Technology, Chennai",
                                         "Dr. R. Thiagarajan, Prathyusha Engineering College",
-                                        "Dr. A. Senthilselvi, SRM Institute of Science & Technology, Ramapuram",
                                         "Dr. C. Sivasankar, Saveetha Institute of Medical and Technical Sciences",
                                         "Dr. T.R. Ganesh Babu, Muthayammal Engineering College, Namakkal",
                                         "Dr. P. Valarmathie, RMK College of Engineering and Technology",
@@ -826,7 +840,7 @@ const ICCDSHome = () => {
                                             <p className="iccds-speaker-org-tag">{speaker.org}</p>
                                         </div>
                                     </div>
-                                    
+
                                     <div className="iccds-speaker-hover-reveal">
                                         <div className="iccds-speaker-reveal-inner">
                                             <span className="iccds-reveal-label">Expertise</span>
@@ -861,7 +875,7 @@ const ICCDSHome = () => {
                                 </div>
                                 <div className="iccds-footer-col">
                                     <h6>Contact</h6>
-                                    <p>Dr. N. Duraimurugan — 9944915267<br />Dr. K. Ananthajothi — 9994075769<br />iccds@rajalakshmi.edu.in</p>
+                                    <p>Dr. N. Duraimurugan — 9944915267<br />Dr. K. Ananthajothi — 9994075769<br />iccds2026@rajalakshmi.edu.in</p>
                                 </div>
                             </div>
                         </div>

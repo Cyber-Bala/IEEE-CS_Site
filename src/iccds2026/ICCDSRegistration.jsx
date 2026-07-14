@@ -57,85 +57,85 @@ const ICCDSRegistration = () => {
                 {/* ═══ REGISTRATION FEE ═══ */}
                 <section className="iccds-sect">
                     <div className="iccds-container">
-                                <SlideReveal>
-                                    <div className="iccds-reg-fee-block">
-                                        <h3 className="iccds-reg-subtitle">Registration Fee</h3>
-                                        <div className="iccds-reg-table-wrap">
-                                            <table className="iccds-reg-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th className="iccds-reg-th-highlight">Indian Author</th>
-                                                        <th className="iccds-reg-th-highlight">Foreign Author</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td rowSpan={3} className="iccds-reg-category">IEEE Member</td>
-                                                        <td>Student</td>
-                                                        <td>INR 8,500</td>
-                                                        <td>USD 175</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Academic / Industry</td>
-                                                        <td>INR 9,000</td>
-                                                        <td>USD 200</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Listener</td>
-                                                        <td>INR 2,000</td>
-                                                        <td>USD 85</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td rowSpan={3} className="iccds-reg-category iccds-reg-category-alt">Non-IEEE Member</td>
-                                                        <td>Student</td>
-                                                        <td>INR 9,000</td>
-                                                        <td>USD 200</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Academic / Industry</td>
-                                                        <td>INR 9,500</td>
-                                                        <td>USD 225</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Listener</td>
-                                                        <td>INR 2,500</td>
-                                                        <td>USD 100</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <p className="iccds-reg-note">⚠ Note: Registration amount for not presented papers will not be refunded strictly.</p>
-                                    </div>
-                                </SlideReveal>
-
-                        <div className="iccds-reg-info-grid">
-                        {/* ═══ COPYRIGHT & CRC ═══ */}
-                        <SlideReveal delay={0.1}>
-                            <div className="iccds-guideline-block" style={{ height: '100%' }}>
-                                <div className="iccds-guideline-icon"><Shield size={24} /></div>
-                                <h3>Copyright Form</h3>
-                                <ul className="iccds-guideline-list">
-                                    <li>Each paper registration must be accompanied by an IEEE copyright form. This will ensure the widest possible protection and dissemination of information under copyright laws</li>
-                                    <li>One author may sign on behalf of all of the authors of a particular paper. In this case, the author signs and accepts responsibility for releasing the material on behalf of any and all co-authors</li>
-                                    <li>Modified forms are not acceptable</li>
-                                    <li>The Title of the Contribution (i.e., paper title) and the List of Authors should exactly match the title and the list of authors of the paper</li>
-                                </ul>
+                        <SlideReveal>
+                            <div className="iccds-reg-fee-block">
+                                <h3 className="iccds-reg-subtitle">Registration Fee</h3>
+                                <div className="iccds-reg-table-wrap">
+                                    <table className="iccds-reg-table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th className="iccds-reg-th-highlight">Indian Author</th>
+                                                <th className="iccds-reg-th-highlight">Foreign Author</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowSpan={3} className="iccds-reg-category">IEEE Member</td>
+                                                <td>Student</td>
+                                                <td>INR 8,500</td>
+                                                <td>USD 175</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Academic / Industry</td>
+                                                <td>INR 9,000</td>
+                                                <td>USD 200</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Listener</td>
+                                                <td>INR 2,000</td>
+                                                <td>USD 85</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowSpan={3} className="iccds-reg-category iccds-reg-category-alt">Non-IEEE Member</td>
+                                                <td>Student</td>
+                                                <td>INR 9,000</td>
+                                                <td>USD 200</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Academic / Industry</td>
+                                                <td>INR 9,500</td>
+                                                <td>USD 225</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Listener</td>
+                                                <td>INR 2,500</td>
+                                                <td>USD 100</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p className="iccds-reg-note">⚠ Note: Registration amount for not presented papers will not be refunded strictly.</p>
                             </div>
                         </SlideReveal>
 
-                                {/* Bank Details */}
-                                <SlideReveal>
-                            <div className="iccds-reg-bank" style={{ height: '100%' }}>
-                                <h3 className="iccds-reg-subtitle">Bank Account Details</h3>
-                                
-                                <div style={{ padding: '40px 0', textAlign: 'center' }}>
-                                    <h4 style={{ color: 'var(--purple)', fontFamily: 'Outfit, sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Registration Will Open Soon</h4>
-                                    <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>Please check back later for bank account details and payment forms.</p>
+                        <div className="iccds-reg-info-grid">
+                            {/* ═══ COPYRIGHT & CRC ═══ */}
+                            <SlideReveal delay={0.1}>
+                                <div className="iccds-guideline-block" style={{ height: '100%' }}>
+                                    <div className="iccds-guideline-icon"><Shield size={24} /></div>
+                                    <h3>Copyright Form</h3>
+                                    <ul className="iccds-guideline-list">
+                                        <li>Each paper registration must be accompanied by an IEEE copyright form. This will ensure the widest possible protection and dissemination of information under copyright laws</li>
+                                        <li>One author may sign on behalf of all of the authors of a particular paper. In this case, the author signs and accepts responsibility for releasing the material on behalf of any and all co-authors</li>
+                                        <li>Modified forms are not acceptable</li>
+                                        <li>The Title of the Contribution (i.e., paper title) and the List of Authors should exactly match the title and the list of authors of the paper</li>
+                                    </ul>
                                 </div>
+                            </SlideReveal>
 
-                                {/* HIDING UNTIL REGISTRATION OPENS
+                            {/* Bank Details */}
+                            <SlideReveal>
+                                <div className="iccds-reg-bank" style={{ height: '100%' }}>
+                                    <h3 className="iccds-reg-subtitle">Bank Account Details</h3>
+
+                                    <div style={{ padding: '40px 0', textAlign: 'center' }}>
+                                        <h4 style={{ color: 'var(--purple)', fontFamily: 'Outfit, sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Registration Will Open Soon</h4>
+                                        <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>Please check back later for bank account details and payment forms.</p>
+                                    </div>
+
+                                    {/* HIDING UNTIL REGISTRATION OPENS
                                 <div className="iccds-bank-grid">
                                     {[
                                         { label: 'Account Name', value: 'REC-IEEE STUDENT' },
@@ -155,19 +155,19 @@ const ICCDSRegistration = () => {
                                     <a href="https://forms.gle/oUKEL2CpTkm4NqL68" target="_blank" rel="noopener noreferrer">Click here to fill the form</a>
                                 </p>
                                 */}
-                            </div>
-                        </SlideReveal>
+                                </div>
+                            </SlideReveal>
 
-                        <SlideReveal delay={0.1}>
-                            <div className="iccds-guideline-block" style={{ height: '100%' }}>
-                                <div className="iccds-guideline-icon"><FileText size={24} /></div>
-                                <h3>Camera Ready Copy (CRC)</h3>
-                                <ul className="iccds-guideline-list">
-                                    <li>Camera Ready papers shall have a maximum length of 8 pages for regular papers.</li>
-                                    <li>All authors need to follow the IEEE format for the CRC preparation of their papers. The CRC should be submitted both in .doc/.docx and PDF. If your CRC of the paper is not as per the guidelines prescribed by IEEE, then it will not be considered for publishing in IEEE Digital Xplore.</li>
-                                </ul>
-                            </div>
-                        </SlideReveal>
+                            <SlideReveal delay={0.1}>
+                                <div className="iccds-guideline-block" style={{ height: '100%' }}>
+                                    <div className="iccds-guideline-icon"><FileText size={24} /></div>
+                                    <h3>Camera Ready Copy (CRC)</h3>
+                                    <ul className="iccds-guideline-list">
+                                        <li>Camera Ready papers shall have a maximum length of 8 pages for regular papers.</li>
+                                        <li>All authors need to follow the IEEE format for the CRC preparation of their papers. The CRC should be submitted both in .doc/.docx and PDF. If your CRC of the paper is not as per the guidelines prescribed by IEEE, then it will not be considered for publishing in IEEE Digital Xplore.</li>
+                                    </ul>
+                                </div>
+                            </SlideReveal>
                         </div>
                     </div>
                 </section>
@@ -191,7 +191,7 @@ const ICCDSRegistration = () => {
                                 </div>
                                 <div className="iccds-footer-col">
                                     <h6>Contact</h6>
-                                    <p>Dr. N. Duraimurugan — 9944915267<br />Dr. K. Ananthajothi — 9994075769<br />iccds@rajalakshmi.edu.in</p>
+                                    <p>Dr. N. Duraimurugan — 9944915267<br />Dr. K. Ananthajothi — 9994075769<br />iccds2026@rajalakshmi.edu.in</p>
                                 </div>
                             </div>
                         </div>
