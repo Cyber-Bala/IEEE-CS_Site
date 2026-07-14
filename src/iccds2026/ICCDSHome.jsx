@@ -722,7 +722,7 @@ const ICCDSHome = () => {
                                     {[
                                         "Dr. B. Surendiran, National Institute of Technology, Puducherry",
                                         "Dr. M. Sivabalakrishnan, Vellore Institute of Technology, Chennai",
-                                        "Dr. S.P. Chokkalingam, Amrita Vishwa Vidyapeetham, Chennai",
+                                        "Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology",
                                         "Dr. S.N. Sangeetha, Bannari Amman Institute of Technology, Erode",
                                         "Dr. M. Mohamed Iqbal, Vellore Institute of Technology, Amaravathi",
                                         "Dr. P. Gururama Senthilvel, Saveetha School of Engineering, Chennai",

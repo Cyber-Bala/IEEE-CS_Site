@@ -1822,7 +1822,8 @@ html {
     .iccds-steps { grid-template-columns: 1fr; }
     .iccds-hero-title-lg { font-size: clamp(2.5rem, 10vw, 4rem); letter-spacing: -2px; }
     .iccds-hero-title { font-size: clamp(2.5rem, 10vw, 4rem); letter-spacing: -2px; }
-    .iccds-hero-mascot { display: none; }
+    .iccds-hero-mascot { bottom: 8px; right: 8px; opacity: 0.85; }
+    .iccds-hero-mascot-img { width: 75px; height: 75px; }
     .iccds-keynote-grid { grid-template-columns: 1fr; }
     .iccds-countdown { gap: 4px; }
     .iccds-countdown-val { font-size: 1.25rem; }
