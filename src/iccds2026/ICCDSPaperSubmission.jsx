@@ -65,7 +65,7 @@ const ICCDSPaperSubmission = () => {
                                     <p>Kindly ensure that your paper is formatted as per Template (not exceeding 6 pages) single-spaced double-column pages using 10-point size font on 8.5×11 inch pages (IEEE conference style), including authors' affiliations, figures, tables, and references. Additional pages per paper above the 6 pages limit will be charged.</p>
                                     <div className="iccds-guideline-links">
                                         <a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener noreferrer" className="iccds-guide-link"><ExternalLink size={14} /> Paper Template</a>
-                                        <a href="https://cmt3.research.microsoft.com/ICCDS2025" target="_blank" rel="noopener noreferrer" className="iccds-guide-link"><ExternalLink size={14} /> Paper Submission Portal</a>
+                                        <a href="https://cmt3.research.microsoft.com/ICCDS2026/Submission/Index" target="_blank" rel="noopener noreferrer" className="iccds-guide-link"><ExternalLink size={14} /> Paper Submission Portal</a>
                                     </div>
                                     <p>All submissions will undergo a double-blind peer review by the team of peer reviewers based on originality, relevance to the conference theme, technical strength, significance, quality of results, and organization and clarity of presentation of the paper.</p>
                                 </div>
