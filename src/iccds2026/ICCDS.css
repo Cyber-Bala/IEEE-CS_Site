@@ -210,6 +210,80 @@ html {
 }
 .iccds-hdr-cta:hover { background: var(--purple-deep) !important; transform: translateY(-1px); }
 
+/* ═══ PAST EDITIONS DROPDOWN ═══ */
+.iccds-dropdown {
+    position: relative;
+    display: inline-flex;
+}
+
+.iccds-dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-family: 'Outfit';
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.iccds-dropdown-trigger:hover { color: var(--purple); }
+
+.iccds-dropdown-chevron {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.iccds-dropdown-chevron.open {
+    transform: rotate(180deg);
+}
+
+.iccds-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    min-width: 180px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: 0 12px 40px rgba(124, 58, 237, 0.12), 0 4px 12px rgba(0,0,0,0.04);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 200;
+}
+
+.iccds-dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+}
+
+.iccds-dropdown-item {
+    display: block;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.iccds-dropdown-item:hover {
+    background: var(--purple);
+    color: #fff;
+    transform: translateX(2px);
+}
+
 .iccds-hdr-cta-soon:hover { transform: none !important; }
 
 /* â•â•â• MOBILE TOGGLE â•â•â• */
@@ -1787,6 +1861,43 @@ html {
     .iccds-hdr-nav button {
         font-size: 1.6rem !important; font-weight: 700 !important;
         color: var(--text) !important;
+    }
+
+    .iccds-dropdown { flex-direction: column; align-items: center; }
+    .iccds-dropdown-trigger {
+        font-size: 1.6rem !important; font-weight: 700 !important;
+        color: var(--text) !important;
+    }
+    .iccds-dropdown-menu {
+        position: static;
+        transform: none;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        pointer-events: none;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        backdrop-filter: none;
+        padding: 0;
+        margin-top: 0;
+        transition: all 0.3s ease;
+    }
+    .iccds-dropdown-menu.show {
+        opacity: 1;
+        max-height: 200px;
+        visibility: visible;
+        pointer-events: all;
+        transform: none;
+        padding: 8px 0;
+        margin-top: 4px;
+    }
+    .iccds-dropdown-item {
+        font-size: 1.1rem;
+        text-align: center;
+        padding: 8px 20px;
+        color: var(--purple);
     }
 
     .iccds-hdr-cta {
