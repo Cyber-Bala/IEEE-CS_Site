@@ -443,7 +443,7 @@ const ICCDSHome = () => {
 
                         <div className="iccds-timeline-wrapper">
                             {[
-                                { step: '01', date: '<s>Aug 10</s>Aug 15', label: 'Full Paper Submission', icon: <Mail size={22} /> },
+                                { step: '01', date: 'Aug 10', label: 'Full Paper Submission', icon: <Mail size={22} /> },
                                 { step: '02', date: 'Sept 1', label: 'Acceptance Notification', icon: <Award size={22} /> },
                                 { step: '03', date: 'Sept 20', label: 'Registration Closes', icon: <Users size={22} /> },
                                 { step: '04', date: 'Sept 20', label: 'Final Camera Ready Paper Submission', icon: <FileText size={22} /> },
