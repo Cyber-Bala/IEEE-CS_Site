@@ -131,7 +131,7 @@ const ICCDSRegistration = () => {
                                     <h3 className="iccds-reg-subtitle">Bank Account Details</h3>
 
                                     <div style={{ padding: '40px 0', textAlign: 'center' }}>
-                                        <h4 style={{ color: 'var(--purple)', fontFamily: 'Outfit, sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Registration Will Open Soon</h4>
+                                        <h4 style={{ color: 'var(--purple)', fontFamily: 'Outfit, sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Registration Will Open After Acceptance</h4>
                                         <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>Please check back later for bank account details and payment forms.</p>
                                     </div>
 
