@@ -189,8 +189,8 @@
     max-width: 100%;
     /* allow it to stretch fully so text aligns with navbar */
     min-height: 100vh;
-    padding: calc(var(--navbar-height, 78px) + 20px) 80px 0 80px;
-    /* top padding clears the navbar, sides match navbar alignment */
+    padding: var(--navbar-height, 78px) 80px 0 80px;
+    /* top padding clears the navbar, align-items:center handles vertical centering */
     gap: 0;
     margin-top: 0;
 }
