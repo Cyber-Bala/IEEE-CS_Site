@@ -990,7 +990,7 @@
 /* Top-Left Back Button */
 .countdown-top-left-back {
   position: absolute;
-  top: 30px;
+  top: 90px;
   left: 40px;
   z-index: 1010;
   display: inline-flex;
@@ -1219,6 +1219,13 @@
 }
 
 @media (max-width: 600px) {
+  .countdown-top-left-back {
+    top: 82px;
+    left: 16px;
+    padding: 8px 14px;
+    font-size: 0.78rem;
+    gap: 6px;
+  }
   .countdown-content {
     padding: 36px 20px;
   }
