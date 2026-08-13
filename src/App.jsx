@@ -9,6 +9,7 @@ import Registration from './components/Registration';
 import ICCDSHome from './iccds2026/ICCDSHome';
 import ICCDSRegistration from './iccds2026/ICCDSRegistration';
 import ICCDSPaperSubmission from './iccds2026/ICCDSPaperSubmission';
+import MemberReveal from './components/MemberReveal';
 import NotFound from './components/NotFound';
 import './App.css';
 
@@ -21,6 +22,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/events" element={<EventGallery />} />
           {/* <Route path="/team" element={<Team />} /> */}
+          <Route path="/reveal" element={<MemberReveal />} />
+          <Route path="/new-team" element={<MemberReveal />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/creators" element={<Creators />} />
           <Route path="/register" element={<Registration />} />
