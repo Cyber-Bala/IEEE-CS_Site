@@ -77,7 +77,7 @@ export const DOMAIN_MEMBERS = {
     { name: 'Vishal S', rollNo: '240701600', dept: 'Computer Science & Engineering' }
   ],
   'R&D': [
-    { name: 'Ashvinth B', rollNo: '250401126', dept: 'Biotechnology' },
+    { name: 'Ashvinth B', rollNo: '250801045', dept: 'Electronics & Communication Engineering' },
     { name: 'Rohit Sriram', rollNo: '251501190', dept: 'Artificial Intelligence & Machine Learning' },
     { name: 'Mathavan N', rollNo: '250701417', dept: 'Computer Science & Engineering' },
     { name: 'Kaviya B', rollNo: '250801082', dept: 'Electronics & Communication Engineering' },
