@@ -6,11 +6,11 @@ import Team from './components/Team';
 import Contact from './components/Contact';
 import Creators from './components/Creators';
 import Registration from './components/Registration';
-import XypherRoutes from './xypher26/XypherRoutes';
 import ICCDSHome from './iccds2026/ICCDSHome';
 import ICCDSRegistration from './iccds2026/ICCDSRegistration';
 import ICCDSRegistrationForm from './iccds2026/ICCDSRegistrationForm';
 import ICCDSPaperSubmission from './iccds2026/ICCDSPaperSubmission';
+import MemberReveal from './components/MemberReveal';
 import NotFound from './components/NotFound';
 import './App.css';
 
@@ -22,11 +22,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/events" element={<EventGallery />} />
-          <Route path="/team" element={<Team />} />
+          {/* <Route path="/team" element={<Team />} /> */}
+          <Route path="/reveal" element={<MemberReveal />} />
+          <Route path="/new-team" element={<MemberReveal />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/creators" element={<Creators />} />
           <Route path="/register" element={<Registration />} />
-          <Route path="/xypher26/*" element={<XypherRoutes />} />
           <Route path="/iccds2026" element={<ICCDSHome />} />
           <Route path="/iccds2026/registration" element={<ICCDSRegistration />} />
           <Route path="/iccds2026/registration/form" element={<ICCDSRegistrationForm />} />
