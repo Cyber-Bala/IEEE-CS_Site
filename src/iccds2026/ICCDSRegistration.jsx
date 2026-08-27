@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useScroll, useSpring, useInView } from 'framer-motion';
-import { ExternalLink, Shield, FileText, ArrowLeft } from 'lucide-react';
+import { ExternalLink, Shield, FileText, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './ICCDS.css';
 import GlassBackground from './GlassBackground';
@@ -131,8 +131,15 @@ const ICCDSRegistration = () => {
                                     <h3 className="iccds-reg-subtitle">Bank Account Details</h3>
 
                                     <div style={{ padding: '40px 0', textAlign: 'center' }}>
-                                        <h4 style={{ color: 'var(--purple)', fontFamily: 'Outfit, sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Registration Will Open After Acceptance</h4>
-                                        <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>Please check back later for bank account details and payment forms.</p>
+                                        <h4 style={{ color: 'var(--purple)', fontFamily: 'Outfit, sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Registration is Open!</h4>
+                                        <p style={{ color: 'var(--text-secondary)', marginTop: '8px', marginBottom: '24px' }}>Please proceed to the online registration form to complete your registration and payment.</p>
+                                        <button 
+                                            className="iccds-rf-btn primary" 
+                                            onClick={() => navigate('/iccds2026/registration/form')}
+                                            style={{ margin: '0 auto' }}
+                                        >
+                                            Proceed to Registration Form <ArrowRight size={18} />
+                                        </button>
                                     </div>
 
                                     {/* HIDING UNTIL REGISTRATION OPENS
