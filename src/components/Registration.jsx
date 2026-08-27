@@ -108,7 +108,11 @@ export default function Registration() {
         }),
       });
 
-      const data = await response.json();
+      const contentType = response.headers.get("content-type");
+      let data = null;
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      }
 
       if (response.ok) {
         setResult(data);
@@ -127,7 +131,7 @@ export default function Registration() {
         setSelectedEvent(null);
         setRegistrationType('individual');
       } else {
-        setError(data.error || 'Registration failed');
+        setError((data && data.error) || `Registration failed (Status: ${response.status}). Please try again or contact the administrator.`);
       }
     } catch (err) {
       setError('Network error: ' + err.message);

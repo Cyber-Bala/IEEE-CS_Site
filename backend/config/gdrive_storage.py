@@ -35,8 +35,19 @@ class GoogleDriveStorage(Storage):
             scopes = ['https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive.metadata.readonly']
             credentials = service_account.Credentials.from_service_account_info(creds_info, scopes=scopes)
             self.service = build('drive', 'v3', credentials=credentials, cache_discovery=False)
+            
+            # Verify folder access during startup
+            try:
+                self.service.files().get(fileId=self.folder_id, fields='id').execute()
+            except Exception as e:
+                import logging
+                logging.error(f"Google Drive configuration error: Cannot access folder {self.folder_id}. Please verify Service Account permissions.")
+                raise ImproperlyConfigured("The configured Google Drive folder is inaccessible. Check permissions.") from e
+                
+        except ImproperlyConfigured:
+            raise
         except Exception as e:
-            raise ImproperlyConfigured(f"Failed to initialize Google Drive service: {e}")
+            raise ImproperlyConfigured(f"Failed to initialize Google Drive service. Check GOOGLE_SERVICE_ACCOUNT_JSON. Error: {e}")
 
     def _find_file_by_name(self, name):
         """Helper to find a file in the Drive folder by its Django name."""
@@ -74,7 +85,12 @@ class GoogleDriveStorage(Storage):
 
         # content is a django.core.files.File object
         content.open('rb')
-        media = MediaIoBaseUpload(content, mimetype=getattr(content, 'content_type', 'application/octet-stream'), resumable=True)
+        
+        # Google API expects the raw file descriptor. Django's UploadedFile wraps it.
+        # InMemoryUploadedFile uses BytesIO, which lacks fileno(), causing resumable=True to crash.
+        fd = content.file if hasattr(content, 'file') else content
+        mime_type = getattr(content, 'content_type', 'application/octet-stream')
+        media = MediaIoBaseUpload(fd, mimetype=mime_type, resumable=False)
 
         try:
             file = self.service.files().create(
