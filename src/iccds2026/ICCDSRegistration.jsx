@@ -66,8 +66,8 @@ const ICCDSRegistration = () => {
                                             <tr>
                                                 <th></th>
                                                 <th></th>
-                                                <th className="iccds-reg-th-highlight">Indian Author</th>
-                                                <th className="iccds-reg-th-highlight">Foreign Author</th>
+                                                <th className="iccds-reg-th-highlight">Indian Delegates / Authors</th>
+                                                <th className="iccds-reg-th-highlight">Foreign Delegates / Authors</th>
                                             </tr>
                                         </thead>
                                         <tbody>

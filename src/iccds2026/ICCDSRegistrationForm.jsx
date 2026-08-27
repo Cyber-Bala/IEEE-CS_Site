@@ -14,10 +14,16 @@ import collegeLogo from '../assets/logo/college.png';
 /* ─── Constants ──────────────────────────────────────────────────── */
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
 
-const STEPS = [
+const AUTHOR_STEPS = [
     { id: 1, label: 'Personal Info', icon: User },
     { id: 2, label: 'Team Members', icon: Users },
     { id: 3, label: 'Paper & Files', icon: FileText },
+    { id: 4, label: 'Review & Pay', icon: CreditCard },
+    { id: 5, label: 'Confirmation', icon: CheckCircle2 },
+];
+
+const LISTENER_STEPS = [
+    { id: 1, label: 'Personal Info', icon: User },
     { id: 4, label: 'Review & Pay', icon: CreditCard },
     { id: 5, label: 'Confirmation', icon: CheckCircle2 },
 ];
@@ -31,11 +37,11 @@ const HONORIFIC_OPTIONS = [
 ];
 
 const FEE_SCHEDULE = {
-    ieee_student:      { INR: 8500, USD: 175, label: 'IEEE Member - Student' },
-    ieee_academic:     { INR: 9000, USD: 200, label: 'IEEE Member - Academic / Industry' },
+    ieee_student:      { INR: 8500, USD: 175, label: 'IEEE Member - Student Author' },
+    ieee_academic:     { INR: 9000, USD: 200, label: 'IEEE Member - Academic / Industry Author' },
     ieee_listener:     { INR: 2000, USD: 85,  label: 'IEEE Member - Listener' },
-    non_ieee_student:  { INR: 9000, USD: 200, label: 'Non-IEEE Member - Student' },
-    non_ieee_academic: { INR: 9500, USD: 225, label: 'Non-IEEE Member - Academic / Industry' },
+    non_ieee_student:  { INR: 9000, USD: 200, label: 'Non-IEEE Member - Student Author' },
+    non_ieee_academic: { INR: 9500, USD: 225, label: 'Non-IEEE Member - Academic / Industry Author' },
     non_ieee_listener: { INR: 2500, USD: 100, label: 'Non-IEEE Member - Listener' },
 };
 
@@ -125,10 +131,13 @@ const FileDropZone = ({ id, label, accept, required, file, onFile, hint }) => {
 /* ═══════════════════════════════════════════════════════════════════ */
 /*                    MAIN REGISTRATION COMPONENT                     */
 /* ═══════════════════════════════════════════════════════════════════ */
-const ROLE_TYPES = [
-    { value: 'student',  label: 'Student',            icon: '🎓' },
-    { value: 'academic', label: 'Academic / Industry', icon: '🏛️' },
-    { value: 'listener', label: 'Listener',            icon: '🎧' },
+const AUTHOR_ROLE_TYPES = [
+    { value: 'student',  label: 'Student Author',            icon: '🎓' },
+    { value: 'academic', label: 'Academic / Industry Author', icon: '🏛️' },
+];
+
+const LISTENER_ROLE_TYPES = [
+    { value: 'listener', label: 'Listener (Attendee)',       icon: '🎧' },
 ];
 
 const ICCDSRegistrationForm = () => {
@@ -246,6 +255,9 @@ const ICCDSRegistrationForm = () => {
         setTimeout(() => setCopiedField(null), 2000);
     };
 
+    const isListenerFlow = roleType === 'listener' || isListener(form.category);
+    const activeSteps = isListenerFlow ? LISTENER_STEPS : AUTHOR_STEPS;
+
     /* ── Paper ID Verification (Step 0) ── */
     const handleVerifyPaper = async () => {
         const trimmed = verifyPaperId.trim();
@@ -265,6 +277,9 @@ const ICCDSRegistrationForm = () => {
             if (data.success) {
                 setPaperVerified(true);
                 setPaper(prev => ({ ...prev, paper_id: trimmed }));
+                if (!roleType || roleType === 'listener') {
+                    setRoleType('student');
+                }
                 setDirection(1);
                 setCurrentStep(1);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -281,6 +296,7 @@ const ICCDSRegistrationForm = () => {
     const handleListenerSkip = () => {
         setPaperVerified(false);
         setRoleType('listener');
+        setPaper({ paper_id: '', paper_title: '', paper_abstract: '' });
         setDirection(1);
         setCurrentStep(1);
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -305,6 +321,7 @@ const ICCDSRegistrationForm = () => {
     };
 
     const validateStep2 = () => {
+        if (isListenerFlow) return true;
         const errs = {};
         // Validate each team member that has any data filled in
         teamMembers.forEach((member, i) => {
@@ -321,7 +338,7 @@ const ICCDSRegistrationForm = () => {
     };
 
     const validateStep3 = () => {
-        if (isListener(form.category)) return true;
+        if (isListenerFlow) return true;
         const errs = {};
         if (!paper.paper_id.trim()) errs.paper_id = 'Paper ID is required';
         if (!paper.paper_title.trim()) errs.paper_title = 'Paper title is required';
@@ -338,13 +355,21 @@ const ICCDSRegistrationForm = () => {
         if (currentStep === 2 && !validateStep2()) return;
         if (currentStep === 3 && !validateStep3()) return;
         setDirection(1);
-        setCurrentStep(prev => Math.min(prev + 1, 5));
+        if (currentStep === 1 && isListenerFlow) {
+            setCurrentStep(4); // Directly skip to review & pay for listener
+        } else {
+            setCurrentStep(prev => Math.min(prev + 1, 5));
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const goBack = () => {
         setDirection(-1);
-        setCurrentStep(prev => Math.max(prev - 1, 1)); // Don't go back to Step 0
+        if (currentStep === 4 && isListenerFlow) {
+            setCurrentStep(1); // Go back directly to personal info for listener
+        } else {
+            setCurrentStep(prev => Math.max(prev - 1, 1));
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -513,242 +538,267 @@ const ICCDSRegistrationForm = () => {
     );
 
     /* ── STEP 1: Personal Info ── */
-    const renderStep1 = () => (
-        <StepMotion direction={direction}>
-            <div className="iccds-rf-card">
-                <h2 className="iccds-rf-card-title">
-                    <User size={22} /> Personal Information
-                </h2>
-                <p className="iccds-rf-card-desc">
-                    Provide your contact and registration details
-                </p>
+    const renderStep1 = () => {
+        const availableRoles = isListenerFlow ? LISTENER_ROLE_TYPES : AUTHOR_ROLE_TYPES;
 
-                <div className="iccds-rf-grid">
-                    {/* Title / Honorific */}
-                    <div className="iccds-rf-field">
-                        <label htmlFor="rf-honorific">Title <span className="iccds-rf-required">*</span></label>
-                        <div className="iccds-rf-input-wrap">
-                            <BadgeCheck size={16} className="iccds-rf-input-icon" />
-                            <select id="rf-honorific" value={form.honorific}
-                                onChange={e => updateForm('honorific', e.target.value)}
-                                className={errors.honorific ? 'error' : ''}>
-                                {HONORIFIC_OPTIONS.map(opt => (
-                                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                                ))}
-                            </select>
+        return (
+            <StepMotion direction={direction}>
+                <div className="iccds-rf-card">
+                    <h2 className="iccds-rf-card-title">
+                        <User size={22} /> {isListenerFlow ? 'Listener Information' : 'Personal Information'}
+                    </h2>
+                    <p className="iccds-rf-card-desc">
+                        {isListenerFlow
+                            ? 'Provide your contact details to register as a Conference Listener'
+                            : 'Provide your contact and author registration details'}
+                    </p>
+
+                    {/* Banner indicating Registration Mode */}
+                    {isListenerFlow ? (
+                        <div className="iccds-rf-alert info" style={{ marginBottom: 20 }}>
+                            <CheckCircle2 size={18} />
+                            <span>
+                                <strong>Listener Registration:</strong> You are registering to attend the conference as a Listener. No paper submission or team members required.
+                            </span>
                         </div>
-                        {errors.honorific && <span className="iccds-rf-error">{errors.honorific}</span>}
-                    </div>
-
-                    {/* Name */}
-                    <div className="iccds-rf-field">
-                        <label htmlFor="rf-name">Full Name <span className="iccds-rf-required">*</span></label>
-                        <div className="iccds-rf-input-wrap">
-                            <User size={16} className="iccds-rf-input-icon" />
-                            <input id="rf-name" type="text" placeholder="John Doe"
-                                value={form.name} onChange={e => updateForm('name', e.target.value)}
-                                className={errors.name ? 'error' : ''} />
+                    ) : paperVerified ? (
+                        <div className="iccds-rf-alert info" style={{ marginBottom: 20 }}>
+                            <FileText size={18} />
+                            <span>
+                                <strong>Author Registration:</strong> Paper ID <code>{paper.paper_id}</code> verified successfully.
+                            </span>
                         </div>
-                        {errors.name && <span className="iccds-rf-error">{errors.name}</span>}
-                    </div>
+                    ) : null}
 
-                    {/* Email */}
-                    <div className="iccds-rf-field">
-                        <label htmlFor="rf-email">Email Address <span className="iccds-rf-required">*</span></label>
-                        <div className="iccds-rf-input-wrap">
-                            <Mail size={16} className="iccds-rf-input-icon" />
-                            <input id="rf-email" type="email" placeholder="john@university.edu"
-                                value={form.email} onChange={e => updateForm('email', e.target.value)}
-                                className={errors.email ? 'error' : ''} />
-                        </div>
-                        {errors.email && <span className="iccds-rf-error">{errors.email}</span>}
-                    </div>
-
-                    {/* Phone */}
-                    <div className="iccds-rf-field">
-                        <label htmlFor="rf-phone">Phone Number <span className="iccds-rf-required">*</span></label>
-                        <div className="iccds-rf-input-wrap">
-                            <Phone size={16} className="iccds-rf-input-icon" />
-                            <input id="rf-phone" type="tel" placeholder="+91 9876543210"
-                                value={form.phone} onChange={e => updateForm('phone', e.target.value)}
-                                className={errors.phone ? 'error' : ''} />
-                        </div>
-                        {errors.phone && <span className="iccds-rf-error">{errors.phone}</span>}
-                    </div>
-
-                    {/* Author Contact Number */}
-                    <div className="iccds-rf-field">
-                        <label htmlFor="rf-author-phone">Author Contact Number</label>
-                        <div className="iccds-rf-input-wrap">
-                            <Phone size={16} className="iccds-rf-input-icon" />
-                            <input id="rf-author-phone" type="tel" placeholder="+91 9876543210 (if different)"
-                                value={form.author_phone} onChange={e => updateForm('author_phone', e.target.value)} />
-                        </div>
-                        <span className="iccds-rf-hint-text">Leave blank if same as phone number above</span>
-                    </div>
-
-                    {/* Institution */}
-                    <div className="iccds-rf-field">
-                        <label htmlFor="rf-institution">Institution / Organization <span className="iccds-rf-required">*</span></label>
-                        <div className="iccds-rf-input-wrap">
-                            <Building2 size={16} className="iccds-rf-input-icon" />
-                            <input id="rf-institution" type="text" placeholder="Rajalakshmi Engineering College"
-                                value={form.institution} onChange={e => updateForm('institution', e.target.value)}
-                                className={errors.institution ? 'error' : ''} />
-                        </div>
-                        {errors.institution && <span className="iccds-rf-error">{errors.institution}</span>}
-                    </div>
-
-                    {/* Country */}
-                    <div className="iccds-rf-field">
-                        <label htmlFor="rf-country">Country <span className="iccds-rf-required">*</span></label>
-                        <div className="iccds-rf-input-wrap">
-                            <Globe size={16} className="iccds-rf-input-icon" />
-                            <input id="rf-country" type="text" placeholder="India"
-                                value={form.country} onChange={e => {
-                                    updateForm('country', e.target.value);
-                                    // Auto-set currency based on country
-                                    if (e.target.value.toLowerCase() === 'india') updateForm('currency', 'INR');
-                                    else if (e.target.value.trim()) updateForm('currency', 'USD');
-                                }}
-                                className={errors.country ? 'error' : ''} />
-                        </div>
-                        {errors.country && <span className="iccds-rf-error">{errors.country}</span>}
-                    </div>
-
-                    {/* Currency */}
-                    <div className="iccds-rf-field">
-                        <label htmlFor="rf-currency">Currency</label>
-                        <div className="iccds-rf-input-wrap">
-                            <Banknote size={16} className="iccds-rf-input-icon" />
-                            <select id="rf-currency" value={form.currency}
-                                onChange={e => updateForm('currency', e.target.value)}>
-                                <option value="INR">₹ INR (Indian Rupee)</option>
-                                <option value="USD">$ USD (US Dollar)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                {/* ── IEEE Membership Toggle ── */}
-                <div className="iccds-rf-field iccds-rf-field-full">
-                    <label>Are you an IEEE Member? <span className="iccds-rf-required">*</span></label>
-                    <div className="iccds-rf-ieee-toggle">
-                        <button
-                            type="button"
-                            className={`iccds-rf-toggle-btn yes ${isIeeeMember === true ? 'active' : ''}`}
-                            onClick={() => { setIsIeeeMember(true); if (errors.ieee_member) setErrors(prev => { const e = { ...prev }; delete e.ieee_member; return e; }); }}
-                        >
-                            <Shield size={18} />
-                            <span>Yes, I'm an IEEE Member</span>
-                        </button>
-                        <button
-                            type="button"
-                            className={`iccds-rf-toggle-btn no ${isIeeeMember === false ? 'active' : ''}`}
-                            onClick={() => { setIsIeeeMember(false); if (errors.ieee_member) setErrors(prev => { const e = { ...prev }; delete e.ieee_member; return e; }); }}
-                        >
-                            <X size={18} />
-                            <span>No</span>
-                        </button>
-                    </div>
-                    {errors.ieee_member && <span className="iccds-rf-error">{errors.ieee_member}</span>}
-                </div>
-
-                {/* ── IEEE Member ID (only when Yes) ── */}
-                <AnimatePresence>
-                    {isIeeeMember === true && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }}
-                            className="iccds-rf-field iccds-rf-field-full"
-                            style={{ overflow: 'hidden' }}
-                        >
-                            <label htmlFor="rf-ieee-id">IEEE Membership ID <span className="iccds-rf-required">*</span></label>
+                    <div className="iccds-rf-grid">
+                        {/* Title / Honorific */}
+                        <div className="iccds-rf-field">
+                            <label htmlFor="rf-honorific">Title <span className="iccds-rf-required">*</span></label>
                             <div className="iccds-rf-input-wrap">
-                                <Shield size={16} className="iccds-rf-input-icon" />
-                                <input id="rf-ieee-id" type="text" placeholder="12345678"
-                                    value={form.ieee_id_card} onChange={e => updateForm('ieee_id_card', e.target.value)}
-                                    className={errors.ieee_id_card ? 'error' : ''} />
+                                <BadgeCheck size={16} className="iccds-rf-input-icon" />
+                                <select id="rf-honorific" value={form.honorific}
+                                    onChange={e => updateForm('honorific', e.target.value)}
+                                    className={errors.honorific ? 'error' : ''}>
+                                    {HONORIFIC_OPTIONS.map(opt => (
+                                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                    ))}
+                                </select>
                             </div>
-                            {errors.ieee_id_card && <span className="iccds-rf-error">{errors.ieee_id_card}</span>}
+                            {errors.honorific && <span className="iccds-rf-error">{errors.honorific}</span>}
+                        </div>
+
+                        {/* Name */}
+                        <div className="iccds-rf-field">
+                            <label htmlFor="rf-name">Full Name <span className="iccds-rf-required">*</span></label>
+                            <div className="iccds-rf-input-wrap">
+                                <User size={16} className="iccds-rf-input-icon" />
+                                <input id="rf-name" type="text" placeholder="John Doe"
+                                    value={form.name} onChange={e => updateForm('name', e.target.value)}
+                                    className={errors.name ? 'error' : ''} />
+                            </div>
+                            {errors.name && <span className="iccds-rf-error">{errors.name}</span>}
+                        </div>
+
+                        {/* Email */}
+                        <div className="iccds-rf-field">
+                            <label htmlFor="rf-email">Email Address <span className="iccds-rf-required">*</span></label>
+                            <div className="iccds-rf-input-wrap">
+                                <Mail size={16} className="iccds-rf-input-icon" />
+                                <input id="rf-email" type="email" placeholder="john@university.edu"
+                                    value={form.email} onChange={e => updateForm('email', e.target.value)}
+                                    className={errors.email ? 'error' : ''} />
+                            </div>
+                            {errors.email && <span className="iccds-rf-error">{errors.email}</span>}
+                        </div>
+
+                        {/* Phone */}
+                        <div className="iccds-rf-field">
+                            <label htmlFor="rf-phone">Phone Number <span className="iccds-rf-required">*</span></label>
+                            <div className="iccds-rf-input-wrap">
+                                <Phone size={16} className="iccds-rf-input-icon" />
+                                <input id="rf-phone" type="tel" placeholder="+91 9876543210"
+                                    value={form.phone} onChange={e => updateForm('phone', e.target.value)}
+                                    className={errors.phone ? 'error' : ''} />
+                            </div>
+                            {errors.phone && <span className="iccds-rf-error">{errors.phone}</span>}
+                        </div>
+
+                        {/* Author Contact Number - Only for Authors */}
+                        {!isListenerFlow && (
+                            <div className="iccds-rf-field">
+                                <label htmlFor="rf-author-phone">Author Contact Number</label>
+                                <div className="iccds-rf-input-wrap">
+                                    <Phone size={16} className="iccds-rf-input-icon" />
+                                    <input id="rf-author-phone" type="tel" placeholder="+91 9876543210 (if different)"
+                                        value={form.author_phone} onChange={e => updateForm('author_phone', e.target.value)} />
+                                </div>
+                                <span className="iccds-rf-hint-text">Leave blank if same as phone number above</span>
+                            </div>
+                        )}
+
+                        {/* Institution */}
+                        <div className="iccds-rf-field">
+                            <label htmlFor="rf-institution">Institution / Organization <span className="iccds-rf-required">*</span></label>
+                            <div className="iccds-rf-input-wrap">
+                                <Building2 size={16} className="iccds-rf-input-icon" />
+                                <input id="rf-institution" type="text" placeholder="Rajalakshmi Engineering College"
+                                    value={form.institution} onChange={e => updateForm('institution', e.target.value)}
+                                    className={errors.institution ? 'error' : ''} />
+                            </div>
+                            {errors.institution && <span className="iccds-rf-error">{errors.institution}</span>}
+                        </div>
+
+                        {/* Country */}
+                        <div className="iccds-rf-field">
+                            <label htmlFor="rf-country">Country <span className="iccds-rf-required">*</span></label>
+                            <div className="iccds-rf-input-wrap">
+                                <Globe size={16} className="iccds-rf-input-icon" />
+                                <input id="rf-country" type="text" placeholder="India"
+                                    value={form.country} onChange={e => {
+                                        updateForm('country', e.target.value);
+                                        // Auto-set currency based on country
+                                        if (e.target.value.toLowerCase() === 'india') updateForm('currency', 'INR');
+                                        else if (e.target.value.trim()) updateForm('currency', 'USD');
+                                    }}
+                                    className={errors.country ? 'error' : ''} />
+                            </div>
+                            {errors.country && <span className="iccds-rf-error">{errors.country}</span>}
+                        </div>
+
+                        {/* Currency */}
+                        <div className="iccds-rf-field">
+                            <label htmlFor="rf-currency">Currency</label>
+                            <div className="iccds-rf-input-wrap">
+                                <Banknote size={16} className="iccds-rf-input-icon" />
+                                <select id="rf-currency" value={form.currency}
+                                    onChange={e => updateForm('currency', e.target.value)}>
+                                    <option value="INR">₹ INR (Indian Rupee)</option>
+                                    <option value="USD">$ USD (US Dollar)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ── IEEE Membership Toggle ── */}
+                    <div className="iccds-rf-field iccds-rf-field-full">
+                        <label>Are you an IEEE Member? <span className="iccds-rf-required">*</span></label>
+                        <div className="iccds-rf-ieee-toggle">
+                            <button
+                                type="button"
+                                className={`iccds-rf-toggle-btn yes ${isIeeeMember === true ? 'active' : ''}`}
+                                onClick={() => { setIsIeeeMember(true); if (errors.ieee_member) setErrors(prev => { const e = { ...prev }; delete e.ieee_member; return e; }); }}
+                            >
+                                <Shield size={18} />
+                                <span>Yes, I'm an IEEE Member</span>
+                            </button>
+                            <button
+                                type="button"
+                                className={`iccds-rf-toggle-btn no ${isIeeeMember === false ? 'active' : ''}`}
+                                onClick={() => { setIsIeeeMember(false); if (errors.ieee_member) setErrors(prev => { const e = { ...prev }; delete e.ieee_member; return e; }); }}
+                            >
+                                <X size={18} />
+                                <span>No</span>
+                            </button>
+                        </div>
+                        {errors.ieee_member && <span className="iccds-rf-error">{errors.ieee_member}</span>}
+                    </div>
+
+                    {/* ── IEEE Member ID (only when Yes) ── */}
+                    <AnimatePresence>
+                        {isIeeeMember === true && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }}
+                                className="iccds-rf-field iccds-rf-field-full"
+                                style={{ overflow: 'hidden' }}
+                            >
+                                <label htmlFor="rf-ieee-id">IEEE Membership ID <span className="iccds-rf-required">*</span></label>
+                                <div className="iccds-rf-input-wrap">
+                                    <Shield size={16} className="iccds-rf-input-icon" />
+                                    <input id="rf-ieee-id" type="text" placeholder="12345678"
+                                        value={form.ieee_id_card} onChange={e => updateForm('ieee_id_card', e.target.value)}
+                                        className={errors.ieee_id_card ? 'error' : ''} />
+                                </div>
+                                {errors.ieee_id_card && <span className="iccds-rf-error">{errors.ieee_id_card}</span>}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    {/* ── Registration Type (role) ── */}
+                    {isIeeeMember !== null && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                            className="iccds-rf-field iccds-rf-field-full"
+                        >
+                            <label>
+                                {isListenerFlow ? 'Listener Registration Category' : 'Author Registration Type'} <span className="iccds-rf-required">*</span>
+                                <span className="iccds-rf-member-badge" style={{
+                                    marginLeft: 10,
+                                    background: isIeeeMember
+                                        ? 'linear-gradient(135deg, rgba(0,102,204,0.15), rgba(0,102,204,0.05))'
+                                        : 'linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))',
+                                    color: isIeeeMember ? '#4db8ff' : 'rgba(255,255,255,0.6)',
+                                    padding: '3px 10px',
+                                    borderRadius: 20,
+                                    fontSize: '0.75rem',
+                                    fontWeight: 600,
+                                }}>
+                                    {isIeeeMember ? '✓ IEEE Member Pricing' : 'Non-IEEE Pricing'}
+                                </span>
+                            </label>
+                            <div className="iccds-rf-category-grid">
+                                {availableRoles.map(role => {
+                                    const catKey = `${isIeeeMember ? 'ieee' : 'non_ieee'}_${role.value}`;
+                                    const feeData = FEE_SCHEDULE[catKey];
+                                    const isActive = roleType === role.value;
+                                    return (
+                                        <button
+                                            key={role.value} type="button"
+                                            className={`iccds-rf-category-btn ${isActive ? 'active' : ''}`}
+                                            onClick={() => {
+                                                setRoleType(role.value);
+                                                if (errors.category) setErrors(prev => { const e = { ...prev }; delete e.category; return e; });
+                                            }}
+                                        >
+                                            <span className="iccds-rf-cat-icon">{role.icon}</span>
+                                            <span className="iccds-rf-cat-label">{role.label}</span>
+                                            <span className="iccds-rf-cat-fee">
+                                                {form.currency === 'INR'
+                                                    ? `₹${feeData?.INR?.toLocaleString('en-IN')}`
+                                                    : `$${feeData?.USD}`}
+                                            </span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                            {errors.category && <span className="iccds-rf-error">{errors.category}</span>}
+
+                            {/* Fee highlight */}
+                            <AnimatePresence>
+                                {form.category && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}
+                                        className="iccds-rf-fee-highlight"
+                                    >
+                                        <div className="iccds-rf-fee-highlight-inner">
+                                            <span className="iccds-rf-fee-highlight-label">
+                                                {FEE_SCHEDULE[form.category]?.label}
+                                            </span>
+                                            <span className="iccds-rf-fee-highlight-amount">
+                                                {feeDisplay}
+                                            </span>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </motion.div>
                     )}
-                </AnimatePresence>
-
-                {/* ── Registration Type (role) ── */}
-                {isIeeeMember !== null && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="iccds-rf-field iccds-rf-field-full"
-                    >
-                        <label>
-                            Registration Type <span className="iccds-rf-required">*</span>
-                            <span className="iccds-rf-member-badge" style={{
-                                marginLeft: 10,
-                                background: isIeeeMember
-                                    ? 'linear-gradient(135deg, rgba(0,102,204,0.15), rgba(0,102,204,0.05))'
-                                    : 'linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))',
-                                color: isIeeeMember ? '#4db8ff' : 'rgba(255,255,255,0.6)',
-                                padding: '3px 10px',
-                                borderRadius: 20,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                            }}>
-                                {isIeeeMember ? '✓ IEEE Member Pricing' : 'Non-IEEE Pricing'}
-                            </span>
-                        </label>
-                        <div className="iccds-rf-category-grid">
-                            {ROLE_TYPES.map(role => {
-                                const catKey = `${isIeeeMember ? 'ieee' : 'non_ieee'}_${role.value}`;
-                                const feeData = FEE_SCHEDULE[catKey];
-                                const isActive = roleType === role.value;
-                                return (
-                                    <button
-                                        key={role.value} type="button"
-                                        className={`iccds-rf-category-btn ${isActive ? 'active' : ''}`}
-                                        onClick={() => {
-                                            setRoleType(role.value);
-                                            if (errors.category) setErrors(prev => { const e = { ...prev }; delete e.category; return e; });
-                                        }}
-                                    >
-                                        <span className="iccds-rf-cat-icon">{role.icon}</span>
-                                        <span className="iccds-rf-cat-label">{role.label}</span>
-                                        <span className="iccds-rf-cat-fee">
-                                            {form.currency === 'INR'
-                                                ? `₹${feeData.INR.toLocaleString('en-IN')}`
-                                                : `$${feeData.USD}`}
-                                        </span>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                        {errors.category && <span className="iccds-rf-error">{errors.category}</span>}
-
-                        {/* Fee highlight */}
-                        <AnimatePresence>
-                            {form.category && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}
-                                    className="iccds-rf-fee-highlight"
-                                >
-                                    <div className="iccds-rf-fee-highlight-inner">
-                                        <span className="iccds-rf-fee-highlight-label">
-                                            {FEE_SCHEDULE[form.category]?.label}
-                                        </span>
-                                        <span className="iccds-rf-fee-highlight-amount">
-                                            {feeDisplay}
-                                        </span>
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </motion.div>
-                )}
-            </div>
-        </StepMotion>
-    );
+                </div>
+            </StepMotion>
+        );
+    };
 
     /* ── STEP 2: Team Members ── */
     const renderStep2 = () => (
@@ -1037,16 +1087,18 @@ const ICCDSRegistrationForm = () => {
         <StepMotion direction={direction}>
             <div className="iccds-rf-card">
                 <h2 className="iccds-rf-card-title">
-                    <CreditCard size={22} /> Review & Payment
+                    <CreditCard size={22} /> {isListenerFlow ? 'Listener Review & Payment' : 'Review & Payment'}
                 </h2>
                 <p className="iccds-rf-card-desc">
-                    Verify your details and choose a payment method
+                    {isListenerFlow
+                        ? 'Verify your details and complete the conference listener payment'
+                        : 'Verify your details and complete your registration payment'}
                 </p>
 
                 {/* Summary */}
                 <div className="iccds-rf-summary">
                     <div className="iccds-rf-summary-section">
-                        <h4>Registrant</h4>
+                        <h4>{isListenerFlow ? 'Listener Details' : 'Registrant'}</h4>
                         <div className="iccds-rf-summary-grid">
                             <div><span>Name</span><strong>{form.name}</strong></div>
                             <div><span>Email</span><strong>{form.email}</strong></div>
@@ -1058,8 +1110,8 @@ const ICCDSRegistrationForm = () => {
                         </div>
                     </div>
 
-                    {/* Team Members Summary */}
-                    {teamMembers.some(m => m.name.trim()) && (
+                    {/* Team Members Summary - Only for Authors */}
+                    {!isListenerFlow && teamMembers.some(m => m.name.trim()) && (
                         <div className="iccds-rf-summary-section">
                             <h4>Team Members</h4>
                             <div className="iccds-rf-summary-team">
@@ -1077,7 +1129,7 @@ const ICCDSRegistrationForm = () => {
                         </div>
                     )}
 
-                    {!isListener(form.category) && (
+                    {!isListenerFlow && (
                         <div className="iccds-rf-summary-section">
                             <h4>Paper</h4>
                             <div className="iccds-rf-summary-grid">
@@ -1092,7 +1144,7 @@ const ICCDSRegistrationForm = () => {
                     )}
 
                     <div className="iccds-rf-summary-fee">
-                        <span>Registration Fee</span>
+                        <span>{isListenerFlow ? 'Listener Registration Fee' : 'Registration Fee'}</span>
                         <strong className="iccds-rf-fee-amount">{feeDisplay}</strong>
                     </div>
                 </div>
@@ -1249,7 +1301,7 @@ const ICCDSRegistrationForm = () => {
                         {/* Hide stepper on Step 0 (Paper ID Verification) */}
                         {currentStep > 0 && (
                         <div className="iccds-rf-stepper">
-                            {STEPS.map((step, i) => {
+                            {activeSteps.map((step, i) => {
                                 const StepIcon = step.icon;
                                 const isActive = currentStep === step.id;
                                 const isCompleted = currentStep > step.id;
@@ -1261,7 +1313,7 @@ const ICCDSRegistrationForm = () => {
                                             </div>
                                             <span className="iccds-rf-step-label">{step.label}</span>
                                         </div>
-                                        {i < STEPS.length - 1 && (
+                                        {i < activeSteps.length - 1 && (
                                             <div className={`iccds-rf-step-line ${isCompleted ? 'completed' : ''}`} />
                                         )}
                                     </React.Fragment>
