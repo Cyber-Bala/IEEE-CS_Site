@@ -99,3 +99,4 @@ class Registration(models.Model):
             role = "Leader" if self.is_team_leader else "Member"
             return f"{self.name} - {self.event.name} ({self.team.name} {role})"
         return f"{self.name} - {self.event.name}"
+
