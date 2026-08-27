@@ -62,3 +62,5 @@ dj-database-url==2.3.0
 whitenoise==6.9.0
 python-magic==0.4.27
 django-unfold==0.46.0
+google-api-python-client==2.115.0
+google-auth==2.27.0

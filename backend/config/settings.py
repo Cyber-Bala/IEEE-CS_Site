@@ -136,10 +136,13 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# WhiteNoise compressed and forever-cacheable static files (updated to include default storage)
+# WhiteNoise compressed and forever-cacheable static files
+# and conditional Google Drive Media Storage for production.
+GOOGLE_DRIVE_ENABLED = os.getenv('GOOGLE_DRIVE_ENABLED', 'False').lower() == 'true'
+
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "config.gdrive_storage.GoogleDriveStorage" if GOOGLE_DRIVE_ENABLED else "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
