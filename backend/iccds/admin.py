@@ -120,7 +120,10 @@ class ICCDSPaperAdmin(ModelAdmin):
     def change_view(self, request, object_id, form_url='', extra_context=None):
         _admin_locals.request = request
         try:
-            return super().change_view(request, object_id, form_url, extra_context)
+            response = super().change_view(request, object_id, form_url, extra_context)
+            if hasattr(response, 'render'):
+                response.render()
+            return response
         finally:
             if hasattr(_admin_locals, 'request'):
                 del _admin_locals.request
@@ -128,7 +131,10 @@ class ICCDSPaperAdmin(ModelAdmin):
     def changelist_view(self, request, extra_context=None):
         _admin_locals.request = request
         try:
-            return super().changelist_view(request, extra_context)
+            response = super().changelist_view(request, extra_context)
+            if hasattr(response, 'render'):
+                response.render()
+            return response
         finally:
             if hasattr(_admin_locals, 'request'):
                 del _admin_locals.request
@@ -195,7 +201,10 @@ class ICCDSRegistrationAdmin(ModelAdmin):
     def change_view(self, request, object_id, form_url='', extra_context=None):
         _admin_locals.request = request
         try:
-            return super().change_view(request, object_id, form_url, extra_context)
+            response = super().change_view(request, object_id, form_url, extra_context)
+            if hasattr(response, 'render'):
+                response.render()
+            return response
         finally:
             if hasattr(_admin_locals, 'request'):
                 del _admin_locals.request
@@ -203,7 +212,10 @@ class ICCDSRegistrationAdmin(ModelAdmin):
     def changelist_view(self, request, extra_context=None):
         _admin_locals.request = request
         try:
-            return super().changelist_view(request, extra_context)
+            response = super().changelist_view(request, extra_context)
+            if hasattr(response, 'render'):
+                response.render()
+            return response
         finally:
             if hasattr(_admin_locals, 'request'):
                 del _admin_locals.request
