@@ -341,14 +341,23 @@ const ICCDSRegistrationForm = () => {
         if (currentStep === 1 && !validateStep1()) return;
         if (currentStep === 2 && !validateStep2()) return;
         if (currentStep === 3 && !validateStep3()) return;
+        
         setDirection(1);
-        setCurrentStep(prev => Math.min(prev + 1, 5));
+        if (currentStep === 1 && isListener(form.category)) {
+            setCurrentStep(4);
+        } else {
+            setCurrentStep(prev => Math.min(prev + 1, 5));
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const goBack = () => {
         setDirection(-1);
-        setCurrentStep(prev => Math.max(prev - 1, 1)); // Don't go back to Step 0
+        if (currentStep === 4 && isListener(form.category)) {
+            setCurrentStep(1);
+        } else {
+            setCurrentStep(prev => Math.max(prev - 1, 1)); // Don't go back to Step 0
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -503,13 +512,15 @@ const ICCDSRegistrationForm = () => {
                         )}
                     </motion.button>
 
+                    <div style={{ width: '100%', height: '1px', backgroundColor: '#e5e7eb', margin: '10px 0' }} />
+
                     <button
                         type="button"
-                        className="iccds-rf-btn secondary"
+                        className="iccds-rf-btn"
                         onClick={handleListenerSkip}
-                        style={{ fontSize: '0.85rem' }}
+                        style={{ fontSize: '1rem', background: 'transparent', border: '2px solid #4f46e5', color: '#4f46e5', fontWeight: 600, padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '450px' }}
                     >
-                        Register as Listener (no paper) <ArrowRight size={16} />
+                        <User size={18} style={{ marginRight: '8px' }} /> Register as Listener (No paper needed)
                     </button>
                 </div>
             </div>
@@ -710,7 +721,7 @@ const ICCDSRegistrationForm = () => {
                             </span>
                         </label>
                         <div className="iccds-rf-category-grid">
-                            {ROLE_TYPES.map(role => {
+                            {ROLE_TYPES.filter(r => paperVerified || r.value === 'listener').map(role => {
                                 const catKey = `${isIeeeMember ? 'ieee' : 'non_ieee'}_${role.value}`;
                                 const feeData = FEE_SCHEDULE[catKey];
                                 const isActive = roleType === role.value;
@@ -1264,7 +1275,10 @@ const ICCDSRegistrationForm = () => {
                         {/* Hide stepper on Step 0 (Paper ID Verification) */}
                         {currentStep > 0 && (
                         <div className="iccds-rf-stepper">
-                            {STEPS.map((step, i) => {
+                            {STEPS.filter(step => {
+                                if (isListener(form.category) && (step.id === 2 || step.id === 3)) return false;
+                                return true;
+                            }).map((step, i, filteredSteps) => {
                                 const StepIcon = step.icon;
                                 const isActive = currentStep === step.id;
                                 const isCompleted = currentStep > step.id;
@@ -1276,7 +1290,7 @@ const ICCDSRegistrationForm = () => {
                                             </div>
                                             <span className="iccds-rf-step-label">{step.label}</span>
                                         </div>
-                                        {i < STEPS.length - 1 && (
+                                        {i < filteredSteps.length - 1 && (
                                             <div className={`iccds-rf-step-line ${isCompleted ? 'completed' : ''}`} />
                                         )}
                                     </React.Fragment>

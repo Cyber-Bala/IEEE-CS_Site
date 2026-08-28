@@ -165,8 +165,14 @@ class ICCDSPaperAdmin(ModelAdmin):
     )
 
 
+from import_export.admin import ImportExportModelAdmin as BaseImportExportModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
+
 @admin.register(ICCDSApprovedPaper)
-class ICCDSApprovedPaperAdmin(ModelAdmin):
+class ICCDSApprovedPaperAdmin(ModelAdmin, BaseImportExportModelAdmin):
+    import_form_class = ImportForm
+    export_form_class = ExportForm
+    
     list_display = ('paper_id', 'title', 'is_active', 'created_at')
     list_filter = ('is_active',)
     search_fields = ('paper_id', 'title')
