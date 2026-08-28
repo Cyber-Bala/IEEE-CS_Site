@@ -33,3 +33,7 @@ Thumbs.db
 .env
 .env.local
 .env.*
+
+# Google OAuth credentials (NEVER commit these)
+credentials.json
+generate_oauth_token.py
