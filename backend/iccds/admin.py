@@ -72,6 +72,8 @@ class ICCDSRegistrationInline(StackedInline):
     tab = True
 
     def team_members_list(self, obj):
+        from django.utils.html import escape
+        from django.utils.safestring import mark_safe
         if not obj or not obj.pk:
             return "None"
         members = obj.team_members.all().order_by('order')
@@ -79,9 +81,9 @@ class ICCDSRegistrationInline(StackedInline):
             return "No team members."
         html = "<ul style='padding-left:20px; margin:0; line-height:1.6;'>"
         for m in members:
-            html += f"<li><strong>{m.name}</strong> ({m.email}) &mdash; {m.institution}</li>"
+            html += f"<li><strong>{escape(m.name)}</strong> ({escape(m.email)}) &mdash; {escape(m.institution)}</li>"
         html += "</ul>"
-        return format_html(html)
+        return mark_safe(html)
     team_members_list.short_description = "Team Members"
 
     def ieee_proof_preview(self, obj):
