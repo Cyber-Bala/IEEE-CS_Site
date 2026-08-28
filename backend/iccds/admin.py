@@ -63,13 +63,42 @@ def generate_secure_file_html(obj, model_name, field_name):
 
 
 
-class ICCDSRegistrationInline(TabularInline):
+class ICCDSRegistrationInline(StackedInline):
     model = ICCDSRegistration
     extra = 0
-    fields = ('name', 'email', 'category', 'currency', 'fee_amount', 'status')
-    readonly_fields = ('name', 'email', 'category', 'currency', 'fee_amount', 'status')
+    fields = ('name', 'email', 'category', 'currency', 'fee_amount', 'status', 'team_members_list', 'ieee_proof_preview', 'student_proof_preview', 'primary_id_proof_preview', 'payment_receipt_preview')
+    readonly_fields = ('name', 'email', 'category', 'currency', 'fee_amount', 'status', 'team_members_list', 'ieee_proof_preview', 'student_proof_preview', 'primary_id_proof_preview', 'payment_receipt_preview')
     show_change_link = True
     tab = True
+
+    def team_members_list(self, obj):
+        if not obj or not obj.pk:
+            return "None"
+        members = obj.team_members.all().order_by('order')
+        if not members:
+            return "No team members."
+        html = "<ul style='padding-left:20px; margin:0; line-height:1.6;'>"
+        for m in members:
+            html += f"<li><strong>{m.name}</strong> ({m.email}) &mdash; {m.institution}</li>"
+        html += "</ul>"
+        return format_html(html)
+    team_members_list.short_description = "Team Members"
+
+    def ieee_proof_preview(self, obj):
+        return generate_secure_file_html(obj, 'iccdsregistration', 'ieee_proof')
+    ieee_proof_preview.short_description = "IEEE Membership Proof"
+
+    def student_proof_preview(self, obj):
+        return generate_secure_file_html(obj, 'iccdsregistration', 'student_proof')
+    student_proof_preview.short_description = "Student Proof"
+
+    def primary_id_proof_preview(self, obj):
+        return generate_secure_file_html(obj, 'iccdsregistration', 'primary_id_proof')
+    primary_id_proof_preview.short_description = "Primary ID Proof"
+
+    def payment_receipt_preview(self, obj):
+        return generate_secure_file_html(obj, 'iccdsregistration', 'payment_receipt')
+    payment_receipt_preview.short_description = "Payment Receipt"
 
 
 class ICCDSTeamMemberInline(StackedInline):
