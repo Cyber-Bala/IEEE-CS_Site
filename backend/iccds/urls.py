@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/iccds/payment/razorpay/verify/', views.razorpay_verify, name='razorpay-verify'),
     path('api/iccds/payment/upload-receipt/', views.upload_receipt, name='upload-receipt'),
     path('api/iccds/registration/<uuid:registration_id>/status/', views.registration_status, name='registration-status'),
+    path('admin/secure-file/<str:token>/', views.secure_file_access, name='secure-admin-file'),
 ]

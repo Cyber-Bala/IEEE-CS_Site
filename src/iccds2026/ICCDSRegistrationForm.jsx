@@ -11,6 +11,10 @@ import GlassBackground from './GlassBackground';
 import ICCDSNav from './ICCDSNav';
 import collegeLogo from '../assets/logo/college.png';
 
+const COUNTRIES = [
+    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+];
+
 /* ─── Constants ──────────────────────────────────────────────────── */
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
 
@@ -604,28 +608,35 @@ const ICCDSRegistrationForm = () => {
                         <label htmlFor="rf-country">Country <span className="iccds-rf-required">*</span></label>
                         <div className="iccds-rf-input-wrap">
                             <Globe size={16} className="iccds-rf-input-icon" />
-                            <input id="rf-country" type="text" placeholder="India"
+                            <input id="rf-country" type="text" list="country-list" placeholder="India"
                                 value={form.country} onChange={e => {
                                     updateForm('country', e.target.value);
-                                    // Auto-set currency based on country
-                                    if (e.target.value.toLowerCase() === 'india') updateForm('currency', 'INR');
-                                    else if (e.target.value.trim()) updateForm('currency', 'USD');
+                                    // Auto-set currency strictly based on country
+                                    if (e.target.value.trim().toLowerCase() === 'india') {
+                                        updateForm('currency', 'INR');
+                                    } else if (e.target.value.trim()) {
+                                        updateForm('currency', 'USD');
+                                    }
                                 }}
-                                className={errors.country ? 'error' : ''} />
+                                className={errors.country ? 'error' : ''} autoComplete="off" />
+                            <datalist id="country-list">
+                                {COUNTRIES.map(country => <option key={country} value={country} />)}
+                            </datalist>
                         </div>
                         {errors.country && <span className="iccds-rf-error">{errors.country}</span>}
                     </div>
 
-                    {/* Currency */}
+                    {/* Currency (Read-Only) */}
                     <div className="iccds-rf-field">
-                        <label htmlFor="rf-currency">Currency</label>
-                        <div className="iccds-rf-input-wrap">
-                            <Banknote size={16} className="iccds-rf-input-icon" />
-                            <select id="rf-currency" value={form.currency}
-                                onChange={e => updateForm('currency', e.target.value)}>
-                                <option value="INR">₹ INR (Indian Rupee)</option>
-                                <option value="USD">$ USD (US Dollar)</option>
-                            </select>
+                        <label>Currency (Auto-derived)</label>
+                        <div className="iccds-rf-input-wrap" style={{ backgroundColor: '#f3f4f6', cursor: 'not-allowed', borderColor: '#d1d5db' }}>
+                            <Banknote size={16} className="iccds-rf-input-icon" style={{ color: '#9ca3af' }} />
+                            <input 
+                                type="text" 
+                                value={form.currency === 'INR' ? '₹ INR (Indian Rupee)' : '$ USD (US Dollar)'} 
+                                readOnly 
+                                style={{ backgroundColor: 'transparent', color: '#6b7280', fontWeight: 'bold', cursor: 'not-allowed' }} 
+                            />
                         </div>
                     </div>
                 </div>
@@ -912,6 +923,10 @@ const ICCDSRegistrationForm = () => {
                     <h2 className="iccds-rf-card-title">
                         <FileText size={22} /> Paper Details & Document Upload
                     </h2>
+                    <div style={{ backgroundColor: '#fff3cd', color: '#856404', padding: '15px', borderRadius: '6px', border: '1px solid #ffeeba', marginBottom: '20px', fontSize: '14px', lineHeight: '1.5' }}>
+                        <strong style={{ display: 'block', marginBottom: '5px' }}>⚠️ Important: Please carefully review all information before submitting your paper.</strong>
+                        The details you provide, including author names, paper title, affiliations, and other relevant information, may be used for official records, certificates, and conference documentation. Please ensure that all information is accurate and correctly spelled before submission.
+                    </div>
                     <p className="iccds-rf-card-desc">
                         Enter your paper details and upload required documents
                     </p>

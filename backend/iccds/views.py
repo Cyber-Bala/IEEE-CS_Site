@@ -9,7 +9,100 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.conf import settings
+from django.core.cache import cache
+from django.contrib.admin.views.decorators import staff_member_required
+from django.http import FileResponse, HttpResponseForbidden, HttpResponseBadRequest, Http404
+from django.shortcuts import get_object_or_404
+import mimetypes
 from .models import ICCDSPaper, ICCDSRegistration, ICCDSTeamMember, ICCDSApprovedPaper
+
+
+# ─── Secure File Access ──────────────────────────────────────────────
+
+# Allowed models and their safe file fields
+ALLOWED_MODELS = {
+    'iccdsregistration': ['ieee_proof', 'student_proof', 'primary_id_proof', 'payment_receipt'],
+    'iccdspaper': ['crc_pdf', 'crc_docx', 'copyright_form'],
+}
+
+# Allowed inline mime types for previews
+INLINE_MIME_TYPES = {
+    'image/jpeg', 'image/png', 'image/webp', 'application/pdf'
+}
+
+@staff_member_required
+def secure_file_access(request, token):
+    """
+    Securely serves files from the storage backend using an opaque token.
+    Enforces staff authentication, verifies token ownership, model-level permissions, and field allowlists.
+    """
+    payload = cache.get(f'secure_file_{token}')
+    
+    if not payload:
+        return HttpResponseBadRequest("Link has expired or is invalid.")
+
+    # Bind token strictly to the user who generated it
+    token_user_id = payload.get('user_id')
+    if token_user_id != request.user.id:
+        return HttpResponseForbidden("This link was generated for another user session.")
+
+    model_name = payload.get('model')
+    obj_id = payload.get('id')
+    field_name = payload.get('field')
+    action = payload.get('action')
+
+    if action not in ('preview', 'download'):
+        return HttpResponseBadRequest("Invalid action.")
+
+    if model_name not in ALLOWED_MODELS or field_name not in ALLOWED_MODELS[model_name]:
+        return HttpResponseForbidden("Access to this field is not allowed.")
+
+    # Check model permissions
+    perm = f'iccds.view_{model_name}'
+    if not request.user.has_perm(perm):
+        return HttpResponseForbidden("You do not have permission to view this model.")
+
+    # Get object
+    if model_name == 'iccdsregistration':
+        model_class = ICCDSRegistration
+    elif model_name == 'iccdspaper':
+        model_class = ICCDSPaper
+    else:
+        raise Http404("Model not found.")
+
+    obj = get_object_or_404(model_class, id=obj_id)
+    file_field = getattr(obj, field_name, None)
+
+    if not file_field or not file_field.name:
+        raise Http404("File not found on this object.")
+
+    # Open file using the storage backend
+    try:
+        # file_field.open() calls storage._open() which returns a File object
+        file_obj = file_field.open('rb')
+    except Exception as e:
+        import logging
+        logging.error(f"Error opening secure file {file_field.name}: {e}")
+        raise Http404("Could not open file.")
+
+    # Create the response
+    content_type, encoding = mimetypes.guess_type(file_field.name)
+    content_type = content_type or 'application/octet-stream'
+
+    response = FileResponse(file_obj, content_type=content_type)
+    
+    # Meaningful filename for download
+    # e.g., ICCDSRegistration_1234_payment_receipt.jpg
+    base_name = os.path.basename(file_field.name)
+    friendly_name = f"{model_class.__name__}_{obj_id}_{field_name}_{base_name}"
+    
+    if action == 'preview' and content_type in INLINE_MIME_TYPES:
+        response['Content-Disposition'] = f'inline; filename="{friendly_name}"'
+    else:
+        response['Content-Disposition'] = f'attachment; filename="{friendly_name}"'
+
+    response['X-Content-Type-Options'] = 'nosniff'
+    return response
 
 
 # ─── Fee Schedule ────────────────────────────────────────────────────
@@ -142,7 +235,10 @@ def iccds_register(request):
         )
 
     category = data['category']
-    currency = data['currency']
+    
+    # Auto-derive currency server-side to prevent tampering
+    country = data.get('country', '').strip()
+    currency = 'INR' if country.lower() == 'india' else 'USD'
 
     # Validate category & currency
     valid_categories = [c[0] for c in ICCDSRegistration.CATEGORY_CHOICES]
@@ -164,10 +260,10 @@ def iccds_register(request):
     if not is_listener_category(category):
         # Paper fields required
         paper_required = ['paper_id', 'paper_title']
-        paper_missing = [f for f in paper_required if not data.get(f)]
+        paper_missing = [f for f in paper_required if not data.get(f, '').strip()]
         if paper_missing:
             return JsonResponse(
-                {'error': f'Missing paper fields: {", ".join(paper_missing)}'},
+                {'error': f'Missing or blank paper fields: {", ".join(paper_missing)}'},
                 status=400
             )
 
@@ -201,9 +297,9 @@ def iccds_register(request):
 
         # Create paper record
         paper = ICCDSPaper.objects.create(
-            paper_id=data['paper_id'],
-            title=data['paper_title'],
-            abstract=data.get('paper_abstract', ''),
+            paper_id=data['paper_id'].strip(),
+            title=data['paper_title'].strip(),
+            abstract=data.get('paper_abstract', '').strip(),
             crc_pdf=files.get('crc_pdf'),
             crc_docx=files['crc_docx'],
             copyright_form=files['copyright_form'],
@@ -222,13 +318,13 @@ def iccds_register(request):
     # ── Create registration ──
     registration = ICCDSRegistration.objects.create(
         paper=paper,
-        honorific=data.get('honorific', 'Mr.'),
-        name=data['name'],
-        email=data['email'],
-        phone=data['phone'],
-        author_phone=data.get('author_phone', ''),
-        institution=data['institution'],
-        country=data['country'],
+        honorific=data.get('honorific', 'Mr.').strip(),
+        name=data['name'].strip(),
+        email=data['email'].strip(),
+        phone=data['phone'].strip(),
+        author_phone=data.get('author_phone', '').strip(),
+        institution=data['institution'].strip(),
+        country=country,
         category=category,
         currency=currency,
         fee_amount=fee_amount,

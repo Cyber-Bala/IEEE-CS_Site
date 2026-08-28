@@ -138,6 +138,38 @@ class GoogleDriveStorage(Storage):
 
     # ── Django Storage API ──────────────────────────────────────────
 
+    def _open(self, name, mode='rb'):
+        """Open the file from Google Drive and return a binary file-like object."""
+        if mode != 'rb':
+            raise ValueError("GoogleDriveStorage only supports 'rb' mode for reading.")
+
+        clean_name = name.replace('\\', '/')
+        file_obj = self._find_file_by_name(clean_name)
+        if not file_obj:
+            raise FileNotFoundError(f"File '{clean_name}' not found in Google Drive.")
+
+        file_id = file_obj['id']
+        try:
+            import io
+            from django.core.files.base import File
+            from googleapiclient.http import MediaIoBaseDownload
+
+            request = self.service.files().get_media(fileId=file_id)
+            fh = io.BytesIO()
+            downloader = MediaIoBaseDownload(fh, request)
+            done = False
+            while done is False:
+                status, done = downloader.next_chunk()
+            
+            fh.seek(0)
+            return File(fh, name=clean_name)
+        except Exception as e:
+            logger.error(
+                "Google Drive API error downloading '%s': %s",
+                clean_name, type(e).__name__,
+            )
+            raise IOError(f"Could not read file {clean_name} from Google Drive.") from e
+
     def _save(self, name, content):
         """Upload file to Google Drive; return the Django storage name."""
         clean_name = name.replace('\\', '/')
@@ -200,20 +232,13 @@ class GoogleDriveStorage(Storage):
         return found
 
     def url(self, name):
-        """Return the Google Drive webViewLink for the stored file."""
-        clean_name = name.replace('\\', '/')
-        if clean_name in self._url_cache:
-            return self._url_cache[clean_name]
-
-        file_obj = self._find_file_by_name(clean_name)
-        if file_obj and file_obj.get('webViewLink'):
-            link = file_obj['webViewLink']
-            self._url_cache[clean_name] = link
-            self._exists_cache[clean_name] = True
-            return link
-
-        # Return empty string so admin pages don't crash on missing files.
-        return ""
+        """
+        File URLs are intentionally hidden to enforce the secure proxy view.
+        Direct Google Drive URLs are never exposed to the frontend or admin HTML.
+        """
+        # We must return a string to satisfy Django's FileField widget, 
+        # but we return a generic placeholder instead of the Drive link.
+        return "#secure-file-access-only"
 
     def delete(self, name):
         """Delete the file from Google Drive if it exists."""
