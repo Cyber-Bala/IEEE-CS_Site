@@ -130,6 +130,7 @@ const ICCDSRegistration = () => {
                                 <div className="iccds-reg-bank" style={{ height: '100%' }}>
                                     <h3 className="iccds-reg-subtitle">Bank Account Details</h3>
 
+                                    {/* Registration Form Button (Kept as comment)
                                     <div style={{ padding: '40px 0', textAlign: 'center' }}>
                                         <h4 style={{ color: 'var(--purple)', fontFamily: 'Outfit, sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Registration is Open!</h4>
                                         <p style={{ color: 'var(--text-secondary)', marginTop: '8px', marginBottom: '24px' }}>Please proceed to the online registration form to complete your registration and payment.</p>
@@ -141,27 +142,26 @@ const ICCDSRegistration = () => {
                                             Proceed to Registration Form <ArrowRight size={18} />
                                         </button>
                                     </div>
+                                    */}
 
-                                    {/* HIDING UNTIL REGISTRATION OPENS
-                                <div className="iccds-bank-grid">
-                                    {[
-                                        { label: 'Account Name', value: 'REC-IEEE STUDENT' },
-                                        { label: 'Account Number', value: '145201000016416' },
-                                        { label: 'Bank Name', value: 'INDIAN OVERSEAS BANK' },
-                                        { label: 'IFSC', value: 'IOBA0001452' },
-                                        { label: 'Branch Code', value: '001452' },
-                                    ].map(item => (
-                                        <div key={item.label} className="iccds-bank-item">
-                                            <span className="iccds-bank-label">{item.label}</span>
-                                            <span className="iccds-bank-value">{item.value}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                                <p className="iccds-reg-form-note">
-                                    * Fill the form below after successful completion of the transaction<br />
-                                    <a href="https://forms.gle/oUKEL2CpTkm4NqL68" target="_blank" rel="noopener noreferrer">Click here to fill the form</a>
-                                </p>
-                                */}
+                                    {/* Payment / Bank Details */}
+                                    <div className="iccds-bank-grid">
+                                        {[
+                                            { label: 'Account Name', value: 'REC-IEEE STUDENT' },
+                                            { label: 'Account Number', value: '145201000016416' },
+                                            { label: 'Bank Name', value: 'INDIAN OVERSEAS BANK' },
+                                            { label: 'IFSC Code', value: 'IOBA0001452' },
+                                            { label: 'Branch Code', value: '001452' },
+                                        ].map(item => (
+                                            <div key={item.label} className="iccds-bank-item">
+                                                <span className="iccds-bank-label">{item.label}</span>
+                                                <span className="iccds-bank-value">{item.value}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <p className="iccds-reg-form-note">
+                                        * Note: Please complete the bank transfer using the account details above and retain your transaction receipt for registration confirmation.
+                                    </p>
                                 </div>
                             </SlideReveal>
 

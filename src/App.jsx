@@ -8,7 +8,7 @@ import Creators from './components/Creators';
 import Registration from './components/Registration';
 import ICCDSHome from './iccds2026/ICCDSHome';
 import ICCDSRegistration from './iccds2026/ICCDSRegistration';
-import ICCDSRegistrationForm from './iccds2026/ICCDSRegistrationForm';
+// import ICCDSRegistrationForm from './iccds2026/ICCDSRegistrationForm';
 import ICCDSPaperSubmission from './iccds2026/ICCDSPaperSubmission';
 import MemberReveal from './components/MemberReveal';
 import NotFound from './components/NotFound';
@@ -30,7 +30,7 @@ function App() {
           <Route path="/register" element={<Registration />} />
           <Route path="/iccds2026" element={<ICCDSHome />} />
           <Route path="/iccds2026/registration" element={<ICCDSRegistration />} />
-          <Route path="/iccds2026/registration/form" element={<ICCDSRegistrationForm />} />
+          {/* <Route path="/iccds2026/registration/form" element={<ICCDSRegistrationForm />} /> */}
           <Route path="/iccds2026/paper-submission" element={<ICCDSPaperSubmission />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
